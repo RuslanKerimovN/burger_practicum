@@ -1,3 +1,6 @@
+import { IBurgerIngredients } from "../types/types";
+
+
 export const data: IBurgerIngredients[] = [
     {
        "_id":"60666c42cc7b410027a1a9b1",

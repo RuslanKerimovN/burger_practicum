@@ -10,14 +10,18 @@ interface Props {
 
 export const PositionMenu = ({type, menu}: Props) => {
     return(
-        <section>
+        <section className={'mt-10'} >
             <p className="text text_type_main-medium mb-6">
                 {header(type)}
             </p>
-            <div className={positionMenuStyle.ingredients}>
+            <div className={`${positionMenuStyle.ingredients} pl-4 pr-4`}>
                 {
-                    cardArray(type, menu).map((el) => (
-                        <div key={el['_id']} style={{width: '50%'}}>
+                    cardArray(type, menu).map((el, index) => (
+                        <div
+                            key={el['_id']}
+                            style={{display: 'flex', width: '45%'}}
+                            className={(index % 2 === 0) ? 'mr-6' : ''}
+                        >
                             <IngredientCard ingredient={el} />
                         </div>
                     ))

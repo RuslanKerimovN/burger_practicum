@@ -8,13 +8,15 @@ interface Props {
 
 export const IngredientCard = ({ingredient}: Props) => {
     return (
-        <div className={ingredientCardStyle.card}>
-            {/* <Counter count={1} size="default" extraClass="m-1" /> */}
-            <img alt='' src={ingredient.image_large} className='pl-4 pr-4 mb-1' width={'200px'} />
-            <p className="text text_type_digits-medium mb-1">
-                {ingredient.price}<CurrencyIcon type="primary" />
+        <div className={`${ingredientCardStyle.card} pb-8`}>
+            <Counter count={1} size="default"/>
+            <img alt='' src={ingredient.image_large} className='pl-4 pr-4 mb-1' width={'220px'} />
+            <p className="text text_type_digits-default mb-1">
+                <span className={ingredientCardStyle.price}>
+                    {ingredient.price}<CurrencyIcon type="primary" />
+                </span>
             </p>
-            <p className={`text text_type_main-default mb-10 ${ingredientCardStyle.name}`}>
+            <p className={`text text_type_main-default${ingredientCardStyle.name}`}>
                 {ingredient.name}
             </p>
         </div>

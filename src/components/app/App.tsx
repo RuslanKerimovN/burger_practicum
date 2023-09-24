@@ -9,8 +9,12 @@ export const App = () => {
     <div>
       <AppHeader/>
       <main className={appStyle.content}>
-        <BurgerIngredients />
-        <BurgerConstructor />
+        <div style={{display: 'flex', justifyContent: 'end'}}>
+          <BurgerIngredients />
+        </div>
+        <div style={{display: 'flex', justifyContent: 'start'}}>
+          <BurgerConstructor />
+        </div>
       </main>
     </div>
   );

@@ -1,4 +1,3 @@
-import React from 'react';
 import {BurgerIcon, ListIcon, ProfileIcon, Logo} from '@ya.praktikum/react-developer-burger-ui-components';
 import styleHeader from './app-header.module.css';
 import { HeaderItem } from '../header-item/header-item';
@@ -23,9 +22,11 @@ export const AppHeader = () => {
                     <Logo/>
                 </div>
                 {/* <a href='#'> */}
+                <div className={styleHeader.items}>
                     <HeaderItem styleItem={'text text_type_main-default text_color_inactive'} text={'Личный кабинет'}>
                         <ProfileIcon type='secondary' />
                     </HeaderItem>
+                </div>
                 {/* </a> */}
             </nav>
         </header>

@@ -14,7 +14,7 @@ export const Tabs = ({setIngredientType}: Props) => {
     }
 
     return (
-        <div className={'mb-10'} style={{ display: 'flex' }}>
+        <div style={{ display: 'flex' }}>
             <Tab value="bun" active={current === 'bun'} onClick={onTabClick}>
                 Булки
             </Tab>
