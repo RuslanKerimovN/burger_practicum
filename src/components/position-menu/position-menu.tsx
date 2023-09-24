@@ -19,8 +19,7 @@ export const PositionMenu = ({type, menu}: Props) => {
                     cardArray(type, menu).map((el, index) => (
                         <div
                             key={el['_id']}
-                            style={{display: 'flex', width: '45%'}}
-                            className={(index % 2 === 0) ? 'mr-6' : ''}
+                            className={`${(index % 2 === 0) ? 'mr-6' : ''} ${positionMenuStyle.card}`}
                         >
                             <IngredientCard ingredient={el} />
                         </div>

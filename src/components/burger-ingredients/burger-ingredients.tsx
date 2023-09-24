@@ -1,13 +1,14 @@
 import React from 'react';
 import { Tabs } from '../tabs/tabs';
 import { TabPage } from '../tab-page.jsx/tab-page';
+import ingredientsStyle from './burger-ingredients.module.css';
 
 export const BurgerIngredients = () => {
     const [ingredientType, setIngredientType] = React.useState<string>('bun');
     const height = window.innerHeight - 320;
     
     return (
-        <section className='mt-10 mr-5 ml-5' style={{maxWidth: '600px'}}>
+        <section className={`${ingredientsStyle.panel} mt-10 mr-5 ml-5`}>
             <p className="text text_type_main-large mb-5">
                 Соберите бургер
             </p>

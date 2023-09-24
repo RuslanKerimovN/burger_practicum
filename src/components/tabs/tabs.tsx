@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import tabsStyle from './tabs.module.css';
 
 interface Props {
     setIngredientType: (type: string) => void;
@@ -14,7 +15,7 @@ export const Tabs = ({setIngredientType}: Props) => {
     }
 
     return (
-        <div style={{ display: 'flex' }}>
+        <div className={`${tabsStyle.tabs}`}>
             <Tab value="bun" active={current === 'bun'} onClick={onTabClick}>
                 Булки
             </Tab>

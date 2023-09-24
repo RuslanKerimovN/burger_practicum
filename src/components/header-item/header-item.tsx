@@ -1,4 +1,5 @@
 import React from 'react';
+import itemStyle from './header-item.module.css';
 
 interface Props {
     children: React.ReactNode;
@@ -8,17 +9,7 @@ interface Props {
 
 export const HeaderItem = ({children, styleItem, text}: Props) => {
     return (
-        <div
-            className='p-5 mr-2'
-            style={{
-                display: 'flex', 
-                flexDirection: 'row', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                maxWidth: '180px',
-                borderRadius: '40px'
-            }}
-        >
+        <div className={`${itemStyle.item} p-5 mr-2`}>
             <div className='mr-2'>
                 {children}
             </div>
