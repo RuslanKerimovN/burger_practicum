@@ -1,0 +1,10 @@
+.ingredients {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+    width: 45%;
+}
