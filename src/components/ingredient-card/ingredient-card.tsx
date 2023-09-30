@@ -4,21 +4,14 @@ import ingredientCardStyle from './ingredient-card.module.css';
 import { useState } from 'react';
 import { Modal } from '../modal/modal';
 import { IngredientDetails } from '../ingredient-details/ingredient-details';
+import { useModal } from '../../hooks/useModal';
 
 interface Props {
     ingredient: IBurgerIngredients;
 }
 
 export const IngredientCard = ({ingredient}: Props) => {
-    const [isModalShow, setIsModalShow] = useState<boolean>(false);
-    
-    const openModal = () => {
-        setIsModalShow(true);
-    };
-
-    const closeModal = () => {
-        setIsModalShow(false);
-    };
+    const {isModalOpen, openModal, closeModal} = useModal();
 
     return (
         <>
@@ -37,18 +30,13 @@ export const IngredientCard = ({ingredient}: Props) => {
                     {ingredient.name}
                 </p>
             </div>
-            {isModalShow && 
+            {isModalOpen && 
                 <Modal
                     header={'Детали ингредиента'}
                     closeModal={closeModal}
                 >
                     <IngredientDetails
-                        img={ingredient.image_large}
-                        name={ingredient.name}
-                        calories={ingredient.calories}
-                        proteins={ingredient.proteins}
-                        fat={ingredient.fat}
-                        carbohydrates={ingredient.carbohydrates}
+                        ingredient={ingredient}
                     />
                 </Modal>
             }

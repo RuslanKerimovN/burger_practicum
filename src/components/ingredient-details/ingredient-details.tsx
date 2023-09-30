@@ -1,12 +1,8 @@
+import { IBurgerIngredients } from '../../types/types';
 import detailsStyle from './ingredient-details.module.css';
 
 interface Props {
-    img: string;
-    name: string;
-    proteins: number
-    fat: number
-    carbohydrates: number
-    calories: number
+    ingredient: IBurgerIngredients;
 }
 
 interface ISectionProps {
@@ -26,10 +22,12 @@ const OneSection = ({name, params, padding}: ISectionProps) => (
     </section>
 )
 
-export const IngredientDetails = ({img, name, proteins, fat, carbohydrates, calories}: Props) => {
+export const IngredientDetails = ({ingredient}: Props) => {
+    const {image_large, name, calories, proteins, fat, carbohydrates} = ingredient;
+
     return (
         <div className={`${detailsStyle.card}`}>
-            <img alt={name} src={img} className='mb-4'/>
+            <img alt={ingredient.name} src={image_large} className='mb-4'/>
             <div>
                 <p className={` ${detailsStyle.header} text text_type_main-medium mb-8`} >
                     {name}

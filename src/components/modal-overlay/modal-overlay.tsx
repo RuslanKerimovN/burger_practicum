@@ -1,7 +1,11 @@
 import styleOverlay from './modal-overlay.module.css';
 
-export const ModalOverlay = () => {
+interface Props {
+    closeModal: () => void;
+}
+
+export const ModalOverlay = ({closeModal}: Props) => {
     return (
-        <div className={`${styleOverlay.window}`}/>
+        <div className={`${styleOverlay.window}`} onClick={closeModal}/>
     );
 }

@@ -41,7 +41,7 @@ export const Modal = ({header, closeModal, children}: Props) => {
                 </div>
                 {children}
             </div>
-            <ModalOverlay />
+            <ModalOverlay closeModal={closeModal}/>
         </>,
         portal
     );

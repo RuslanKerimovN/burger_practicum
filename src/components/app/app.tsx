@@ -4,16 +4,17 @@ import { BurgerConstructor } from '../burger-constructor/burger-constructor';
 import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
 import { useEffect, useState } from 'react';
 import { IBurgerIngredients } from '../../types/types';
-import { getIngredients } from '../srvices/services';
+import { getIngredients } from '../services/services';
 
 export const App = () => {
   const [ingredients, setIngredients] = useState<IBurgerIngredients[]>([]);
 
   useEffect(() => {
-    const getData = async () => {
-      const response = await getIngredients();
-      await setIngredients(response);
-    }
+    const getData = () => {
+        getIngredients()
+          .then((res) => setIngredients(res))
+          .catch((res) => console.log(res));
+        }
     getData();
   }, []);
 

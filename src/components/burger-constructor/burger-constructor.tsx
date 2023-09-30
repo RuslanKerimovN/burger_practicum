@@ -5,21 +5,14 @@ import constructorStyle from './burger-constructor.module.css';
 import { useMemo, useState } from "react";
 import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
+import { useModal } from "../../hooks/useModal";
 
 interface Props {
   ingredients: IBurgerIngredients[];
 }
 
 export const BurgerConstructor = ({ingredients}: Props) => {
-  const [isModalShow, setIsModalShow] = useState<boolean>(false);
-
-  const openModal = () => {
-    setIsModalShow(true);
-  }
-
-  const closeModal = () => {
-    setIsModalShow(false);
-  }
+  const {isModalOpen, openModal, closeModal} = useModal();
 
   //временные вычисления с захардкоженными данными
   const buns: IBurgerIngredients[] = ingredients.filter((el) => el.type === 'bun');
@@ -85,21 +78,26 @@ export const BurgerConstructor = ({ingredients}: Props) => {
           </div>
         </>
       }
-      <div className={constructorStyle.order}>
-        <p className="text text_type_digits-medium mr-10">
-          {price}<CurrencyIcon type="primary" />
-        </p>
+      {/* ingredients временно, пока не появится реальный заказ */}
 
-        <Button htmlType="button" type="primary" size="medium"  onClick={openModal}>
-          Оформить заказ
-        </Button>
+      {ingredients.length ?
+        <div className={constructorStyle.order}>
+          <p className="text text_type_digits-medium mr-10">
+            {price}<CurrencyIcon type="primary" />
+          </p>
 
-        {isModalShow && 
-          <Modal header={''} closeModal={closeModal} >
-            <OrderDetails id={'034536'}/>
-          </Modal>
-        }
-      </div>
+          <Button htmlType="button" type="primary" size="medium"  onClick={openModal}>
+            Оформить заказ
+          </Button>
+
+          {isModalOpen && 
+            <Modal header={''} closeModal={closeModal} >
+              <OrderDetails id={'034536'}/>
+            </Modal>
+          }
+        </div>
+        : <></>
+      }
     </div>
   );
 }
