@@ -34,12 +34,3 @@ export const cardArray = (type: 'bun' | 'sauce' | 'main', arrayMenu: IBurgerIngr
     }
     return obj[type] ?? [];
 }
-
-  
-export  const getIsActiveBurgerElement = (index: number, menu: IBurgerIngredients[]): boolean => {
-    return (index === 0) ? false : (index === menu.length - 1) ? false : true;
-}
-  
-export  const getIsPaddingActiveBurgerElement = (index: number, menu: IBurgerIngredients[]): boolean => {
-    return (index === 0) ? true : (index === menu.length - 1) ? true : false;
-}

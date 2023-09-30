@@ -1,21 +1,40 @@
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { data } from "../../data/data";
 import { IBurgerIngredients } from "../../types/types";
 import { BurgerElement } from "../burger-element/burger-element";
-import {
-  getIsActiveBurgerElement,
-  getIsPaddingActiveBurgerElement
-} from '../../helpers/helpers';
 import constructorStyle from './burger-constructor.module.css';
+import { useMemo, useState } from "react";
+import { Modal } from "../modal/modal";
+import { OrderDetails } from "../order-details/order-details";
 
-export const BurgerConstructor = () => {
-  const menu: IBurgerIngredients[] = data;
-  
+interface Props {
+  ingredients: IBurgerIngredients[];
+}
+
+export const BurgerConstructor = ({ingredients}: Props) => {
+  const [isModalShow, setIsModalShow] = useState<boolean>(false);
+
+  const openModal = () => {
+    setIsModalShow(true);
+  }
+
+  const closeModal = () => {
+    setIsModalShow(false);
+  }
+
   //временные вычисления с захардкоженными данными
-  const arrayOneBut = menu.filter((el) => el._id !== '60666c42cc7b410027a1a9b2');
-  const bun = arrayOneBut.find((el) => el.type === 'bun');
-  const arrayWithoutBun = data.filter((el) => el.type !== 'bun');
+  const buns: IBurgerIngredients[] = ingredients.filter((el) => el.type === 'bun');
+  const bun = buns.find((el) => el.type === 'bun');
+  const arrayWithoutBun: IBurgerIngredients[] = ingredients.filter((el) => el.type !== 'bun');
   ////////////////////////////////////////////////
+
+  let price: number = useMemo(() => {
+    let price: number = 0;
+
+    for(let i = 0; i < arrayWithoutBun.length; i++) {
+      price += arrayWithoutBun[i].price;
+    }
+    return price + ((bun) ? (bun.price * 2) : 0);
+  }, [ingredients]);
 
   const height = window.innerHeight - 320;
   const heightIngredientsWindow = window.innerHeight - 550;
@@ -33,8 +52,9 @@ export const BurgerConstructor = () => {
               thumbnail={bun.image_mobile}
             />
           </div>
+
           <div 
-            style={{overflowY: 'scroll', maxHeight: `${heightIngredientsWindow}px`}} 
+            style={{maxHeight: `${heightIngredientsWindow}px`, overflow: 'auto'}} 
             className="mb-1"
           >
             {
@@ -46,14 +66,14 @@ export const BurgerConstructor = () => {
                       name={el.name}
                       price={el.price}
                       img={el.image_mobile}
-                      isActive={getIsActiveBurgerElement(index, menu)}
-                      isPadding={getIsPaddingActiveBurgerElement(index, menu)}
                     />
-                    {index !== menu.length -1 && <div className="pb-1"/>}
+                    {index !== ingredients.length - 1 && <div className="pb-1"/>}
+                    
                   </div>
                 )})
             }
           </div>
+
           <div  className="pl-6 mb-10">
             <ConstructorElement
               type={'bottom'}
@@ -67,11 +87,18 @@ export const BurgerConstructor = () => {
       }
       <div className={constructorStyle.order}>
         <p className="text text_type_digits-medium mr-10">
-          {610}<CurrencyIcon type="primary" />
+          {price}<CurrencyIcon type="primary" />
         </p>
-        <Button htmlType="button" type="primary" size="medium">
+
+        <Button htmlType="button" type="primary" size="medium"  onClick={openModal}>
           Оформить заказ
         </Button>
+
+        {isModalShow && 
+          <Modal header={''} closeModal={closeModal} >
+            <OrderDetails id={'034536'}/>
+          </Modal>
+        }
       </div>
     </div>
   );

@@ -6,14 +6,12 @@ interface Props {
     name: string;
     price: number;
     img: string;
-    isActive: boolean;
-    isPadding: boolean;
 }
 
-export const BurgerElement = ({isLocked, name, price, img, isActive, isPadding}: Props) => {
+export const BurgerElement = ({isLocked, name, price, img}: Props) => {
     return (
-        <div className={`${elementStyle.element} ${isPadding ? 'pl-6' : ''}`}>
-            {isActive && <DragIcon type="primary" />}
+        <div className={`${elementStyle.element}`}>
+            <DragIcon type="primary" />
             <ConstructorElement
               isLocked={isLocked}
               text={name}
