@@ -2,8 +2,13 @@ import React from 'react';
 import { Tabs } from '../tabs/tabs';
 import { TabPage } from '../tab-page.jsx/tab-page';
 import ingredientsStyle from './burger-ingredients.module.css';
+import { IBurgerIngredients } from '../../types/types';
 
-export const BurgerIngredients = () => {
+interface Props {
+    ingredients: IBurgerIngredients[];
+}
+
+export const BurgerIngredients = ({ingredients}: Props) => {
     const [ingredientType, setIngredientType] = React.useState<string>('bun');
     const height = window.innerHeight - 320;
     
@@ -14,9 +19,9 @@ export const BurgerIngredients = () => {
             </p>
             <Tabs setIngredientType={setIngredientType}/>
             <div style={{height: `${height}px`, overflowY: 'scroll'}}>
-                {ingredientType === 'bun' && <TabPage type1={'bun'} type2={'main'} type3={'sauce'}/>}
-                {ingredientType === 'sauce' && <TabPage type1={'sauce'} type2={'bun'} type3={'main'}/>}
-                {ingredientType === 'main' && <TabPage type1={'main'} type2={'bun'} type3={'sauce'}/>}
+                {ingredientType === 'bun' && <TabPage ingredients={ingredients} type1={'bun'} type2={'main'} type3={'sauce'}/>}
+                {ingredientType === 'sauce' && <TabPage ingredients={ingredients} type1={'sauce'} type2={'bun'} type3={'main'}/>}
+                {ingredientType === 'main' && <TabPage ingredients={ingredients} type1={'main'} type2={'bun'} type3={'sauce'}/>}
             </div>
         </section>
     );
