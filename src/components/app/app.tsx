@@ -5,6 +5,7 @@ import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
 import { useEffect, useState } from 'react';
 import { IBurgerIngredients } from '../../types/types';
 import { getIngredients } from '../services/services';
+import { Context } from '../../context/context';
 
 export const App = () => {
   const [ingredients, setIngredients] = useState<IBurgerIngredients[]>([]);
@@ -26,7 +27,9 @@ export const App = () => {
           <BurgerIngredients ingredients={ingredients}/>
         </div>
         <div className={`${appStyle.constructor}`}>
-          <BurgerConstructor ingredients={ingredients}/>
+          <Context.Provider value={ingredients}>
+            <BurgerConstructor/>
+          </Context.Provider>
         </div>
       </main>
     </div>
