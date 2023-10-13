@@ -8,13 +8,14 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 import { useDrop } from "react-dnd";
 import {Constructor} from '../constructor/constructor';
 import { IBurgerIngredients } from "../../types/types";
+import { getStateConstructor } from "../../services/slices/constructorSlice";
 
 export const BurgerConstructor = () => {
   const {isModalOpen, openModal, closeModal} = useModal();
-  const {constructor} = useAppSelector(state => state.restaurantSlice);
+  const constructor = useAppSelector(getStateConstructor);
   const [requestParams, setRequestParams] = useState<string[]>([]);
   const [renderPrice, setRenderPrice] = useState<number>(0);
-  const [bun, setBun] = useState<IBurgerIngredients | undefined>(undefined)
+  const [bun, setBun] = useState<IBurgerIngredients | undefined>(undefined);
   const height = window.innerHeight - 320;
 
   const [, drop] = useDrop(() => ({
@@ -71,7 +72,7 @@ export const BurgerConstructor = () => {
             {renderPrice}<CurrencyIcon type="primary" />
           </p>
 
-          <Button htmlType="button" type="primary" size="medium"  onClick={openModal}>
+          <Button htmlType="button" type="primary" size="medium"  onClick={openModal} disabled={!bun}>
             Оформить заказ
           </Button>
 

@@ -1,9 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import restaurantSlice from '../services/slices/restaurantSlice';
+import constructorSlice from '../services/slices/constructorSlice';
+import ingredientsSlice from "../services/slices/ingredientsSlice";
+import orderSlice from '../services/slices/orderSlice';
+import showIngredientSlice from '../services/slices/showIngredientSlice';
 
 export const rootReducer = combineReducers({
-    restaurantSlice,
+    constructorSlice,
+    ingredientsSlice,
+    orderSlice,
+    showIngredientSlice,
 });
 
 export const setupStore = () => {

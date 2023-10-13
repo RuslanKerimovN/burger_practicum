@@ -20,15 +20,6 @@ export interface IOrderResponse {
   success: boolean;
 }
 
-export interface IRestaurant {
-  ingredients: IBurgerIngredients[];
-  constructor: IBurgerIngredients[];
-  watchIngredient: IBurgerIngredients;
-  order: IOrderResponse;
-  isLoading: boolean;
-  isError: boolean;
-}
-
 export interface IIngredientsArray {
   header: string;
   body: IBurgerIngredients[];

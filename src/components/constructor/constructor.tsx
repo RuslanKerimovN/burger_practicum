@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
-import { moveIngredientInConstructor } from "../../services/slices/restaurantSlice";
+import { getStateConstructor, moveIngredientInConstructor } from "../../services/slices/constructorSlice";
 import { IBurgerIngredients } from "../../types/types";
 import update from 'immutability-helper';
 import { BurgerElement } from "../burger-element/burger-element";
@@ -10,7 +10,7 @@ import { BurgerElement } from "../burger-element/burger-element";
 export const Constructor = () => {
     const dispatch = useAppDispatch();
     const [, drop] = useDrop(() => ({ accept: 'constructor' }));
-    const {constructor} = useAppSelector(state => state.restaurantSlice);
+    const constructor = useAppSelector(getStateConstructor);
     const [ingredient, setIngredient] = useState<IBurgerIngredients[]>([]);
     const heightIngredientsWindow = window.innerHeight - 550;
   

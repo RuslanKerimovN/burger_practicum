@@ -2,7 +2,7 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import elementStyle from './burger-element.module.css';
 import { IBurgerIngredients } from '../../types/types';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { deleteIngredientFromConstructor } from '../../services/slices/restaurantSlice';
+import { deleteIngredientFromConstructor } from '../../services/slices/constructorSlice';
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef } from 'react';
 import type { Identifier, XYCoord } from 'dnd-core';

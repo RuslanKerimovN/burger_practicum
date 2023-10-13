@@ -5,11 +5,12 @@ import { Modal } from '../modal/modal';
 import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { useModal } from '../../hooks/useModal';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { addIngredientInConstructor, deleteWatchIngredient, saveWatchIngredient } from '../../services/slices/restaurantSlice';
+import { addIngredientInConstructor, getStateConstructor } from '../../services/slices/constructorSlice';
 import { useDrag } from 'react-dnd';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { findCount } from '../../helpers/helpers';
 import {useEffect, useState} from 'react';
+import { deleteWatchIngredient, saveWatchIngredient } from '../../services/slices/showIngredientSlice';
 
 interface Props {
     ingredient: IBurgerIngredients;
@@ -17,7 +18,7 @@ interface Props {
 
 export const IngredientCard = ({ingredient}: Props) => {
     const dispatch = useAppDispatch();
-    const {constructor} = useAppSelector(state => state.restaurantSlice); 
+    const constructor = useAppSelector(getStateConstructor);
     const {isModalOpen, openModal, closeModal} = useModal();
     const {name} = ingredient;
     const [count, setCount] = useState<number>(0);

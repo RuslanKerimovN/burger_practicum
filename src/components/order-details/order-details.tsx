@@ -1,10 +1,9 @@
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { SvgOrder } from '../../images/svg-order';
-import { postOrder } from '../../services/slices/restaurantSlice';
+import { getStateErrorOrder, getStateLoadingOrder, getStateOrder, postOrder } from '../../services/slices/orderSlice';
 import detailsStyle from './order-details.module.css';
 import { useEffect } from "react";
-
 
 interface Props {
     ids: string[];
@@ -12,17 +11,19 @@ interface Props {
 
 export const OrderDetails = ({ids}: Props) => {
     const dispatch = useAppDispatch();
-    const {isError, isLoading, order} = useAppSelector(state => state.restaurantSlice);
-
+    const order = useAppSelector(getStateOrder);
+    const isLoadingOrder = useAppSelector(getStateLoadingOrder);
+    const isErrorOrder = useAppSelector(getStateErrorOrder);
+    
     useEffect(() => {
         dispatch(postOrder(ids));
-    }, []); 
+    }, [dispatch, ids]); 
 
     return (
         <>
-            {isLoading
+            {isLoadingOrder
                 ?   <h1>Loading....</h1>
-                :   isError ? <h1>Ошибка сервера, попробуйте еще раз!</h1>
+                :   isErrorOrder ? <h1>Ошибка сервера, попробуйте еще раз!</h1>
                     :
                         <div className={`${detailsStyle.card}`}>
                             <div>
