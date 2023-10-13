@@ -1,28 +1,42 @@
-import React from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Tabs } from '../tabs/tabs';
-import { TabPage } from '../tab-page.jsx/tab-page';
 import ingredientsStyle from './burger-ingredients.module.css';
-import { IBurgerIngredients } from '../../types/types';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { getIngredients } from '../../services/slices/restaurantSlice';
+import { IIngredientsArray } from '../../types/types';
+import { tabArray } from '../../helpers/helpers';
 
-interface Props {
-    ingredients: IBurgerIngredients[];
-}
+export const BurgerIngredients = memo(() => {
+    const dispatch = useAppDispatch();
+    const {ingredients, isLoading} = useAppSelector(state => state.restaurantSlice);
+    const [ingredientsArray, setIngredientsArray] = useState<IIngredientsArray[]>([]);
 
-export const BurgerIngredients = ({ingredients}: Props) => {
-    const [ingredientType, setIngredientType] = React.useState<string>('bun');
-    const height = window.innerHeight - 320;
+    useEffect(() => {
+      dispatch(getIngredients());
+    }, [dispatch]);
+
+    useEffect(() => {
+        const tmp = tabArray(ingredients);
+        setIngredientsArray(tmp);
+    }, [ingredients]);
     
     return (
         <section className={`${ingredientsStyle.panel} mt-10 mr-5 ml-5`}>
-            <p className="text text_type_main-large mb-5">
-                Соберите бургер
-            </p>
-            <Tabs setIngredientType={setIngredientType}/>
-            <div style={{height: `${height}px`, overflowY: 'scroll'}}>
-                {ingredientType === 'bun' && <TabPage ingredients={ingredients} type1={'bun'} type2={'main'} type3={'sauce'}/>}
-                {ingredientType === 'sauce' && <TabPage ingredients={ingredients} type1={'sauce'} type2={'bun'} type3={'main'}/>}
-                {ingredientType === 'main' && <TabPage ingredients={ingredients} type1={'main'} type2={'bun'} type3={'sauce'}/>}
-            </div>
+            {ingredients.length ?
+                <>
+                    <p className="text text_type_main-large mb-5">
+                        Соберите бургер
+                    </p>
+                    <Tabs ingredients={ingredientsArray}/>
+                </>
+                : (!ingredients.length && isLoading)
+                    ? <h1 className={`${ingredientsStyle.attention}`}>Loading...</h1>
+                    :
+                        <h1 className={`${ingredientsStyle.attention}`}>
+                            Ошибка загрузки ингредиентов, перезагрузите страницу!
+                        </h1>
+            }
         </section>
     );
-}
+})

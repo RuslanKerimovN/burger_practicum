@@ -8,12 +8,10 @@
     position: sticky;
     float: inline-start;
     top: 0;
-    /* background: #131316; */
 }
 
 .positionElemFixEnd {
     position: sticky;
     float: inline-start;
     bottom: 0;
-    /* background: #131316; */
 }

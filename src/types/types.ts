@@ -11,6 +11,7 @@ export interface IBurgerIngredients {
   image_mobile: string;
   image_large: string;
   __v: number;
+  constructorId: string;
 }
 
 export interface IOrderResponse {
@@ -19,8 +20,16 @@ export interface IOrderResponse {
   success: boolean;
 }
 
-export const baseOrder: IOrderResponse = {
-  name: '',
-  order: {number: 0},
-  success: false
+export interface IRestaurant {
+  ingredients: IBurgerIngredients[];
+  constructor: IBurgerIngredients[];
+  watchIngredient: IBurgerIngredients;
+  order: IOrderResponse;
+  isLoading: boolean;
+  isError: boolean;
+}
+
+export interface IIngredientsArray {
+  header: string;
+  body: IBurgerIngredients[];
 }

@@ -1,6 +1,6 @@
-import { IBurgerIngredients } from "../types/types";
+import { IBurgerIngredients, IIngredientsArray } from "../types/types";
 
-export const tabArray = (ingredients: IBurgerIngredients[]): IBurgerIngredients[][] => {
+export const tabArray = (ingredients: IBurgerIngredients[]): IIngredientsArray[] => {
     let arrType1: IBurgerIngredients[] = [];
     let arrType2: IBurgerIngredients[] = [];
     let arrType3: IBurgerIngredients[] = [];
@@ -14,23 +14,20 @@ export const tabArray = (ingredients: IBurgerIngredients[]): IBurgerIngredients[
             arrType3 = [...arrType3, ingredients[i]];
         }
     }
-    return [arrType1, arrType2, arrType3];
+    return [
+        {header: 'Булки', body: arrType1},
+        {header: 'Начинки', body: arrType2},
+        {header: 'Соусы', body: arrType3}
+    ];
 }
 
-export const header = (type: 'bun' | 'sauce' | 'main'): string => {
-    const obj = {
-        'bun': 'Булки',
-        'sauce': 'Соусы',
-        'main': 'Начинка'
-    }
-    return obj[type] ?? '';
-}
+export const findCount = (array: IBurgerIngredients[], name: string): number => {
+    let count: number = 0;
 
-export const cardArray = (type: 'bun' | 'sauce' | 'main', arrayMenu: IBurgerIngredients[][]): IBurgerIngredients[] => {
-    const obj = {
-        'bun': arrayMenu[0],
-        'sauce': arrayMenu[1],
-        'main': arrayMenu[2],
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].name === name) {
+            count++;
+        }
     }
-    return obj[type] ?? [];
+    return count;
 }
