@@ -1,103 +1,88 @@
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { IBurgerIngredients } from "../../types/types";
-import { BurgerElement } from "../burger-element/burger-element";
 import constructorStyle from './burger-constructor.module.css';
-import { useMemo, useState } from "react";
+import { useEffect, useState} from "react";
 import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
 import { useModal } from "../../hooks/useModal";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { useDrop } from "react-dnd";
+import {Constructor} from '../constructor/constructor';
+import { IBurgerIngredients } from "../../types/types";
+import { getStateConstructor } from "../../services/slices/constructorSlice";
 
-interface Props {
-  ingredients: IBurgerIngredients[];
-}
-
-export const BurgerConstructor = ({ingredients}: Props) => {
+export const BurgerConstructor = () => {
   const {isModalOpen, openModal, closeModal} = useModal();
-
-  //временные вычисления с захардкоженными данными
-  const buns: IBurgerIngredients[] = ingredients.filter((el) => el.type === 'bun');
-  const bun = buns.find((el) => el.type === 'bun');
-  const arrayWithoutBun: IBurgerIngredients[] = ingredients.filter((el) => el.type !== 'bun');
-  ////////////////////////////////////////////////
-
-  let price: number = useMemo(() => {
-    let price: number = 0;
-
-    for(let i = 0; i < arrayWithoutBun.length; i++) {
-      price += arrayWithoutBun[i].price;
-    }
-    return price + ((bun) ? (bun.price * 2) : 0);
-  }, [ingredients]);
-
+  const constructor = useAppSelector(getStateConstructor);
+  const [requestParams, setRequestParams] = useState<string[]>([]);
+  const [renderPrice, setRenderPrice] = useState<number>(0);
+  const [bun, setBun] = useState<IBurgerIngredients | undefined>(undefined);
   const height = window.innerHeight - 320;
-  const heightIngredientsWindow = window.innerHeight - 550;
+
+  const [, drop] = useDrop(() => ({
+    accept: 'ingredient',
+    drop: () => ({ name: 'BurgerConstructor' }),
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  }))
+
+  useEffect(() => {
+    let price: number = 0;
+    let ids: string[] = [];
+    const bunTmp = constructor.find((el) => el.type === 'bun') 
+    for (let i = 0; i < constructor.length; i++) {
+      price += constructor[i].price;
+      ids = [...ids, constructor[i]._id];
+    }
+
+    setRequestParams(ids)
+    setRenderPrice(bunTmp ? price + bunTmp.price : price);
+    setBun(bunTmp);
+  }, [constructor]);
 
   return (
-    <div className='mt-25 pl-4 pr-4' style={{maxHeight: `${height}px`}}>
-      {bun &&
+    <div ref={drop} className='mt-25 pl-4 pr-4' style={{maxHeight: `${height}px`}}>
         <>
           <div className="pl-6 mb-1">
             <ConstructorElement
               type={'top'}
               isLocked={true}
-              text={`${bun.name} (верх)`}
-              price={bun.price}
-              thumbnail={bun.image_mobile}
+              text={bun?.name || `Выберите самую вкусную булку во всей галактике (верх)`}
+              price={bun?.price || 0}
+              thumbnail={bun?.image_mobile || ''}
             />
           </div>
 
-          <div 
-            style={{maxHeight: `${heightIngredientsWindow}px`, overflow: 'auto'}} 
-            className="mb-1"
-          >
-            {
-              arrayWithoutBun.map((el, index) => {
-                return (
-                  <div key={el._id}>
-                    <BurgerElement
-                      isLocked={false}
-                      name={el.name}
-                      price={el.price}
-                      img={el.image_mobile}
-                    />
-                    {index !== ingredients.length - 1 && <div className="pb-1"/>}
-                    
-                  </div>
-                )})
-            }
-          </div>
+          <Constructor />
 
           <div  className="pl-6 mb-10">
             <ConstructorElement
               type={'bottom'}
               isLocked={true}
-              text={`${bun.name} (низ)`}
-              price={bun.price}
-              thumbnail={bun.image_mobile}
+              text={bun?.name || `Выберите самую вкусную булку во всей галактике (низ)`}
+              price={bun?.price || 0}
+              thumbnail={bun?.image_mobile || ''}
             />
           </div>
         </>
-      }
-      {/* ingredients временно, пока не появится реальный заказ */}
 
-      {ingredients.length ?
         <div className={constructorStyle.order}>
           <p className="text text_type_digits-medium mr-10">
-            {price}<CurrencyIcon type="primary" />
+            {renderPrice}<CurrencyIcon type="primary" />
           </p>
 
-          <Button htmlType="button" type="primary" size="medium"  onClick={openModal}>
+          <Button htmlType="button" type="primary" size="medium"  onClick={openModal} disabled={!bun}>
             Оформить заказ
           </Button>
 
-          {isModalOpen && 
-            <Modal header={''} closeModal={closeModal} >
-              <OrderDetails id={'034536'}/>
-            </Modal>
+          {
+            isModalOpen && 
+              <Modal header={''} closeModal={closeModal} >
+                <OrderDetails ids={requestParams}/>
+              </Modal>
           }
         </div>
-        : <></>
-      }
     </div>
   );
 }
