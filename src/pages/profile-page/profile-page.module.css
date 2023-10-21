@@ -1,0 +1,38 @@
+.page {
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr; */
+    display: flex;
+    justify-content: center;
+}
+
+.items {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.items:first-child {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    width: 320px;
+}
+
+.nav {
+    height: 64px;
+}
+
+.active {
+    color: #F2F2F3;
+    text-decoration: none
+}
+
+.notActive {
+    color:#8585AD;
+    text-decoration: none
+}
+
+.notActive:hover {
+    color: #876c99;
+    text-decoration: none
+}
