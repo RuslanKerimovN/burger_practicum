@@ -1,8 +1,3 @@
-.header {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
 .content {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

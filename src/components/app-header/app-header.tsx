@@ -4,7 +4,7 @@ import { HeaderItem } from '../header-item/header-item';
 
 export const AppHeader = () => {
     return (
-        <header>
+        <header className={`${styleHeader.headerStyle}`}>
             <nav className={`p-4 ${styleHeader.header}`}>
                 <div className={`${styleHeader.items}`}>
                     {/* <a href='#'> */}
