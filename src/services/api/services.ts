@@ -1,6 +1,7 @@
-import { IResetPasswordRequest } from "../../types/types";
+import { IAuthTokenRequest, IRegisterRequest, IResetPasswordRequest } from "../../types/types";
 
 const ADDRESS = 'https://norma.nomoreparties.space/api';
+const AUTH = `${ADDRESS}/auth`;
 
 export const getIngredientsServices = () => {
     return fetch(`${ADDRESS}/ingredients`);
@@ -29,3 +30,35 @@ export const postPasswordResetServices = (params: IResetPasswordRequest) => {
         body: JSON.stringify(params)
     });
 };
+
+export const postLoginService = (params: IAuthTokenRequest) => {
+    return fetch(`${AUTH}/login`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(params)
+    });
+}
+
+export const postRegisterService = (params: IRegisterRequest) => {
+    return fetch(`${AUTH}/register`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(params)
+    });
+}
+
+export const postLogoutService = (token: string) => {
+    return fetch(`${AUTH}/logout`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({token})
+    });
+}
+ 
+export const postUpdateTokenService = (params: IAuthTokenRequest) => {
+    return fetch(`${AUTH}/token`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(params)
+    });
+}

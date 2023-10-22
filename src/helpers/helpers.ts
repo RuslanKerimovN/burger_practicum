@@ -1,3 +1,4 @@
+import { HOME, PROFILE, PROFILE_TAPE } from "../constants/path";
 import { IBurgerIngredients, IIngredientsArray } from "../types/types";
 
 export const tabArray = (ingredients: IBurgerIngredients[]): IIngredientsArray[] => {
@@ -30,4 +31,15 @@ export const findCount = (array: IBurgerIngredients[], name: string): number => 
         }
     }
     return count;
+}
+
+export const getIconType = (location: string, nav: string): 'primary' | 'secondary' => {
+    if (location === HOME && nav === 'constructor') {
+        return 'primary';
+    } else if (location === PROFILE_TAPE && nav === 'tape') {
+        return 'primary';
+    } else if (location === PROFILE && nav === 'profile') {
+        return 'primary';
+    }
+    return 'secondary';
 }

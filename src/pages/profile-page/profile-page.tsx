@@ -3,6 +3,7 @@ import { HEIGHT_WITHOUT_HEADER } from '../../constants/constants';
 import styles from './profile-page.module.css';
 import { ChangeEvent, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { LOGIN, PROFILE, PROFILE_ORDERS } from '../../constants/path';
 
 export const ProfilePage = () => {
     const [state, setState] = useState<string>('');
@@ -15,17 +16,17 @@ export const ProfilePage = () => {
         <div className={`${styles.page}`}>
             <div className={`${styles.items} mr-15 mt-30`}>
                 <div className={`${styles.nav}`}>
-                    <NavLink to='' className={({ isActive }) =>  isActive ? `text text_type_main-medium ${styles.active}` : ``}>
+                    <NavLink to={PROFILE} className={({ isActive }) =>  isActive ? `text text_type_main-medium ${styles.active}` : `text text_type_main-medium ${styles.notActive}`}>
                         Профиль
                     </NavLink>
                 </div>
                 <div className={`${styles.nav}`}>
-                    <NavLink to='' className={`text text_type_main-medium ${styles.notActive}`}>
+                    <NavLink to={PROFILE_ORDERS} className={({ isActive }) =>  isActive ? `text text_type_main-medium ${styles.active}` : `text text_type_main-medium ${styles.notActive}`}>
                         История заказов
                     </NavLink>
                 </div>
                 <div className={`${styles.nav} mb-20`}>
-                    <NavLink to='/login' className={`text text_type_main-medium ${styles.notActive}`}>
+                    <NavLink to={LOGIN} className={({ isActive }) =>  isActive ? `text text_type_main-medium ${styles.active}` : `text text_type_main-medium ${styles.notActive}`}>
                         Выход
                     </NavLink>
                 </div>

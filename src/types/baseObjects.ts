@@ -1,4 +1,4 @@
-import { IBurgerIngredients, IOrderResponse, IResetPasswordStatus } from "./types"
+import { IAuthTokenRequest, IAuthTokenResponse, IBurgerIngredients, ILogoutResponse, IOrderResponse, IRegisterResponse, IResetPasswordStatus } from "./types"
 
 export const baseOrder: IOrderResponse = {
     name: '',
@@ -23,6 +23,31 @@ export const baseIngredient: IBurgerIngredients = {
 }
 
 export const baseResetResponse: IResetPasswordStatus = {
+    success: false,
+    message: '',
+}
+
+export const baseRegisterResponse: IRegisterResponse = {
+    success: false,
+    user: {
+        email: '',
+        name: '',
+    },
+    accessToken: '', //"Bearer ...",
+    refreshToken: '',
+}
+
+export const baseAuthToken: IAuthTokenResponse = {
+    success: false,
+    accessToken: '',
+    refreshToken: '',
+    user: {
+      email: '',
+      name: '',
+    }
+}
+
+export const baseLogout: ILogoutResponse = {
     success: false,
     message: '',
 }

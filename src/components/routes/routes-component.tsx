@@ -12,19 +12,27 @@ import {
     HOME,
     LOGIN,
     PROFILE,
+    PROFILE_ORDERS,
     REGISTER,
     RESET_PASSWORD
 } from '../../constants/path';
+import { HistoryOrdersPage } from '../../pages/history-orders-page/history-orders-page';
+import { TapeOrdersPage } from '../../pages/tape-orders-page/tape-orders-page';
 
 export const  RoutesComponent = () => {
     return (
         <Routes>
+            {/* static paths */}
             <Route path={HOME} element={<ConstructorPage />} />
             <Route path={LOGIN} element={<LoginPage />} />
             <Route path={REGISTER} element={<RegisterPage />} />
             <Route path={FORGOT_PASSWORD} element={<ForgotPasswordPage />} />
             <Route path={RESET_PASSWORD} element={<ResetPasswordPage />} />
             <Route path={PROFILE} element={<ProfilePage />} />
+            <Route path={PROFILE_ORDERS} element={<HistoryOrdersPage />} />
+
+            {/* dynamic paths */}
+            <Route path={'/profile/orders/:id'} element={<TapeOrdersPage />} />
             <Route path='/ingredients/:id' element={<IngredientsPage />} />
             <Route path='*' element={<NotFoundPage />} />
         </Routes>

@@ -24,3 +24,17 @@
     align-items: start;
     justify-content: start;
 }
+
+.link {
+    text-decoration: none;
+}
+
+.active {
+    color: #F2F2F3;
+    text-decoration: none
+}
+
+.notActive {
+    color:#8585AD;
+    text-decoration: none
+}
