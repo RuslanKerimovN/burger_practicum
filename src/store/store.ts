@@ -4,12 +4,16 @@ import constructorSlice from '../services/slices/constructorSlice';
 import ingredientsSlice from "../services/slices/ingredientsSlice";
 import orderSlice from '../services/slices/orderSlice';
 import showIngredientSlice from '../services/slices/showIngredientSlice';
+import confirmationEmailSlice from "../services/slices/confirmationEmailSlice";
+import resetPasswordSlice from "../services/slices/resetPasswordSlice";
 
 export const rootReducer = combineReducers({
     constructorSlice,
     ingredientsSlice,
     orderSlice,
     showIngredientSlice,
+    confirmationEmailSlice,
+    resetPasswordSlice
 });
 
 export const setupStore = () => {

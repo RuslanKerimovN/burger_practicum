@@ -1,14 +1,14 @@
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './login-page.module.css';
 import { Link } from 'react-router-dom';
-import { HEIGHT_WITHOUT_HEADER, WIDTH } from '../../constants/constants';
+import { HEIGHT_WITHOUT_HEADER } from '../../constants/constants';
 import { FORGOT_PASSWORD, REGISTER } from '../../constants/path';
 
 export const LoginPage = () => {
     return (
         <div
             className={`${styles.login}`}
-            style={{width: WIDTH, height: HEIGHT_WITHOUT_HEADER}}
+            style={{height: HEIGHT_WITHOUT_HEADER}}
         >
             <p className={`text text_type_main-medium mb-6`}>
                 Вход

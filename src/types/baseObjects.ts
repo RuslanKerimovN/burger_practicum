@@ -1,4 +1,4 @@
-import { IBurgerIngredients, IOrderResponse } from "./types"
+import { IBurgerIngredients, IOrderResponse, IResetPasswordStatus } from "./types"
 
 export const baseOrder: IOrderResponse = {
     name: '',
@@ -20,4 +20,9 @@ export const baseIngredient: IBurgerIngredients = {
     image_large: '',
     __v: -1,
     constructorId: ''
+}
+
+export const baseResetResponse: IResetPasswordStatus = {
+    success: false,
+    message: '',
 }

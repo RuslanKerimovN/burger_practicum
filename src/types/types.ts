@@ -24,3 +24,13 @@ export interface IIngredientsArray {
   header: string;
   body: IBurgerIngredients[];
 }
+
+export interface IResetPasswordStatus {
+  success: boolean;
+  message: string;
+}
+
+export interface IResetPasswordRequest {
+  password: string;
+  token: string;
+}
