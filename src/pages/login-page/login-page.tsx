@@ -2,6 +2,7 @@ import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burg
 import styles from './login-page.module.css';
 import { Link } from 'react-router-dom';
 import { HEIGHT_WITHOUT_HEADER, WIDTH } from '../../constants/constants';
+import { FORGOT_PASSWORD, REGISTER } from '../../constants/path';
 
 export const LoginPage = () => {
     return (
@@ -24,10 +25,10 @@ export const LoginPage = () => {
                 </Button>
             </div>
             <p className={`text text_type_main-default text_color_inactive mb-4`}>
-                Вы - новый пользователь? <Link to={'/register'} className={`${styles.text}`}>Зарегистрироваться</Link>
+                Вы - новый пользователь? <Link to={REGISTER} className={`${styles.text}`}>Зарегистрироваться</Link>
             </p>
             <p className="text text_type_main-default text_color_inactive">
-                Забыли пароль? <Link to={'/forgot-password'} className={`${styles.text}`}>Восстановить пароль</Link>
+                Забыли пароль? <Link to={FORGOT_PASSWORD} className={`${styles.text}`}>Восстановить пароль</Link>
             </p>
         </div>
     );

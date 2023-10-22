@@ -4,6 +4,7 @@ import tabsStyle from './tabs.module.css';
 import { IIngredientsArray } from '../../types/types';
 import { IngredientCard } from '../ingredient-card/ingredient-card';
 import { useInView } from 'react-intersection-observer';
+import { CONSTRUCTOR_HEIGHT } from '../../constants/constants';
 
 interface Props {
     ingredients: IIngredientsArray[];
@@ -12,7 +13,6 @@ interface Props {
 export const Tabs = ({ingredients}: Props) => {
     const [current, setCurrent] = React.useState<string>('bun');
     const containerRef = useRef();
-    const height = window.innerHeight - 320;
 
     const [bunRef, bunIsView] = useInView({
         threshold: 0,
@@ -54,7 +54,7 @@ export const Tabs = ({ingredients}: Props) => {
                     Соусы
                 </Tab>
             </div>
-            <div style={{height: `${height}px`, overflowY: 'scroll'}}>
+            <div style={{height: `${CONSTRUCTOR_HEIGHT}px`, overflowY: 'scroll'}}>
             {
                 ingredients.map((el, index) => (
                     <section className={'mt-10'} key={el.header} ref={tmp[index]}>

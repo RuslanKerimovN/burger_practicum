@@ -3,6 +3,7 @@ import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burg
 import styles from './register-page.module.css';
 import { HEIGHT_WITHOUT_HEADER, WIDTH } from '../../constants/constants';
 import { Link } from 'react-router-dom';
+import { LOGIN } from '../../constants/path';
 
 export const RegisterPage = () => {
     return (
@@ -28,7 +29,7 @@ export const RegisterPage = () => {
                 </Button>
             </div>
             <p className={`text text_type_main-default text_color_inactive`}>
-                Уже зарегистрированы? <Link to={'/login'} className={`${styles.text}`}>Войти</Link>
+                Уже зарегистрированы? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
             </p>
         </div>
     );

@@ -3,6 +3,7 @@ import styles from './reset-password-page.module.css';
 import { HEIGHT_WITHOUT_HEADER, WIDTH } from '../../constants/constants';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
+import { LOGIN } from '../../constants/path';
 
 export const ResetPasswordPage = () => {
     return (
@@ -25,7 +26,7 @@ export const ResetPasswordPage = () => {
                 </Button>
             </div>
             <p className={`text text_type_main-default text_color_inactive`}>
-                Вспомнили пароль? <Link to={'/login'} className={`${styles.text}`}>Войти</Link>
+                Вспомнили пароль? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
             </p>
         </div>
     );

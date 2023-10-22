@@ -9,6 +9,7 @@ import { useDrop } from "react-dnd";
 import {Constructor} from '../constructor/constructor';
 import { IBurgerIngredients } from "../../types/types";
 import { getStateConstructor } from "../../services/slices/constructorSlice";
+import { CONSTRUCTOR_HEIGHT } from "../../constants/constants";
 
 export const BurgerConstructor = () => {
   const {isModalOpen, openModal, closeModal} = useModal();
@@ -16,7 +17,6 @@ export const BurgerConstructor = () => {
   const [requestParams, setRequestParams] = useState<string[]>([]);
   const [renderPrice, setRenderPrice] = useState<number>(0);
   const [bun, setBun] = useState<IBurgerIngredients | undefined>(undefined);
-  const height = window.innerHeight - 320;
 
   const [, drop] = useDrop(() => ({
     accept: 'ingredient',
@@ -42,7 +42,7 @@ export const BurgerConstructor = () => {
   }, [constructor]);
 
   return (
-    <div ref={drop} className='mt-25 pl-4 pr-4' style={{maxHeight: `${height}px`}}>
+    <div ref={drop} className='mt-25 pl-4 pr-4' style={{maxHeight: `${CONSTRUCTOR_HEIGHT}px`}}>
         <>
           <div className="pl-6 mb-1">
             <ConstructorElement

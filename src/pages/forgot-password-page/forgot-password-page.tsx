@@ -2,6 +2,7 @@ import styles from './forgot-password-page.module.css';
 import { HEIGHT_WITHOUT_HEADER, WIDTH } from '../../constants/constants';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
+import { LOGIN } from '../../constants/path';
 
 export const ForgotPasswordPage = () => {
     return (
@@ -21,7 +22,7 @@ export const ForgotPasswordPage = () => {
                 </Button>
             </div>
             <p className={`text text_type_main-default text_color_inactive`}>
-                Уже зарегистрированы? <Link to={'/login'} className={`${styles.text}`}>Войти</Link>
+                Уже зарегистрированы? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
             </p>
         </div>
     );
