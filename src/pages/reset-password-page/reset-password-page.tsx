@@ -2,7 +2,7 @@ import styles from './reset-password-page.module.css';
 import { HEIGHT_WITHOUT_HEADER } from '../../constants/constants';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, Navigate } from 'react-router-dom';
-import { HOME, LOGIN } from '../../constants/path';
+import { LOGIN } from '../../constants/path';
 import { useInput } from '../../hooks/useInput';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { getStateResetPassword, getStateResetPasswordError, getStateResetPasswordLoading, postResetPassword } from '../../services/slices/resetPasswordSlice';
@@ -58,11 +58,11 @@ export const ResetPasswordPage = () => {
                                     Вспомнили пароль? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
                                 </p>
                             </div>
-                        :   <Navigate to={HOME}/>
+                        :   <Navigate to={LOGIN}/>
             }
             {isModalOpen &&
                 <ModalStatus
-                    header='На сервере технические неполадки, попробуйте позднее'
+                    header='Введены неверные данные'
                     closeModal={closeModal}
                 />
             }

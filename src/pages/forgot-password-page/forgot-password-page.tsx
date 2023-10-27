@@ -53,7 +53,7 @@ export const ForgotPasswordPage = () => {
                             </Button>
                             </div>
                             <p className={`text text_type_main-default text_color_inactive`}>
-                                Уже зарегистрированы? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
+                                Вспомнили пароль? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
                             </p>
                         </div>
                     :   <Navigate to={RESET_PASSWORD}/>

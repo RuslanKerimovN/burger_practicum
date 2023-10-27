@@ -3,6 +3,7 @@ import { baseAuthToken } from "../../types/baseObjects";
 import { IAuthTokenRequest, IAuthTokenResponse } from "../../types/types";
 import { postUpdateTokenService } from "../api/services";
 import { RootState } from "../../store/store";
+import { setCookie } from "../../helpers/helpers";
 
 interface IUpadateToken {
     token: IAuthTokenResponse;
@@ -16,10 +17,10 @@ const initialState: IUpadateToken = {
     isTokenError: false,
 }
 
-export const postUpdateToken = createAsyncThunk<IAuthTokenResponse, IAuthTokenRequest>(
+export const postUpdateToken = createAsyncThunk<IAuthTokenResponse, string>(
     'postUpdateToken',
-    async (params, {rejectWithValue}) => {
-        const response = await postUpdateTokenService(params);
+    async (token, {rejectWithValue}) => {
+        const response = await postUpdateTokenService(token);
 
         if (!response.ok) {
             return rejectWithValue(true);
@@ -38,6 +39,8 @@ const updateTokenSlice = createSlice({
         builder
             .addCase(postUpdateToken.fulfilled, (state, action) => {
                 state.token = action.payload;
+                localStorage.setItem('refreshToken', `${(action.payload.refreshToken)}`);
+                setCookie('accessToken', `${(action.payload.accessToken).split('Bearer ')[1]}`);
                 state.isTokenLoading = false;
                 state.isTokenError = false;
             })

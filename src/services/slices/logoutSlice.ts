@@ -17,7 +17,7 @@ const initialState: ILogout = {
 }
 
 export const postLogout = createAsyncThunk<ILogoutResponse, string>(
-    'postLogin',
+    'postLogout',
     async (token, {rejectWithValue}) => {
         const response = await postLogoutService(token);
 

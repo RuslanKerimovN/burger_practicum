@@ -1,4 +1,5 @@
-import { IAuthTokenRequest, IRegisterRequest, IResetPasswordRequest } from "../../types/types";
+import { getCookie } from "../../helpers/helpers";
+import { IAuthTokenRequest, IPatchUserRequest, IRegisterRequest, IResetPasswordRequest } from "../../types/types";
 
 const ADDRESS = 'https://norma.nomoreparties.space/api';
 const AUTH = `${ADDRESS}/auth`;
@@ -55,10 +56,30 @@ export const postLogoutService = (token: string) => {
     });
 }
  
-export const postUpdateTokenService = (params: IAuthTokenRequest) => {
+export const postUpdateTokenService = (token: string) => {
     return fetch(`${AUTH}/token`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(params)
+        body: JSON.stringify({token: token})
     });
+}
+
+export const getUserService = (cookie: string) => {
+    return fetch(`${AUTH}/user`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${cookie}`,
+        },
+    })
+}
+
+export const patchUserService = (cookie: string, params: IPatchUserRequest) => {
+    return fetch(`${AUTH}/user`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${cookie}`,
+        },
+        body: JSON.stringify(params)
+    })
 }

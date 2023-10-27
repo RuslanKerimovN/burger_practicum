@@ -52,7 +52,7 @@ export interface IRegisterResponse {
 }
 
 export interface IAuthTokenRequest {
-  email: string; 
+  email: string;
   password: string;
 }
 
@@ -80,3 +80,17 @@ export interface ILogoutResponse {
   success: boolean;
   message: string;
 }
+
+export interface IUserResponse {
+  success: boolean;
+  user: {
+    email: string;
+    name: string;
+  }
+}
+
+export interface IPatchUserRequest {
+  name: string;
+  email: string;
+  password: string;
+} 

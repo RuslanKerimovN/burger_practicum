@@ -17,7 +17,7 @@ const initialState: IResetPassword = {
 }
 
 export const postResetPassword = createAsyncThunk<IResetPasswordStatus, IResetPasswordRequest>(
-    'postConfirmationEmail',
+    'postResetEmail',
     async (params, {rejectWithValue}) => {
         const response = await postPasswordResetServices(params);
 
@@ -41,11 +41,11 @@ const resetPasswordSlice = createSlice({
                 state.isLoadingResetPassword = false;
                 state.isErrorResetPassword = false;
             })
-            .addMatcher(isAnyOf(postResetPassword.pending), (state) => {
+            .addCase(postResetPassword.pending, (state) => {
                 state.isLoadingResetPassword = true;
                 state.isErrorResetPassword = false;
             })
-            .addMatcher(isAnyOf(postResetPassword.rejected), (state) => {
+            .addCase(postResetPassword.rejected, (state) => {
                 state.isLoadingResetPassword = false;
                 state.isErrorResetPassword = true;
             })

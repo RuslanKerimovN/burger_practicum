@@ -4,9 +4,12 @@ import { HeaderItem } from '../header-item/header-item';
 import { NavLink, useLocation } from 'react-router-dom';
 import { HOME, PROFILE, PROFILE_TAPE } from '../../constants/path';
 import { getIconType } from '../../helpers/helpers';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { getStateName } from '../../services/slices/userSlice';
 
 export const AppHeader = () => {
     const {pathname} = useLocation();
+    const name = useAppSelector(getStateName);
 
     return (
         <header className={`${styles.headerStyle}`}>
@@ -37,7 +40,7 @@ export const AppHeader = () => {
                     className={({ isActive }) =>  isActive ? `${styles.active}` : `${styles.notActive}`}
                 >
                     <div className={`${styles.items}`}>
-                        <HeaderItem text={'Личный кабинет'}>
+                        <HeaderItem text={name || 'Личный кабинет'}>
                             <ProfileIcon type={getIconType(pathname, 'profile')}/>
                         </HeaderItem>
                     </div>

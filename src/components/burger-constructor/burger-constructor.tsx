@@ -10,6 +10,9 @@ import {Constructor} from '../constructor/constructor';
 import { IBurgerIngredients } from "../../types/types";
 import { getStateConstructor } from "../../services/slices/constructorSlice";
 import { CONSTRUCTOR_HEIGHT } from "../../constants/constants";
+import { getCookie } from "../../helpers/helpers";
+import { useNavigate } from "react-router";
+import { LOGIN } from "../../constants/path";
 
 export const BurgerConstructor = () => {
   const {isModalOpen, openModal, closeModal} = useModal();
@@ -17,6 +20,18 @@ export const BurgerConstructor = () => {
   const [requestParams, setRequestParams] = useState<string[]>([]);
   const [renderPrice, setRenderPrice] = useState<number>(0);
   const [bun, setBun] = useState<IBurgerIngredients | undefined>(undefined);
+  const navigate = useNavigate();
+
+  const onPressButton = () => {
+    let cookie = getCookie('accessToken');
+    const token = localStorage.getItem('refreshToken');
+
+    if (!cookie || !token) {
+      navigate(LOGIN);
+      return;
+    }
+    openModal();
+  }
 
   const [, drop] = useDrop(() => ({
     accept: 'ingredient',
@@ -30,7 +45,7 @@ export const BurgerConstructor = () => {
   useEffect(() => {
     let price: number = 0;
     let ids: string[] = [];
-    const bunTmp = constructor.find((el) => el.type === 'bun') 
+    const bunTmp = constructor.find((el: IBurgerIngredients) => el.type === 'bun') 
     for (let i = 0; i < constructor.length; i++) {
       price += constructor[i].price;
       ids = [...ids, constructor[i]._id];
@@ -72,7 +87,7 @@ export const BurgerConstructor = () => {
             {renderPrice}<CurrencyIcon type="primary" />
           </p>
 
-          <Button htmlType="button" type="primary" size="medium"  onClick={openModal} disabled={!bun}>
+          <Button htmlType="button" type="primary" size="medium"  onClick={onPressButton} disabled={!bun}>
             Оформить заказ
           </Button>
 

@@ -10,6 +10,7 @@ import registerSlice from "../services/slices/registerSlice";
 import loginSlice from "../services/slices/loginSlice";
 import logoutSlice from "../services/slices/logoutSlice";
 import updateTokenSlice from "../services/slices/updateTokenSlice";
+import userSlice from "../services/slices/userSlice";
 
 export const rootReducer = combineReducers({
     constructorSlice,
@@ -21,7 +22,8 @@ export const rootReducer = combineReducers({
     registerSlice,
     loginSlice,
     logoutSlice,
-    updateTokenSlice
+    updateTokenSlice,
+    userSlice
 });
 
 export const setupStore = () => {

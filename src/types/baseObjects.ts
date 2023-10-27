@@ -1,4 +1,4 @@
-import { IAuthTokenRequest, IAuthTokenResponse, IBurgerIngredients, ILogoutResponse, IOrderResponse, IRegisterResponse, IResetPasswordStatus } from "./types"
+import { IAuthTokenRequest, IAuthTokenResponse, IBurgerIngredients, ILogoutResponse, IOrderResponse, IRegisterResponse, IResetPasswordStatus, IUserResponse } from "./types"
 
 export const baseOrder: IOrderResponse = {
     name: '',
@@ -50,4 +50,12 @@ export const baseAuthToken: IAuthTokenResponse = {
 export const baseLogout: ILogoutResponse = {
     success: false,
     message: '',
+}
+
+export const baseUser: IUserResponse = {
+    success: false,
+    user: {
+        email: '',
+        name: ''
+    }
 }

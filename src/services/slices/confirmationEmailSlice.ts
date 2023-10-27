@@ -41,11 +41,11 @@ const confirmationEmailSlice = createSlice({
                 state.isLoadingConfirmationEmail = false;
                 state.isErrorConfirmationEmail = false;
             })
-            .addMatcher(isAnyOf(postConfirmationEmail.pending), (state) => {
+            .addCase(postConfirmationEmail.pending, (state) => {
                 state.isLoadingConfirmationEmail = true;
                 state.isErrorConfirmationEmail = false;
             })
-            .addMatcher(isAnyOf(postConfirmationEmail.rejected), (state) => {
+            .addCase(postConfirmationEmail.rejected, (state) => {
                 state.isLoadingConfirmationEmail = false;
                 state.isErrorConfirmationEmail = true;
             })

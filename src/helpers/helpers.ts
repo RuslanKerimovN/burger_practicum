@@ -1,4 +1,4 @@
-import { HOME, PROFILE, PROFILE_TAPE } from "../constants/path";
+import { FORGOT_PASSWORD, HOME, LOGIN, PROFILE, PROFILE_TAPE, REGISTER, RESET_PASSWORD } from "../constants/path";
 import { IBurgerIngredients, IIngredientsArray } from "../types/types";
 
 export const tabArray = (ingredients: IBurgerIngredients[]): IIngredientsArray[] => {
@@ -42,4 +42,31 @@ export const getIconType = (location: string, nav: string): 'primary' | 'seconda
         return 'primary';
     }
     return 'secondary';
+}
+
+export const getCookie = (name: string) => {
+    let matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+export const setCookie = (name: string, value: string) => {
+    let updatedCookie = `${name}=${value}`;
+    document.cookie = updatedCookie;
+}
+
+export const deleteCookie = (name: string) => {
+    document.cookie = `${name}=${''}; max-age: -1;`;
+}
+
+export const findRoute = (path: string): boolean => {
+    const object = {
+        [LOGIN]: true,
+        [REGISTER]: true,
+        [FORGOT_PASSWORD]: true,
+        [RESET_PASSWORD]: true,
+    }
+    // @ts-ignore
+    return object[path] ?? false;
 }

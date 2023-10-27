@@ -3,6 +3,7 @@ import { baseRegisterResponse } from "../../types/baseObjects";
 import { IRegisterRequest, IRegisterResponse } from "../../types/types";
 import { postRegisterService } from "../api/services";
 import { RootState } from "../../store/store";
+import { setCookie } from "../../helpers/helpers";
 
 interface IRegister {
     registerData: IRegisterResponse;
@@ -25,7 +26,7 @@ export const postRegister = createAsyncThunk<IRegisterResponse, IRegisterRequest
             return rejectWithValue(true);
         }
 
-        const data = await response.json();
+        const data: IRegisterResponse = await response.json();
         return data;
     }
 )
@@ -38,6 +39,8 @@ const registerSlice = createSlice({
         builder
             .addCase(postRegister.fulfilled, (state, action) => {
                 state.registerData = action.payload;
+                localStorage.setItem('refreshToken', `${(action.payload.refreshToken)}`);
+                setCookie('accessToken', `${(action.payload.accessToken).split('Bearer ')[1]}`);
                 state.isRegisterLoading = false;
                 state.isRegisterError = false;
             })

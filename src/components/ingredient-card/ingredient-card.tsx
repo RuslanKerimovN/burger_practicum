@@ -11,6 +11,7 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { findCount } from '../../helpers/helpers';
 import {useEffect, useState} from 'react';
 import { deleteWatchIngredient, saveWatchIngredient } from '../../services/slices/showIngredientSlice';
+import { Link, useLocation } from 'react-router-dom';
 
 interface Props {
     ingredient: IBurgerIngredients;
@@ -22,6 +23,7 @@ export const IngredientCard = ({ingredient}: Props) => {
     const {isModalOpen, openModal, closeModal} = useModal();
     const {name} = ingredient;
     const [count, setCount] = useState<number>(0);
+    const location = useLocation();
 
     useEffect(() => {
         setCount(findCount(constructor, ingredient.name));
@@ -69,16 +71,19 @@ export const IngredientCard = ({ingredient}: Props) => {
                     {ingredient.name}
                 </p>
             </div>
-            {isModalOpen && 
-                <Modal
-                    header={'Детали ингредиента'}
-                    closeModal={onCloseClick}
-                >
-                    <IngredientDetails
-                        ingredient={ingredient}
-                    />
-                </Modal>
-            }
+            <Link to={`/ingredients/${ingredient._id}`}>
+                {isModalOpen &&
+                    <Modal
+                        header={'Детали ингредиента'}
+                        closeModal={onCloseClick}
+                    >
+                        <IngredientDetails
+                            ingredient={ingredient}
+                        />
+                    </Modal>
+                }
+            </Link>
+
         </>
     );
 };
