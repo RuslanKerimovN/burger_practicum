@@ -4,6 +4,7 @@ import { IAuthTokenRequest, IAuthTokenResponse } from "../../types/types";
 import { postLoginService } from "../api/services";
 import { RootState } from "../../store/store";
 import { setCookie } from "../../helpers/helpers";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants/constants";
 
 interface ILogin {
     login: IAuthTokenResponse;
@@ -49,8 +50,8 @@ const loginSlice = createSlice({
             .addCase(postLogin.fulfilled, (state, action) => {
                 state.login = action.payload;
                 state.loginName = action.payload.user.name;
-                localStorage.setItem('refreshToken', `${(action.payload.refreshToken)}`);
-                setCookie('accessToken', `${(action.payload.accessToken).split('Bearer ')[1]}`);
+                localStorage.setItem(REFRESH_TOKEN, `${(action.payload.refreshToken)}`);
+                setCookie(ACCESS_TOKEN, `${(action.payload.accessToken).split('Bearer ')[1]}`);
                 state.isLoginLoading = false;
                 state.isLoginError = false;
             })

@@ -5,6 +5,7 @@ import modalStyle from './modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useNavigate, useParams } from 'react-router';
 import React from 'react';
+import { HOME } from '../../constants/path';
 
 interface Props {
     closeModal?: () => void;
@@ -13,12 +14,12 @@ interface Props {
 
 const portal = document.getElementById('portal') as Element;
 
-export const Modal = ({children=<></>}: Props) => {
+export const Modal = ({closeModal = () => {}, children=<></>}: Props) => {
     let navigate = useNavigate();
     let { id } = useParams<"id">();
 
     const onDismiss = () => {
-        if (id) navigate(-1);
+        id ? navigate(-1) : closeModal();
     }
 
     useEffect(() => {

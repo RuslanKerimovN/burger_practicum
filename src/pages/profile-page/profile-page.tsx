@@ -1,5 +1,5 @@
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import { HEIGHT_WITHOUT_HEADER } from '../../constants/constants';
+import { ACCESS_TOKEN, HEIGHT_WITHOUT_HEADER, REFRESH_TOKEN } from '../../constants/constants';
 import styles from './profile-page.module.css';
 import { ChangeEvent, useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -32,7 +32,7 @@ export const ProfilePage = () => {
     }
 
     useEffect(() => {
-        const token = localStorage.getItem('refreshToken'); 
+        const token = localStorage.getItem(REFRESH_TOKEN); 
         if (token) setToken(token);
         
         if (!name && token) {
@@ -46,8 +46,8 @@ export const ProfilePage = () => {
 
     const onLogoutClick = async () => {
         await dispatch(postLogout(token));
-        localStorage.getItem('refreshToken');
-        deleteCookie('accessToken');
+        localStorage.getItem(REFRESH_TOKEN);
+        deleteCookie(ACCESS_TOKEN);
         dispatch(deleteUser());
         dispatch(clearLogin());
         navigate(LOGIN);

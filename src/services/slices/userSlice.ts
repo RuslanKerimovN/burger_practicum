@@ -4,6 +4,7 @@ import { IPatchUserRequest, IUserResponse } from "../../types/types";
 import { getUserService, patchUserService, postUpdateTokenService } from "../api/services";
 import { RootState } from "../../store/store";
 import { getCookie, setCookie } from "../../helpers/helpers";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants/constants";
 
 interface IUserInfo {
     user: IUserResponse;
@@ -46,8 +47,8 @@ const initialState: IUserInfo = {
 export const patchUser = createAsyncThunk<IUserResponse, IPatchUserRequest>(
     'patchUser',
     async (params, {rejectWithValue}) => {
-        let cookie = getCookie('accessToken');
-        const token = localStorage.getItem('refreshToken');
+        let cookie = getCookie(ACCESS_TOKEN);
+        const token = localStorage.getItem(REFRESH_TOKEN);
         let response;
 
         if (!cookie || !token) {
@@ -69,13 +70,13 @@ export const patchUser = createAsyncThunk<IUserResponse, IPatchUserRequest>(
             }
 
             const tmp = await res.json();
-            await localStorage.setItem('refreshToken', `${(tmp.refreshToken)}`);
-            await setCookie('accessToken', `${(tmp.accessToken).split('Bearer ')[1]}`);
+            await localStorage.setItem(REFRESH_TOKEN, `${(tmp.refreshToken)}`);
+            await setCookie(ACCESS_TOKEN, `${(tmp.accessToken).split('Bearer ')[1]}`);
         } else {
             return await response.json();
         }
 
-        cookie = await getCookie('accessToken');
+        cookie = await getCookie(ACCESS_TOKEN);
 
         if (!cookie) {
             return rejectWithValue(true);
@@ -93,8 +94,8 @@ export const patchUser = createAsyncThunk<IUserResponse, IPatchUserRequest>(
 export const getUser = createAsyncThunk<IUserResponse, undefined>(
     'getUser',
     async (_, {rejectWithValue}) => {
-        let cookie = getCookie('accessToken');
-        const token = localStorage.getItem('refreshToken');
+        let cookie = getCookie(ACCESS_TOKEN);
+        const token = localStorage.getItem(REFRESH_TOKEN);
         let response;
 
         if (!cookie || !token) {
@@ -115,13 +116,13 @@ export const getUser = createAsyncThunk<IUserResponse, undefined>(
             }
 
             const tmp = await res.json();
-            await localStorage.setItem('refreshToken', `${(tmp.refreshToken)}`);
-            await setCookie('accessToken', `${(tmp.accessToken).split('Bearer ')[1]}`);
+            await localStorage.setItem(REFRESH_TOKEN, `${(tmp.refreshToken)}`);
+            await setCookie(ACCESS_TOKEN, `${(tmp.accessToken).split('Bearer ')[1]}`);
         } else {
             return await response.json();
         }
 
-        cookie = await getCookie('accessToken');
+        cookie = await getCookie(ACCESS_TOKEN);
         if (!cookie) {
             return rejectWithValue(true);
         }

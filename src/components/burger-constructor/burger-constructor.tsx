@@ -9,7 +9,7 @@ import { useDrop } from "react-dnd";
 import {Constructor} from '../constructor/constructor';
 import { IBurgerIngredients } from "../../types/types";
 import { getStateConstructor } from "../../services/slices/constructorSlice";
-import { CONSTRUCTOR_HEIGHT } from "../../constants/constants";
+import { ACCESS_TOKEN, CONSTRUCTOR_HEIGHT, REFRESH_TOKEN } from "../../constants/constants";
 import { getCookie } from "../../helpers/helpers";
 import { useNavigate } from "react-router";
 import { LOGIN } from "../../constants/path";
@@ -23,8 +23,8 @@ export const BurgerConstructor = () => {
   const navigate = useNavigate();
 
   const onPressButton = () => {
-    let cookie = getCookie('accessToken');
-    const token = localStorage.getItem('refreshToken');
+    let cookie = getCookie(ACCESS_TOKEN);
+    const token = localStorage.getItem(REFRESH_TOKEN);
 
     if (!cookie || !token) {
       navigate(LOGIN);

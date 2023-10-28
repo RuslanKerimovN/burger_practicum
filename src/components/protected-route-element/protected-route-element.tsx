@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { getCookie } from "../../helpers/helpers";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants/constants";
 
 interface Props {
     children: React.ReactNode;
@@ -11,8 +12,8 @@ export const ProtectedRouteElement = ({children}: Props) => {
     const location = useLocation();
 
     useEffect(() => {
-        let cookie = getCookie('accessToken');
-        const token = localStorage.getItem('refreshToken');
+        let cookie = getCookie(ACCESS_TOKEN);
+        const token = localStorage.getItem(REFRESH_TOKEN);
 
         localStorage.setItem('noLogin', `${location.pathname}`);
 

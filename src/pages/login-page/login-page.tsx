@@ -14,8 +14,8 @@ import { ModalStatus } from '../../components/modal-status/modal-status';
 
 export const LoginPage = () => {
     const dispatch = useAppDispatch();
-    const [email, setEmail] = useInput('ruslanprime666@gmail.com');
-    const [password, setPassword] = useInput('1111111111');
+    const [email, setEmail] = useInput('');
+    const [password, setPassword] = useInput('');
     const {isModalOpen, closeModal, openModal} = useModal();
     const login = useAppSelector(getStateLogin);
     const isLoginLoading = useAppSelector(getStateLoadingLogin);
@@ -27,6 +27,7 @@ export const LoginPage = () => {
     };
 
     useEffect(() => {
+        localStorage.removeItem('isForgot');
         if (isLoginError) {
             openModal();
         }

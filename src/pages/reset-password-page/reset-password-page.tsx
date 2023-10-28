@@ -1,8 +1,8 @@
 import styles from './reset-password-page.module.css';
 import { HEIGHT_WITHOUT_HEADER } from '../../constants/constants';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link, Navigate } from 'react-router-dom';
-import { LOGIN } from '../../constants/path';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { FORGOT_PASSWORD, LOGIN } from '../../constants/path';
 import { useInput } from '../../hooks/useInput';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { getStateResetPassword, getStateResetPasswordError, getStateResetPasswordLoading, postResetPassword } from '../../services/slices/resetPasswordSlice';
@@ -20,11 +20,18 @@ export const ResetPasswordPage = () => {
     const [password, setPassword] = useInput();
     const [token, setToken] = useInput();
     const {isModalOpen, closeModal, openModal} = useModal();
+    const navigate = useNavigate();
 
     const onSubmitClick = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(postResetPassword({password, token}));
     }
+
+    useEffect(() => {
+        if (!localStorage.getItem('isForgot')) {
+            navigate(FORGOT_PASSWORD);
+        }
+    }, []);
 
     useEffect(() => {
         if (isErrorResetPassword) {
@@ -61,7 +68,7 @@ export const ResetPasswordPage = () => {
                                     Вспомнили пароль? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
                                 </p>
                             </div>
-                        :   <Navigate to={LOGIN}/>
+                        :   <Navigate to={LOGIN} />
             }
             {isModalOpen &&
                 <ModalStatus

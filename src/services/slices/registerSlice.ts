@@ -4,6 +4,7 @@ import { IRegisterRequest, IRegisterResponse } from "../../types/types";
 import { postRegisterService } from "../api/services";
 import { RootState } from "../../store/store";
 import { setCookie } from "../../helpers/helpers";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants/constants";
 
 interface IRegister {
     registerData: IRegisterResponse;
@@ -39,8 +40,8 @@ const registerSlice = createSlice({
         builder
             .addCase(postRegister.fulfilled, (state, action) => {
                 state.registerData = action.payload;
-                localStorage.setItem('refreshToken', `${(action.payload.refreshToken)}`);
-                setCookie('accessToken', `${(action.payload.accessToken).split('Bearer ')[1]}`);
+                localStorage.setItem(REFRESH_TOKEN, `${(action.payload.refreshToken)}`);
+                setCookie(ACCESS_TOKEN, `${(action.payload.accessToken).split('Bearer ')[1]}`);
                 state.isRegisterLoading = false;
                 state.isRegisterError = false;
             })

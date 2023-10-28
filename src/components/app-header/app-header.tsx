@@ -32,9 +32,9 @@ export const AppHeader = () => {
                         </HeaderItem>
                     </NavLink>
                 </div>
-                <div className={`${styles.items}`}>
+                <NavLink to={HOME} className={`${styles.items}`}>
                     <Logo/>
-                </div>
+                </NavLink>
                 <NavLink
                     to={PROFILE}
                     className={({ isActive }) =>  isActive ? `${styles.active}` : `${styles.notActive}`}

@@ -4,6 +4,7 @@ import { IAuthTokenResponse } from "../../types/types";
 import { postUpdateTokenService } from "../api/services";
 import { RootState } from "../../store/store";
 import { setCookie } from "../../helpers/helpers";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants/constants";
 
 interface IUpadateToken {
     token: IAuthTokenResponse;
@@ -39,8 +40,8 @@ const updateTokenSlice = createSlice({
         builder
             .addCase(postUpdateToken.fulfilled, (state, action) => {
                 state.token = action.payload;
-                localStorage.setItem('refreshToken', `${(action.payload.refreshToken)}`);
-                setCookie('accessToken', `${(action.payload.accessToken).split('Bearer ')[1]}`);
+                localStorage.setItem(REFRESH_TOKEN, `${(action.payload.refreshToken)}`);
+                setCookie(ACCESS_TOKEN, `${(action.payload.accessToken).split('Bearer ')[1]}`);
                 state.isTokenLoading = false;
                 state.isTokenError = false;
             })

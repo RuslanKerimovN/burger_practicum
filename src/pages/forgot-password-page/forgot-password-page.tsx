@@ -28,6 +28,7 @@ export const ForgotPasswordPage = () => {
     const onSubmitClick = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(postConfirmationEmail(email));
+        localStorage.setItem('isForgot', 'true');
     }
 
     useEffect(() => {
