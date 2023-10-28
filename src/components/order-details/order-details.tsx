@@ -22,7 +22,7 @@ export const OrderDetails = ({ids}: Props) => {
     return (
         <>
             {isLoadingOrder
-                ?   <h1>Loading....</h1>
+                ?   <h1>Загрузка....</h1>
                 :   isErrorOrder ? <h1>Ошибка сервера, попробуйте еще раз!</h1>
                     :
                         <div className={`${detailsStyle.card}`}>

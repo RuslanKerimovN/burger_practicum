@@ -1,4 +1,4 @@
-import { IAuthTokenRequest, IAuthTokenResponse, IBurgerIngredients, ILogoutResponse, IOrderResponse, IRegisterResponse, IResetPasswordStatus, IUserResponse } from "./types"
+import { IAuthTokenResponse, IBurgerIngredients, ILogoutResponse, IOrderResponse, IRegisterResponse, IResetPasswordStatus, IUserResponse } from "./types"
 
 export const baseOrder: IOrderResponse = {
     name: '',

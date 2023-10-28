@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSelector, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { baseAuthToken } from "../../types/baseObjects";
-import { IAuthTokenRequest, IAuthTokenResponse } from "../../types/types";
+import { IAuthTokenResponse } from "../../types/types";
 import { postUpdateTokenService } from "../api/services";
 import { RootState } from "../../store/store";
 import { setCookie } from "../../helpers/helpers";

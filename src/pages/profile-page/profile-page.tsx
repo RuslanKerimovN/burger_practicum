@@ -32,36 +32,29 @@ export const ProfilePage = () => {
     }
 
     useEffect(() => {
-        dispatch(getUser());
-    }, []);
-
-    const onLogoutClick = async () => {
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('name');
-        deleteCookie('accessToken');
-        dispatch(deleteUser());
-        dispatch(clearLogin());
-        await dispatch(postLogout(token));
-    }
-
-    useEffect(() => {
-        const tmpToken = localStorage.getItem('refreshToken');
-        if (!tmpToken) {
-            navigate('/login');
-        } else {
-            setToken(tmpToken);
-        };
-    }, []);
+        const token = localStorage.getItem('refreshToken'); 
+        if (token) setToken(token);
+        
+        if (!name && token) {
+            dispatch(getUser())
+        }
+    }, [name]);
 
     useEffect(() => {
         dispatch(setLoginName(name));
     }, [name]);
 
-    
+    const onLogoutClick = async () => {
+        await dispatch(postLogout(token));
+        localStorage.getItem('refreshToken');
+        deleteCookie('accessToken');
+        dispatch(deleteUser());
+        dispatch(clearLogin());
+        navigate(LOGIN);
+    }
 
     return (
         <>
-            {/* {(logout && logout.message === 'Successful logout') && <Navigate to={LOGIN}/>} */}
             <div className={`${styles.page}`}>
                 <div className={`${styles.items} mr-15 mt-30`}>
                     <div className={`${styles.nav}`}>
@@ -104,15 +97,18 @@ export const ProfilePage = () => {
                     </div>
                     {isChangeData ? 
                             <div>
-                                <div>
-                                    <Button htmlType='button' onClick={() => dispatch(patchUser({name: userName, email: userEmail, password: userPassword}))}>
+                                <div className={`${styles.buttons}`}>
+                                    <Button
+                                        htmlType='button'
+                                        type='secondary'
+                                        onClick={() => dispatch(patchUser({name: userName, email: userEmail, password: userPassword}))}
+                                    >
                                         Сохранить
                                     </Button>
                                     <Button htmlType='button' onClick={() => dispatch(resetChanges())}>
                                         Отменить
                                     </Button>
                                 </div>
-                                
                             </div>
                         :   <></>
                     }

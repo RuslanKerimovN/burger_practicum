@@ -1,4 +1,3 @@
-import { getCookie } from "../../helpers/helpers";
 import { IAuthTokenRequest, IPatchUserRequest, IRegisterRequest, IResetPasswordRequest } from "../../types/types";
 
 const ADDRESS = 'https://norma.nomoreparties.space/api';
@@ -52,7 +51,7 @@ export const postLogoutService = (token: string) => {
     return fetch(`${AUTH}/logout`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({token})
+        body: JSON.stringify({token: token})
     });
 }
  

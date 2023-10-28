@@ -21,12 +21,15 @@ import { TapeOrdersPage } from '../../pages/tape-orders-page/tape-orders-page';
 import { ProtectedRouteElement } from '../protected-route-element/protected-route-element';
 import { ProtectedUserElement } from '../protected-user-element/protected-user-element';
 import { Modal } from '../modal/modal';
+import { IngredientDetails } from '../ingredient-details/ingredient-details';
+import { IngredientsPage } from '../../pages/ingredients-page/ingredients-page';
 
 export const  RoutesComponent = () => {
     const location = useLocation();
     let state = location.state as { backgroundLocation?: Location };
 
     return (
+        <>
             <Routes location={state?.backgroundLocation || location}>
                 {/* static paths */}
                 <Route path={HOME} element={<ConstructorPage />} />
@@ -37,18 +40,18 @@ export const  RoutesComponent = () => {
                 <Route path={PROFILE} element={<ProtectedRouteElement><ProfilePage/></ProtectedRouteElement>}/>
                 <Route path={PROFILE_ORDERS} element={<ProtectedRouteElement><HistoryOrdersPage /></ProtectedRouteElement>} />
                 <Route path={PROFILE_TAPE} element={<TapeOrdersPage />} />
-                <Route path="/ingredients/:id" element={<>HELLO WORLD</>} />
-
-
+                <Route path="/ingredients/:id" element={<IngredientsPage />} />
+                <Route path='*' element={<NotFoundPage />} />
 
                 {/* dynamic paths */}
                 {/* <Route path={'/profile/orders/:id'} element={<TapeOrdersPage />} /> */}
-                {state?.backgroundLocation && (
-                    <Routes>
-                        <Route path="/ingredients/:id" element={<Modal />} />
-                    </Routes>
-                )}
-                <Route path='*' element={<NotFoundPage />} />
             </Routes>
+
+            {state?.backgroundLocation && (
+                <Routes>
+                    <Route path="/ingredients/:id" element={<Modal><IngredientDetails/></Modal>} />
+                </Routes>
+            )}
+        </>
     );
 }

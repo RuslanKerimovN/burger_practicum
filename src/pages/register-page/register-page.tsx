@@ -69,7 +69,7 @@ export const RegisterPage = () => {
             }
             {isModalOpen &&
                 <ModalStatus
-                    header='На сервере технические неполадки, попробуйте позднее'
+                    header='Заполните все поля ввода данными'
                     closeModal={closeModal}
                 />
             }

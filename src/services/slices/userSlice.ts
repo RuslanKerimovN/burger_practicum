@@ -1,10 +1,9 @@
-import { PayloadAction, createAsyncThunk, createSelector, createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSelector, createSlice } from "@reduxjs/toolkit";
 import { baseUser } from "../../types/baseObjects";
 import { IPatchUserRequest, IUserResponse } from "../../types/types";
 import { getUserService, patchUserService, postUpdateTokenService } from "../api/services";
 import { RootState } from "../../store/store";
 import { getCookie, setCookie } from "../../helpers/helpers";
-import { ChangeEvent } from "react";
 
 interface IUserInfo {
     user: IUserResponse;
@@ -163,7 +162,6 @@ const userSlice = createSlice({
             state.userName = state.name;
             state.userEmail = state.email;
             state.userPassword = state.password;
-
         },
         deleteUser(state) {
             state.user = baseUser;
@@ -179,7 +177,6 @@ const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getUser.fulfilled, (state, action) => {
-                // localStorage.setItem('name', action.payload.user.name);
                 state.user = action.payload;
                 state.name = action.payload.user.name;
                 state.email = action.payload.user.email;
@@ -190,7 +187,6 @@ const userSlice = createSlice({
                 state.isErrorUser = false;
             })
             .addCase(patchUser.fulfilled, (state, action) => {
-                // localStorage.setItem('name', action.payload.user.name);
                 state.user = action.payload;
                 state.userEmail = action.payload.user.email;
                 state.userName = action.payload.user.name;
@@ -278,5 +274,3 @@ export const getStateIsChangeData = createSelector(
 export const getStateName = createSelector(
     [name], name => name
 );
-
-

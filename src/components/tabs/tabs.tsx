@@ -5,6 +5,7 @@ import { IIngredientsArray } from '../../types/types';
 import { IngredientCard } from '../ingredient-card/ingredient-card';
 import { useInView } from 'react-intersection-observer';
 import { CONSTRUCTOR_HEIGHT } from '../../constants/constants';
+import { Link, useLocation } from 'react-router-dom';
 
 interface Props {
     ingredients: IIngredientsArray[];
@@ -13,6 +14,7 @@ interface Props {
 export const Tabs = ({ingredients}: Props) => {
     const [current, setCurrent] = React.useState<string>('bun');
     const containerRef = useRef();
+    let location = useLocation();
 
     const [bunRef, bunIsView] = useInView({
         threshold: 0,
@@ -57,23 +59,25 @@ export const Tabs = ({ingredients}: Props) => {
             <div style={{height: `${CONSTRUCTOR_HEIGHT}px`, overflowY: 'scroll'}}>
             {
                 ingredients.map((el, index) => (
-                    <section className={'mt-10'} key={el.header} ref={tmp[index]}>
-                        <p className="text text_type_main-medium mb-6">
-                            {el.header}
-                        </p>
-                        <div className={`${tabsStyle.ingredients} pl-4 pr-4`}>
-                            {
-                                el.body.map((el, index) => (
-                                    <div
-                                        key={el['_id']}
-                                        className={`${(index % 2 === 0) ? 'mr-6' : ''} ${tabsStyle.card}`}
-                                    >
-                                        <IngredientCard ingredient={el} />
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </section>
+                        <section className={'mt-10'} key={el.header} ref={tmp[index]}>
+                            <p className="text text_type_main-medium mb-6">
+                                {el.header}
+                            </p>
+                            <div className={`${tabsStyle.ingredients} pl-4 pr-4`}>
+                                {
+                                    el.body.map((el, index) => (
+                                        <div
+                                            key={el['_id']}
+                                            className={`${(index % 2 === 0) ? 'mr-6' : ''} ${tabsStyle.card}`}
+                                        >
+                                            <Link key={el._id} to={`/ingredients/${el._id}`} state={{ backgroundLocation: location }} className={`${tabsStyle.links}`}>
+                                                <IngredientCard ingredient={el} />
+                                            </Link>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </section>
                 ))
             }
             </div>

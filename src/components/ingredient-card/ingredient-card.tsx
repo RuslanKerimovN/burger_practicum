@@ -1,8 +1,6 @@
 import { IBurgerIngredients } from '../../types/types';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import ingredientCardStyle from './ingredient-card.module.css';
-import { Modal } from '../modal/modal';
-import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { useModal } from '../../hooks/useModal';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { addIngredientInConstructor, getStateConstructor } from '../../services/slices/constructorSlice';
@@ -10,8 +8,7 @@ import { useDrag } from 'react-dnd';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { findCount } from '../../helpers/helpers';
 import {useEffect, useState} from 'react';
-import { deleteWatchIngredient, saveWatchIngredient } from '../../services/slices/showIngredientSlice';
-import { Link, useLocation } from 'react-router-dom';
+import { saveWatchIngredient } from '../../services/slices/showIngredientSlice';
 
 interface Props {
     ingredient: IBurgerIngredients;
@@ -20,23 +17,17 @@ interface Props {
 export const IngredientCard = ({ingredient}: Props) => {
     const dispatch = useAppDispatch();
     const constructor = useAppSelector(getStateConstructor);
-    const {isModalOpen, openModal, closeModal} = useModal();
+    const {openModal} = useModal();
     const {name} = ingredient;
     const [count, setCount] = useState<number>(0);
-    const location = useLocation();
 
     useEffect(() => {
         setCount(findCount(constructor, ingredient.name));
-    }, [constructor])
+    }, [constructor, ingredient])
 
     const onOpenClick = () => {
         openModal();
         dispatch(saveWatchIngredient(ingredient));
-    }
-
-    const onCloseClick = () => {
-        closeModal();
-        dispatch(deleteWatchIngredient());
     }
 
     const [, drag] = useDrag(() => ({
@@ -71,19 +62,6 @@ export const IngredientCard = ({ingredient}: Props) => {
                     {ingredient.name}
                 </p>
             </div>
-            <Link to={`/ingredients/${ingredient._id}`}>
-                {isModalOpen &&
-                    <Modal
-                        header={'Детали ингредиента'}
-                        closeModal={onCloseClick}
-                    >
-                        <IngredientDetails
-                            ingredient={ingredient}
-                        />
-                    </Modal>
-                }
-            </Link>
-
         </>
     );
 };

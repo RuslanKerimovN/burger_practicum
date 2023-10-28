@@ -14,7 +14,7 @@ import { useInput } from '../../hooks/useInput';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { ModalStatus } from '../../components/modal-status/modal-status';
 import { useModal } from '../../hooks/useModal';
-import { useEffect } from 'react';
+import { FormEvent, useEffect } from 'react';
 import { Status } from '../../components/status/status';
 
 export const ForgotPasswordPage = () => {
@@ -25,7 +25,8 @@ export const ForgotPasswordPage = () => {
     const [email, setEmail] = useInput();
     const {isModalOpen, closeModal, openModal} = useModal();
 
-    const onRecoveryClick = () => {
+    const onSubmitClick = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         dispatch(postConfirmationEmail(email));
     }
 
@@ -40,18 +41,20 @@ export const ForgotPasswordPage = () => {
             {(isLoadingConfirmationEmail)
                 ?   <Status status='Проверка данных...'/>
                 :   (!confirmationEmail.success) ?
-                        <div className={`${styles.login}`} style={{height: HEIGHT_WITHOUT_HEADER}}>
+                        <div className={`${styles.center}`} style={{height: HEIGHT_WITHOUT_HEADER}}>
                             <p className={`text text_type_main-medium mb-6`}>
                                 Восстановление пароля
                             </p>
-                            <div className='mb-6'>
-                                <Input placeholder='E-mail' value={`${email}`} onChange={setEmail}/>
-                            </div>
-                            <div className='mb-20'>
-                                <Button htmlType="button" type="primary" size="medium" onClick={onRecoveryClick}>
-                                    Восстановить
-                            </Button>
-                            </div>
+                            <form onSubmit={onSubmitClick} className={`${styles.center}`}>
+                                <div className='mb-6'>
+                                    <Input placeholder='E-mail' value={`${email}`} onChange={setEmail}/>
+                                </div>
+                                <div className='mb-20'>
+                                    <Button htmlType="submit" type="primary" size="medium">
+                                        Восстановить
+                                    </Button>
+                                </div>
+                            </form>
                             <p className={`text text_type_main-default text_color_inactive`}>
                                 Вспомнили пароль? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
                             </p>

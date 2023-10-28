@@ -1,5 +1,5 @@
 import { IResetPasswordStatus } from "../../types/types";
-import { createAsyncThunk, createSelector, createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSelector, createSlice } from "@reduxjs/toolkit";
 import { postConfirmationEmailServices } from '../api/services';
 import { RootState } from "../../store/store";
 import { baseResetResponse } from "../../types/baseObjects";

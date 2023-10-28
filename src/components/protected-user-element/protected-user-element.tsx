@@ -14,7 +14,7 @@ export const ProtectedUserElement = ({children}: Props) => {
         let cookie = getCookie('accessToken');
         const token = localStorage.getItem('refreshToken');
 
-        if ((cookie || token) && findRoute(location.pathname)) {
+        if ((cookie && token) && findRoute(location.pathname)) {
             navigate(localStorage.getItem('noLogin') || '/', {replace: true});
             return;
         }

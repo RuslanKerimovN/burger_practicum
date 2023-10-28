@@ -6,7 +6,7 @@ import { LOGIN } from '../../constants/path';
 import { useInput } from '../../hooks/useInput';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { getStateResetPassword, getStateResetPasswordError, getStateResetPasswordLoading, postResetPassword } from '../../services/slices/resetPasswordSlice';
-import { useEffect } from 'react';
+import { FormEvent, useEffect } from 'react';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useModal } from '../../hooks/useModal';
 import { ModalStatus } from '../../components/modal-status/modal-status';
@@ -21,7 +21,8 @@ export const ResetPasswordPage = () => {
     const [token, setToken] = useInput();
     const {isModalOpen, closeModal, openModal} = useModal();
 
-    const onSaveClick = () => {
+    const onSubmitClick = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         dispatch(postResetPassword({password, token}));
     }
 
@@ -37,23 +38,25 @@ export const ResetPasswordPage = () => {
                 ?   <Status status='Проверка данных...'/>
                 :   (!resetPassword.success) ?
                             <div
-                                className={`${styles.login}`}
+                                className={`${styles.center}`}
                                 style={{height: HEIGHT_WITHOUT_HEADER}}
                             >
                                 <p className={`text text_type_main-medium mb-6`}>
                                     Восстановление пароля
                                 </p>
-                                <div className='mb-6'>
-                                    <PasswordInput placeholder='Введите новый пароль' value={password} onChange={setPassword}/>
-                                </div>
-                                <div className='mb-6'>
-                                    <Input placeholder='Введите код из письма' value={token} onChange={setToken}/>
-                                </div>
-                                <div className='mb-20'>
-                                    <Button htmlType="button" type="primary" size="medium" onClick={onSaveClick}>
-                                        Сохранить
-                                    </Button>
-                                </div>
+                                <form onSubmit={onSubmitClick} className={`${styles.center}`}>
+                                    <div className='mb-6'>
+                                        <PasswordInput placeholder='Введите новый пароль' value={password} onChange={setPassword}/>
+                                    </div>
+                                    <div className='mb-6'>
+                                        <Input placeholder='Введите код из письма' value={token} onChange={setToken}/>
+                                    </div>
+                                    <div className='mb-20'>
+                                        <Button htmlType="submit" type="primary" size="medium">
+                                            Сохранить
+                                        </Button>
+                                    </div>
+                                </form>
                                 <p className={`text text_type_main-default text_color_inactive`}>
                                     Вспомнили пароль? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
                                 </p>

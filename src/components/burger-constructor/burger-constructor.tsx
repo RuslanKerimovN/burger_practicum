@@ -65,7 +65,7 @@ export const BurgerConstructor = () => {
               isLocked={true}
               text={bun?.name || `Выберите самую вкусную булку во всей галактике (верх)`}
               price={bun?.price || 0}
-              thumbnail={bun?.image_mobile || ''}
+              thumbnail={bun?.image_mobile || 'https://www.svgrepo.com/show/286913/close-error.svg'}
             />
           </div>
 
@@ -77,7 +77,7 @@ export const BurgerConstructor = () => {
               isLocked={true}
               text={bun?.name || `Выберите самую вкусную булку во всей галактике (низ)`}
               price={bun?.price || 0}
-              thumbnail={bun?.image_mobile || ''}
+              thumbnail={bun?.image_mobile || 'https://www.svgrepo.com/show/286913/close-error.svg'}
             />
           </div>
         </>
@@ -93,7 +93,7 @@ export const BurgerConstructor = () => {
 
           {
             isModalOpen && 
-              <Modal header={''} closeModal={closeModal} >
+              <Modal closeModal={closeModal} >
                 <OrderDetails ids={requestParams}/>
               </Modal>
           }
