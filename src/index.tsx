@@ -4,8 +4,9 @@ import reportWebVitals from './reportWebVitals';
 import {App} from './components/app/app';
 import { Provider } from 'react-redux';
 import { setupStore } from './store/store';
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import {BrowserRouter} from 'react-router-dom'
 
 
 const root = ReactDOM.createRoot(
@@ -15,11 +16,13 @@ const root = ReactDOM.createRoot(
 const store = setupStore();
 
 root.render(
-  <DndProvider backend={HTML5Backend}>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </DndProvider>
+  <BrowserRouter>
+    <DndProvider backend={HTML5Backend}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </DndProvider>
+  </BrowserRouter>
 );
 
 reportWebVitals();

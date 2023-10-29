@@ -14,8 +14,10 @@ export const BurgerIngredients = memo(() => {
     const [ingredientsArray, setIngredientsArray] = useState<IIngredientsArray[]>([]);
 
     useEffect(() => {
-      dispatch(getIngredients());
-    }, [dispatch]);
+        if (!ingredients.length) {
+            dispatch(getIngredients());
+        }
+    }, [dispatch, ingredients]);
 
     useEffect(() => {
         const tmp = tabArray(ingredients);
@@ -32,7 +34,7 @@ export const BurgerIngredients = memo(() => {
                     <Tabs ingredients={ingredientsArray}/>
                 </>
                 : (!ingredients.length && isLoadingIngredients)
-                    ? <h1 className={`${ingredientsStyle.attention}`}>Loading...</h1>
+                    ? <h1 className={`${ingredientsStyle.attention}`}>Загрузка...</h1>
                     :
                         <h1 className={`${ingredientsStyle.attention}`}>
                             Ошибка загрузки ингредиентов, перезагрузите страницу!

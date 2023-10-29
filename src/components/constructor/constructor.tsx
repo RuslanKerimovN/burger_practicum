@@ -6,13 +6,13 @@ import { getStateConstructor, moveIngredientInConstructor } from "../../services
 import { IBurgerIngredients } from "../../types/types";
 import update from 'immutability-helper';
 import { BurgerElement } from "../burger-element/burger-element";
+import { CONSTRUCTOR_INGREDIENTS_ARRAY } from "../../constants/constants";
 
 export const Constructor = () => {
     const dispatch = useAppDispatch();
     const [, drop] = useDrop(() => ({ accept: 'constructor' }));
     const constructor = useAppSelector(getStateConstructor);
     const [ingredient, setIngredient] = useState<IBurgerIngredients[]>([]);
-    const heightIngredientsWindow = window.innerHeight - 550;
   
     useEffect(() => {
       setIngredient(constructor);
@@ -53,12 +53,12 @@ export const Constructor = () => {
     )
   
     return(
-    <div 
-            style={{maxHeight: `${heightIngredientsWindow}px`, overflow: 'auto'}} 
-            className="mb-1"
-            ref={drop}
-        >
-            {constructor.map((ingredient, index) => ingredient.type !== 'bun' && renderCard(ingredient, index))}
-        </div>
+      <div 
+        style={{maxHeight: `${CONSTRUCTOR_INGREDIENTS_ARRAY}px`, overflow: 'auto'}} 
+        className="mb-1"
+        ref={drop}
+      >
+        {constructor.map((ingredient, index) => ingredient.type !== 'bun' && renderCard(ingredient, index))}
+      </div>
     )
 }
