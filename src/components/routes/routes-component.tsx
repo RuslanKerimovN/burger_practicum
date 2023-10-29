@@ -1,4 +1,4 @@
-import  {Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { ConstructorPage } from '../../pages/constructor-page/constructor-page';
 import { LoginPage } from '../../pages/login-page/login-page';
 import { RegisterPage } from '../../pages/register-page/register-page';

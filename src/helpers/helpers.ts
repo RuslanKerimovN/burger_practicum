@@ -1,24 +1,32 @@
-import { FORGOT_PASSWORD, HOME, LOGIN, PROFILE, PROFILE_TAPE, REGISTER, RESET_PASSWORD } from "../constants/path";
+import {
+    FORGOT_PASSWORD,
+    HOME,
+    LOGIN,
+    PROFILE,
+    PROFILE_TAPE,
+    REGISTER,
+    RESET_PASSWORD
+} from "../constants/path";
 import { IBurgerIngredients, IIngredientsArray } from "../types/types";
 
 export const tabArray = (ingredients: IBurgerIngredients[]): IIngredientsArray[] => {
-    let arrType1: IBurgerIngredients[] = [];
-    let arrType2: IBurgerIngredients[] = [];
-    let arrType3: IBurgerIngredients[] = [];
+    let bun: IBurgerIngredients[] = [];
+    let main: IBurgerIngredients[] = [];
+    let sauce: IBurgerIngredients[] = [];
 
     for(let i = 0; i < ingredients.length; i++) {
         if (ingredients[i].type === 'bun') {
-            arrType1 = [...arrType1, ingredients[i]];
+            bun = [...bun, ingredients[i]];
         } else if (ingredients[i].type === 'main') {
-            arrType2 = [...arrType2, ingredients[i]];
+            main = [...main, ingredients[i]];
         } else if (ingredients[i].type === 'sauce') {
-            arrType3 = [...arrType3, ingredients[i]];
+            sauce = [...sauce, ingredients[i]];
         }
     }
     return [
-        {header: 'Булки', body: arrType1},
-        {header: 'Начинки', body: arrType2},
-        {header: 'Соусы', body: arrType3}
+        {header: 'Булки', body: bun},
+        {header: 'Начинки', body: main},
+        {header: 'Соусы', body: sauce}
     ];
 }
 
@@ -52,8 +60,7 @@ export const getCookie = (name: string) => {
 }
 
 export const setCookie = (name: string, value: string) => {
-    let updatedCookie = `${name}=${value}`;
-    document.cookie = updatedCookie;
+    document.cookie = `${name}=${value}`;
 }
 
 export const deleteCookie = (name: string) => {

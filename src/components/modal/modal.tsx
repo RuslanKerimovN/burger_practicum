@@ -5,7 +5,6 @@ import modalStyle from './modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useNavigate, useParams } from 'react-router';
 import React from 'react';
-import { HOME } from '../../constants/path';
 
 interface Props {
     closeModal?: () => void;
