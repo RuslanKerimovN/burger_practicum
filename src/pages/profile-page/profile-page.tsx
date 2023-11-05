@@ -21,7 +21,7 @@ export const ProfilePage = () => {
     const [token, setToken] = useState<string>('');
     const navigate = useNavigate();
 
-    const onChange = (e: ChangeEvent<HTMLInputElement>, name: string) => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>, name: string): void => {
         if (name === 'name') {
             dispatch(setUserName(e.target.value))
         } else if (name === 'email') {

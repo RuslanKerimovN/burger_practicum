@@ -22,7 +22,7 @@ export const BurgerConstructor = () => {
   const [bun, setBun] = useState<IBurgerIngredients | undefined>(undefined);
   const navigate = useNavigate();
 
-  const onPressButton = () => {
+  const onPressButton = (): void => {
     let cookie = getCookie(ACCESS_TOKEN);
     const token = localStorage.getItem(REFRESH_TOKEN);
 

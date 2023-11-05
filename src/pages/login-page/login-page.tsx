@@ -21,7 +21,7 @@ export const LoginPage = () => {
     const isLoginLoading = useAppSelector(getStateLoadingLogin);
     const isLoginError = useAppSelector(getStateErrorLogin);
 
-    const onSubmitClick = (e: FormEvent<HTMLFormElement>) => {
+    const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         dispatch(postLogin({email, password}));
     };

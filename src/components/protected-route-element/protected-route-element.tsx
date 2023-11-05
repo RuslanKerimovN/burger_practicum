@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import {ReactNode, useEffect} from "react";
 import { useLocation, useNavigate } from "react-router";
 import { getCookie } from "../../helpers/helpers";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants/constants";
 
 interface Props {
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
 export const ProtectedRouteElement = ({children}: Props) => {

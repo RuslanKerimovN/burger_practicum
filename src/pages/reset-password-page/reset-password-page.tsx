@@ -22,7 +22,7 @@ export const ResetPasswordPage = () => {
     const {isModalOpen, closeModal, openModal} = useModal();
     const navigate = useNavigate();
 
-    const onSubmitClick = (e: FormEvent<HTMLFormElement>) => {
+    const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         dispatch(postResetPassword({password, token}));
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState} from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import tabsStyle from './tabs.module.css';
 import { IIngredientsArray } from '../../types/types';
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const Tabs = ({ingredients}: Props) => {
-    const [current, setCurrent] = React.useState<string>('bun');
+    const [current, setCurrent] = useState<string>('bun');
     const containerRef = useRef();
     let location = useLocation();
 
@@ -31,7 +31,7 @@ export const Tabs = ({ingredients}: Props) => {
         root: containerRef.current,
     })
 
-    const tmp = [bunRef, mainRef, saucesRef];
+    const refs = [bunRef, mainRef, saucesRef];
     
     useEffect(() => {
         if (bunIsView) {
@@ -59,7 +59,7 @@ export const Tabs = ({ingredients}: Props) => {
             <div style={{height: `${CONSTRUCTOR_HEIGHT}px`, overflowY: 'scroll'}}>
             {
                 ingredients.map((el, index) => (
-                        <section className={'mt-10'} key={el.header} ref={tmp[index]}>
+                        <section className={'mt-10'} key={el.header} ref={refs[index]}>
                             <p className="text text_type_main-medium mb-6">
                                 {el.header}
                             </p>

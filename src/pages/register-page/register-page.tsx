@@ -22,7 +22,7 @@ export const RegisterPage = () => {
     const isRegisterError = useAppSelector(getStateErrorRegisterData);
     const {isModalOpen, closeModal, openModal} = useModal();
     
-    const onSubmitClick = (e: FormEvent<HTMLFormElement>) => {
+    const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         dispatch(postRegister({email, password, name}));
     };
