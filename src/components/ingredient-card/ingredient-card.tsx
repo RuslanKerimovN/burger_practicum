@@ -25,7 +25,7 @@ export const IngredientCard = ({ingredient}: Props) => {
         setCount(findCount(constructor, ingredient.name));
     }, [constructor, ingredient])
 
-    const onOpenClick = () => {
+    const onOpenClick = (): void => {
         openModal();
         dispatch(saveWatchIngredient(ingredient));
     }

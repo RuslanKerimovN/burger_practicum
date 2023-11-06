@@ -3,11 +3,11 @@ import { IAuthTokenRequest, IPatchUserRequest, IRegisterRequest, IResetPasswordR
 const ADDRESS = 'https://norma.nomoreparties.space/api';
 const AUTH = `${ADDRESS}/auth`;
 
-export const getIngredientsServices = () => {
+export const getIngredientsServices = (): Promise<Response> => {
     return fetch(`${ADDRESS}/ingredients`);
 };
 
-export const postOrderServices = (order: string[]) => {
+export const postOrderServices = (order: string[]): Promise<Response> => {
     return fetch(`${ADDRESS}/orders`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -15,7 +15,7 @@ export const postOrderServices = (order: string[]) => {
     });
 };
 
-export const postConfirmationEmailServices = (email: string) => {
+export const postConfirmationEmailServices = (email: string): Promise<Response> => {
     return fetch(`${ADDRESS}/password-reset`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -23,7 +23,7 @@ export const postConfirmationEmailServices = (email: string) => {
     });
 };
 
-export const postPasswordResetServices = (params: IResetPasswordRequest) => {
+export const postPasswordResetServices = (params: IResetPasswordRequest): Promise<Response> => {
     return fetch(`${ADDRESS}/password-reset/reset`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -31,7 +31,7 @@ export const postPasswordResetServices = (params: IResetPasswordRequest) => {
     });
 };
 
-export const postLoginService = (params: IAuthTokenRequest) => {
+export const postLoginService = (params: IAuthTokenRequest): Promise<Response> => {
     return fetch(`${AUTH}/login`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -39,7 +39,7 @@ export const postLoginService = (params: IAuthTokenRequest) => {
     });
 }
 
-export const postRegisterService = (params: IRegisterRequest) => {
+export const postRegisterService = (params: IRegisterRequest): Promise<Response> => {
     return fetch(`${AUTH}/register`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -47,7 +47,7 @@ export const postRegisterService = (params: IRegisterRequest) => {
     });
 }
 
-export const postLogoutService = (token: string) => {
+export const postLogoutService = (token: string): Promise<Response> => {
     return fetch(`${AUTH}/logout`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -55,7 +55,7 @@ export const postLogoutService = (token: string) => {
     });
 }
  
-export const postUpdateTokenService = (token: string) => {
+export const postUpdateTokenService = (token: string): Promise<Response> => {
     return fetch(`${AUTH}/token`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -63,7 +63,7 @@ export const postUpdateTokenService = (token: string) => {
     });
 }
 
-export const getUserService = (cookie: string) => {
+export const getUserService = (cookie: string): Promise<Response> => {
     return fetch(`${AUTH}/user`, {
         headers: {
             'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ export const getUserService = (cookie: string) => {
     })
 }
 
-export const patchUserService = (cookie: string, params: IPatchUserRequest) => {
+export const patchUserService = (cookie: string, params: IPatchUserRequest): Promise<Response> => {
     return fetch(`${AUTH}/user`, {
         method: 'PATCH',
         headers: {

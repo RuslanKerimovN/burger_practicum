@@ -25,7 +25,7 @@ export const ForgotPasswordPage = () => {
     const [email, setEmail] = useInput();
     const {isModalOpen, closeModal, openModal} = useModal();
 
-    const onSubmitClick = (e: FormEvent<HTMLFormElement>) => {
+    const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         dispatch(postConfirmationEmail(email));
         localStorage.setItem('isForgot', 'true');

@@ -52,18 +52,18 @@ export const getIconType = (location: string, nav: string): 'primary' | 'seconda
     return 'secondary';
 }
 
-export const getCookie = (name: string) => {
+export const getCookie = (name: string): string | undefined => {
     let matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
     ));
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-export const setCookie = (name: string, value: string) => {
+export const setCookie = (name: string, value: string): void => {
     document.cookie = `${name}=${value}`;
 }
 
-export const deleteCookie = (name: string) => {
+export const deleteCookie = (name: string): void => {
     document.cookie = `${name}=${''}; max-age: -1;`;
 }
 
@@ -74,6 +74,5 @@ export const findRoute = (path: string): boolean => {
         [FORGOT_PASSWORD]: true,
         [RESET_PASSWORD]: true,
     }
-    // @ts-ignore
-    return object[path] ?? false;
+    return path in object;
 }
