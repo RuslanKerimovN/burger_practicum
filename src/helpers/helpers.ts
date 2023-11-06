@@ -74,6 +74,5 @@ export const findRoute = (path: string): boolean => {
         [FORGOT_PASSWORD]: true,
         [RESET_PASSWORD]: true,
     }
-    // @ts-ignore
-    return object[path] ?? false;
+    return path in object;
 }
