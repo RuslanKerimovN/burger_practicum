@@ -22,26 +22,26 @@ interface DragItem {
     type: string
   }
 
-export const BurgerElement = ({isLocked, ingredient, id, moveIngredient, index, deleteId}: Props) => {
+export const BurgerElement = ({ isLocked, ingredient, id, moveIngredient, index, deleteId }: Props) => {
   const dispatch = useAppDispatch();
-  const {name, price, image_mobile} = ingredient;
+  const { name, price, image_mobile } = ingredient;
   const ref = useRef<HTMLDivElement>(null);
 
   const [, drop] = useDrop<DragItem, void, { handlerId: Identifier | null }>({
-      accept: 'constructor',
-      collect(monitor) {
+    accept: 'constructor',
+    collect(monitor) {
       return {
-          handlerId: monitor.getHandlerId(),
-      }
+        handlerId: monitor.getHandlerId()
+      };
     },
     hover(item: DragItem, monitor) {
       if (!ref.current) {
-        return
+        return;
       }
       const dragIndex = item.index;
       const hoverIndex = index;
       if (dragIndex === hoverIndex) {
-        return
+        return;
       }
 
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
@@ -50,40 +50,40 @@ export const BurgerElement = ({isLocked, ingredient, id, moveIngredient, index, 
       const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
       
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return
+        return;
       }
 
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return
+        return;
       }
 
       moveIngredient(dragIndex, hoverIndex);
       item.index = hoverIndex;
-    },
-  })
+    }
+  });
 
   const [, drag] = useDrag({
     type: 'constructor',
     item: () => {
-      return { id, index }
+      return { id, index };
     },
-    collect: (monitor: any) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  })
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging()
+    })
+  });
 
   drag(drop(ref));
   
   return (
-      <div ref={ref} className={`${elementStyle.element}`}>
-          <DragIcon type="primary" />
-          <ConstructorElement
-            isLocked={isLocked}
-            text={name}
-            price={price}
-            thumbnail={image_mobile}
-            handleClose={() => dispatch(deleteIngredientFromConstructor(deleteId))}
-          />
-      </div>
+    <div ref={ref} className={`${elementStyle.element}`}>
+      <DragIcon type="primary" />
+      <ConstructorElement
+        isLocked={isLocked}
+        text={name}
+        price={price}
+        thumbnail={image_mobile}
+        handleClose={() => dispatch(deleteIngredientFromConstructor(deleteId))}
+      />
+    </div>
   );
-}
+};

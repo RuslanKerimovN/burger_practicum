@@ -26,202 +26,202 @@ interface IUserInfo {
 }
 
 const initialState: IUserInfo = {
-    user: baseUser,
-    userEmail: '',
-    userName: '',
-    userPassword: '',
+  user: baseUser,
+  userEmail: '',
+  userName: '',
+  userPassword: '',
 
-    name: '',
-    email: '',
-    password: '',
+  name: '',
+  email: '',
+  password: '',
 
-    isChangeData: false,
+  isChangeData: false,
 
-    isLoadingUser: false,
-    isErrorUser: false,
+  isLoadingUser: false,
+  isErrorUser: false,
 
-    isPatchLoadingUser: false,
-    isPatchErrorUser: false
-}
+  isPatchLoadingUser: false,
+  isPatchErrorUser: false
+};
 
 export const patchUser = createAsyncThunk<IUserResponse, IPatchUserRequest>(
-    'patchUser',
-    async (params, {rejectWithValue}) => {
-        let cookie = getCookie(ACCESS_TOKEN);
-        const token = localStorage.getItem(REFRESH_TOKEN);
-        let response;
+  'patchUser',
+  async (params, { rejectWithValue }) => {
+    let cookie = getCookie(ACCESS_TOKEN);
+    const token = localStorage.getItem(REFRESH_TOKEN);
+    let response;
 
-        if (!cookie || !token) {
-            return rejectWithValue(true);
-        }
-
-        response = await patchUserService(cookie, params);
-        if (response.ok) {
-            return response.json();
-        }
-
-        const tmp = await response.json();
-
-        if (tmp.message === 'jwt expired') {
-            const res = await postUpdateTokenService(token);
-
-            if (!res.ok) {
-                return rejectWithValue(true);
-            }
-
-            const tmp = await res.json();
-            await localStorage.setItem(REFRESH_TOKEN, `${(tmp.refreshToken)}`);
-            await setCookie(ACCESS_TOKEN, `${(tmp.accessToken).split('Bearer ')[1]}`);
-        } else {
-            return await response.json();
-        }
-
-        cookie = await getCookie(ACCESS_TOKEN);
-
-        if (!cookie) {
-            return rejectWithValue(true);
-        }
-
-        response = await patchUserService(cookie, params);
-        if (!response.ok) {
-            return rejectWithValue(true);
-        }
-
-        return await response.json();
+    if (!cookie || !token) {
+      return rejectWithValue(true);
     }
-)
+
+    response = await patchUserService(cookie, params);
+    if (response.ok) {
+      return response.json();
+    }
+
+    const tmp = await response.json();
+
+    if (tmp.message === 'jwt expired') {
+      const res = await postUpdateTokenService(token);
+
+      if (!res.ok) {
+        return rejectWithValue(true);
+      }
+
+      const tmp = await res.json();
+      await localStorage.setItem(REFRESH_TOKEN, `${(tmp.refreshToken)}`);
+      await setCookie(ACCESS_TOKEN, `${(tmp.accessToken).split('Bearer ')[1]}`);
+    } else {
+      return await response.json();
+    }
+
+    cookie = await getCookie(ACCESS_TOKEN);
+
+    if (!cookie) {
+      return rejectWithValue(true);
+    }
+
+    response = await patchUserService(cookie, params);
+    if (!response.ok) {
+      return rejectWithValue(true);
+    }
+
+    return await response.json();
+  }
+);
 
 export const getUser = createAsyncThunk<IUserResponse, undefined>(
-    'getUser',
-    async (_, {rejectWithValue}) => {
-        let cookie = getCookie(ACCESS_TOKEN);
-        const token = localStorage.getItem(REFRESH_TOKEN);
-        let response;
+  'getUser',
+  async (_, { rejectWithValue }) => {
+    let cookie = getCookie(ACCESS_TOKEN);
+    const token = localStorage.getItem(REFRESH_TOKEN);
+    let response;
 
-        if (!cookie || !token) {
-            return rejectWithValue(true);
-        }
+    if (!cookie || !token) {
+      return rejectWithValue(true);
+    }
 
-        response = await getUserService(cookie);
-        if (response.ok) {
-            return response.json();
-        }
+    response = await getUserService(cookie);
+    if (response.ok) {
+      return response.json();
+    }
 
-        const tmp = await response.json();
+    const tmp = await response.json();
 
-        if (tmp && tmp.message === 'jwt expired') {
-            const res = await postUpdateTokenService(token);
-            if (!res.ok) {
-                return rejectWithValue(true);
-            }
+    if (tmp && tmp.message === 'jwt expired') {
+      const res = await postUpdateTokenService(token);
+      if (!res.ok) {
+        return rejectWithValue(true);
+      }
 
-            const tmp = await res.json();
-            await localStorage.setItem(REFRESH_TOKEN, `${(tmp.refreshToken)}`);
-            await setCookie(ACCESS_TOKEN, `${(tmp.accessToken).split('Bearer ')[1]}`);
-        } else {
-            return await response.json();
-        }
+      const tmp = await res.json();
+      await localStorage.setItem(REFRESH_TOKEN, `${(tmp.refreshToken)}`);
+      await setCookie(ACCESS_TOKEN, `${(tmp.accessToken).split('Bearer ')[1]}`);
+    } else {
+      return await response.json();
+    }
 
-        cookie = await getCookie(ACCESS_TOKEN);
-        if (!cookie) {
-            return rejectWithValue(true);
-        }
+    cookie = await getCookie(ACCESS_TOKEN);
+    if (!cookie) {
+      return rejectWithValue(true);
+    }
 
-        response = await getUserService(cookie);
-        if (!response.ok) {
-            return rejectWithValue(true);
-        }
+    response = await getUserService(cookie);
+    if (!response.ok) {
+      return rejectWithValue(true);
+    }
 
-        return await response.json();
-        }
-)
+    return await response.json();
+  }
+);
 
 const userSlice = createSlice({
-    name: 'userSlice',
-    initialState: initialState,
-    reducers: {
-        setUserEmail(state, action: PayloadAction<string>) {
-            if (!state.isChangeData) {
-                state.isChangeData = true;
-            }
-            state.userEmail = action.payload;
-        },
-        setUserName(state, action: PayloadAction<string>) {
-            if (!state.isChangeData) {
-                state.isChangeData = true;
-            }
-            state.userName = action.payload;
-        },
-        setUserPassword(state, action: PayloadAction<string>) {
-            if (!state.isChangeData) {
-                state.isChangeData = true;
-            }
-            state.userPassword = action.payload;
-        },
-        resetChanges(state) {
-            state.isChangeData = false;
-            state.userName = state.name;
-            state.userEmail = state.email;
-            state.userPassword = state.password;
-        },
-        deleteUser(state) {
-            state.user = baseUser;
-            state.userName = '';
-            state.userEmail = '';
-            state.userPassword = '';
-            state.name = '';
-            state.email = '';
-            state.password = '';
-            state.isChangeData = false;
-        }
+  name: 'userSlice',
+  initialState: initialState,
+  reducers: {
+    setUserEmail(state, action: PayloadAction<string>) {
+      if (!state.isChangeData) {
+        state.isChangeData = true;
+      }
+      state.userEmail = action.payload;
     },
-    extraReducers: (builder) => {
-        builder
-            .addCase(getUser.fulfilled, (state, action) => {
-                state.user = action.payload;
-                state.name = action.payload.user.name;
-                state.email = action.payload.user.email;
-                state.password = '';
-                state.userEmail = action.payload.user.email;
-                state.userName = action.payload.user.name;
-                state.isLoadingUser = false;
-                state.isErrorUser = false;
-            })
-            .addCase(patchUser.fulfilled, (state, action) => {
-                state.user = action.payload;
-                state.userEmail = action.payload.user.email;
-                state.userName = action.payload.user.name;
-                state.name = action.payload.user.name;
-                state.email = action.payload.user.email;
-                state.userPassword = '';
-                state.isPatchLoadingUser = false;
-                state.isPatchErrorUser = false;
-            })
-            .addCase(getUser.pending, (state) => {
-                state.isLoadingUser = true;
-                state.isErrorUser = false;
-            })
-            .addCase(getUser.rejected, (state) => {
-                state.isLoadingUser = false;
-                state.isErrorUser = true;
-            })
-            .addCase(patchUser.pending, (state) => {
-                state.isPatchLoadingUser = true;
-                state.isPatchErrorUser = false;
-            })
-            .addCase(patchUser.rejected, (state) => {
-                state.isPatchLoadingUser = false;
-                state.isPatchErrorUser = true;
-            })
+    setUserName(state, action: PayloadAction<string>) {
+      if (!state.isChangeData) {
+        state.isChangeData = true;
+      }
+      state.userName = action.payload;
+    },
+    setUserPassword(state, action: PayloadAction<string>) {
+      if (!state.isChangeData) {
+        state.isChangeData = true;
+      }
+      state.userPassword = action.payload;
+    },
+    resetChanges(state) {
+      state.isChangeData = false;
+      state.userName = state.name;
+      state.userEmail = state.email;
+      state.userPassword = state.password;
+    },
+    deleteUser(state) {
+      state.user = baseUser;
+      state.userName = '';
+      state.userEmail = '';
+      state.userPassword = '';
+      state.name = '';
+      state.email = '';
+      state.password = '';
+      state.isChangeData = false;
     }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.name = action.payload.user.name;
+        state.email = action.payload.user.email;
+        state.password = '';
+        state.userEmail = action.payload.user.email;
+        state.userName = action.payload.user.name;
+        state.isLoadingUser = false;
+        state.isErrorUser = false;
+      })
+      .addCase(patchUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.userEmail = action.payload.user.email;
+        state.userName = action.payload.user.name;
+        state.name = action.payload.user.name;
+        state.email = action.payload.user.email;
+        state.userPassword = '';
+        state.isPatchLoadingUser = false;
+        state.isPatchErrorUser = false;
+      })
+      .addCase(getUser.pending, (state) => {
+        state.isLoadingUser = true;
+        state.isErrorUser = false;
+      })
+      .addCase(getUser.rejected, (state) => {
+        state.isLoadingUser = false;
+        state.isErrorUser = true;
+      })
+      .addCase(patchUser.pending, (state) => {
+        state.isPatchLoadingUser = true;
+        state.isPatchErrorUser = false;
+      })
+      .addCase(patchUser.rejected, (state) => {
+        state.isPatchLoadingUser = false;
+        state.isPatchErrorUser = true;
+      });
+  }
 });
 
 export const {
-    setUserEmail,
-    setUserName,
-    setUserPassword,
-    resetChanges,
-    deleteUser
+  setUserEmail,
+  setUserName,
+  setUserPassword,
+  resetChanges,
+  deleteUser
 } = userSlice.actions;
 export default userSlice.reducer;
 
@@ -237,41 +237,41 @@ const isChangeData = (state: RootState) => state.userSlice.isChangeData;
 const name = (state: RootState) => state.userSlice.name;
 
 export const getStateUser = createSelector(
-    [user], user => user
+  [user], user => user
 );
 
 export const getStateUserEmail = createSelector(
-    [userEmail], userEmail => userEmail
+  [userEmail], userEmail => userEmail
 );
 
 export const getStateUserName = createSelector(
-    [userName], userName => userName
+  [userName], userName => userName
 );
 
 export const getStateUserPassword = createSelector(
-    [userPassword], userPassword => userPassword
+  [userPassword], userPassword => userPassword
 );
 
 export const getStateLoadingUser = createSelector(
-    [isLoadingUser], isLoadingUser => isLoadingUser
+  [isLoadingUser], isLoadingUser => isLoadingUser
 );
 
 export const getStateErrorUser = createSelector(
-    [isErrorUser], isErrorUser => isErrorUser
+  [isErrorUser], isErrorUser => isErrorUser
 );
 
 export const getStatePatchLoadingUser = createSelector(
-    [isPatchLoadingUser], isPatchLoadingUser => isPatchLoadingUser
+  [isPatchLoadingUser], isPatchLoadingUser => isPatchLoadingUser
 );
 
 export const getStatePatchErrorUser = createSelector(
-    [isPatchErrorUser], isPatchErrorUser => isPatchErrorUser
+  [isPatchErrorUser], isPatchErrorUser => isPatchErrorUser
 );
 
 export const getStateIsChangeData = createSelector(
-    [isChangeData], isChangeData => isChangeData
+  [isChangeData], isChangeData => isChangeData
 );
 
 export const getStateName = createSelector(
-    [name], name => name
+  [name], name => name
 );

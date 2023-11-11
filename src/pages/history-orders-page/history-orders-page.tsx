@@ -1,6 +1,6 @@
 export const HistoryOrdersPage = () => {
-    return (
-        <div>
-        </div>
-    );
-}
+  return (
+    <div>
+    </div>
+  );
+};

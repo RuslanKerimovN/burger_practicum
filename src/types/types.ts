@@ -93,4 +93,4 @@ export interface IPatchUserRequest {
   name: string;
   email: string;
   password: string;
-} 
+}

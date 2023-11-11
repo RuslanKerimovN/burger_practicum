@@ -13,23 +13,23 @@ import updateTokenSlice from "../services/slices/updateTokenSlice";
 import userSlice from "../services/slices/userSlice";
 
 export const rootReducer = combineReducers({
-    constructorSlice,
-    ingredientsSlice,
-    orderSlice,
-    showIngredientSlice,
-    confirmationEmailSlice,
-    resetPasswordSlice,
-    registerSlice,
-    loginSlice,
-    logoutSlice,
-    updateTokenSlice,
-    userSlice
+  constructorSlice,
+  ingredientsSlice,
+  orderSlice,
+  showIngredientSlice,
+  confirmationEmailSlice,
+  resetPasswordSlice,
+  registerSlice,
+  loginSlice,
+  logoutSlice,
+  updateTokenSlice,
+  userSlice
 });
 
 export const setupStore = () => {
-    return configureStore({
-        reducer: rootReducer
-    })
+  return configureStore({
+    reducer: rootReducer
+  });
 };
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -10,13 +10,13 @@ export const ConstructorPage = () => {
   return (
     <>
       <main className={`${appStyle.content}`}>
-          <div className={`${appStyle.ingredients}`}>
-            <BurgerIngredients/>
-          </div>
-          <div className={`${appStyle.constructor}`}>
-            <BurgerConstructor/>
-          </div>
+        <div className={`${appStyle.ingredients}`}>
+          <BurgerIngredients/>
+        </div>
+        <div className={`${appStyle.constructor}`}>
+          <BurgerConstructor/>
+        </div>
       </main>
     </>
-  )
-}
+  );
+};

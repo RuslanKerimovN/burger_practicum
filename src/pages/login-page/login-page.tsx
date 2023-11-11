@@ -13,66 +13,66 @@ import { Status } from '../../components/status/status';
 import { ModalStatus } from '../../components/modal-status/modal-status';
 
 export const LoginPage = () => {
-    const dispatch = useAppDispatch();
-    const [email, setEmail] = useInput('');
-    const [password, setPassword] = useInput('');
-    const {isModalOpen, closeModal, openModal} = useModal();
-    const login = useAppSelector(getStateLogin);
-    const isLoginLoading = useAppSelector(getStateLoadingLogin);
-    const isLoginError = useAppSelector(getStateErrorLogin);
+  const dispatch = useAppDispatch();
+  const [email, setEmail] = useInput('');
+  const [password, setPassword] = useInput('');
+  const { isModalOpen, closeModal, openModal } = useModal();
+  const login = useAppSelector(getStateLogin);
+  const isLoginLoading = useAppSelector(getStateLoadingLogin);
+  const isLoginError = useAppSelector(getStateErrorLogin);
 
-    const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
-        e.preventDefault();
-        dispatch(postLogin({email, password}));
-    };
+  const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    dispatch(postLogin({ email, password }));
+  };
 
-    useEffect(() => {
-        localStorage.removeItem('isForgot');
-        if (isLoginError) {
-            openModal();
-        }
-    }, [isLoginError]);
+  useEffect(() => {
+    localStorage.removeItem('isForgot');
+    if (isLoginError) {
+      openModal();
+    }
+  }, [isLoginError]);
 
-    return (
-        <>
-            {(isLoginLoading) 
-                ?   <Status status='Проверка данных...'/>
-                :   (!login.success) ?
-                            <div
-                                className={`${styles.login}`}
-                                style={{height: HEIGHT_WITHOUT_HEADER}}
-                            >
-                                <p className={`text text_type_main-medium mb-6`}>
-                                    Вход
-                                </p>
-                                <form onSubmit={onSubmitClick} className={`${styles.login}`}>
-                                    <div className='mb-6'>
-                                        <Input placeholder='E-mail' value={email} onChange={setEmail}/>
-                                    </div>
-                                    <div className='mb-6'>
-                                        <PasswordInput placeholder='Пароль' value={password} onChange={setPassword}/>
-                                    </div>
-                                    <div className='mb-20'>
-                                        <Button htmlType="submit" type="primary" size="medium">
-                                            Войти
-                                        </Button>
-                                    </div>
-                                </form>
-                                <p className={`text text_type_main-default text_color_inactive mb-4`}>
-                                    Вы - новый пользователь? <Link to={REGISTER} className={`${styles.text}`}>Зарегистрироваться</Link>
-                                </p>
-                                <p className="text text_type_main-default text_color_inactive">
-                                    Забыли пароль? <Link to={FORGOT_PASSWORD} className={`${styles.text}`}>Восстановить пароль</Link>
-                                </p>
-                            </div>
-                        :   <Navigate to={localStorage.getItem('noLogin') || HOME} />
-            }
-            {isModalOpen &&
-                <ModalStatus
-                    header='Неверный логин или пароль'
-                    closeModal={closeModal}
-                />
-            }
-        </>
-    );
-}
+  return (
+    <>
+      {(isLoginLoading) 
+        ?   <Status status='Проверка данных...'/>
+        :   (!login.success) ?
+          <div
+            className={`${styles.login}`}
+            style={{ height: HEIGHT_WITHOUT_HEADER }}
+          >
+            <p className={`text text_type_main-medium mb-6`}>
+                Вход
+            </p>
+            <form onSubmit={onSubmitClick} className={`${styles.login}`}>
+              <div className='mb-6'>
+                <Input placeholder='E-mail' value={email} onChange={setEmail}/>
+              </div>
+              <div className='mb-6'>
+                <PasswordInput placeholder='Пароль' value={password} onChange={setPassword}/>
+              </div>
+              <div className='mb-20'>
+                <Button htmlType="submit" type="primary" size="medium">
+                    Войти
+                </Button>
+              </div>
+            </form>
+            <p className={`text text_type_main-default text_color_inactive mb-4`}>
+                Вы - новый пользователь? <Link to={REGISTER} className={`${styles.text}`}>Зарегистрироваться</Link>
+            </p>
+            <p className="text text_type_main-default text_color_inactive">
+                Забыли пароль? <Link to={FORGOT_PASSWORD} className={`${styles.text}`}>Восстановить пароль</Link>
+            </p>
+          </div>
+          :   <Navigate to={localStorage.getItem('noLogin') || HOME} />
+      }
+      {isModalOpen &&
+        <ModalStatus
+          header='Неверный логин или пароль'
+          closeModal={closeModal}
+        />
+      }
+    </>
+  );
+};

@@ -11,45 +11,44 @@ interface ILogout {
 }
 
 const initialState: ILogout = {
-    logout: baseLogout,
-    isLogoutLoading: false,
-    isLogoutError: false,
-}
+  logout: baseLogout,
+  isLogoutLoading: false,
+  isLogoutError: false
+};
 
 export const postLogout = createAsyncThunk<ILogoutResponse, string>(
-    'postLogout',
-    async (token, {rejectWithValue}) => {
-        const response = await postLogoutService(token);
+  'postLogout',
+  async (token, { rejectWithValue }) => {
+    const response = await postLogoutService(token);
 
-        if (!response.ok) {
-            return rejectWithValue(true);
-        }
-
-        const data = await response.json();
-        return data;
+    if (!response.ok) {
+      return rejectWithValue(true);
     }
-)
+
+    return await response.json();
+  }
+);
 
 const logoutSlice = createSlice({
-    name: 'logoutSlice',
-    initialState: initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder
-            .addCase(postLogout.fulfilled, (state, action) => {
-                state.logout = action.payload;
-                state.isLogoutLoading = false;
-                state.isLogoutError = false;
-            })
-            .addMatcher(isAnyOf(postLogout.pending), (state) => {
-                state.isLogoutLoading = true;
-                state.isLogoutError = false;
-            })
-            .addMatcher(isAnyOf(postLogout.rejected), (state) => {
-                state.isLogoutLoading = false;
-                state.isLogoutError = true;
-            })
-    }
+  name: 'logoutSlice',
+  initialState: initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(postLogout.fulfilled, (state, action) => {
+        state.logout = action.payload;
+        state.isLogoutLoading = false;
+        state.isLogoutError = false;
+      })
+      .addMatcher(isAnyOf(postLogout.pending), (state) => {
+        state.isLogoutLoading = true;
+        state.isLogoutError = false;
+      })
+      .addMatcher(isAnyOf(postLogout.rejected), (state) => {
+        state.isLogoutLoading = false;
+        state.isLogoutError = true;
+      });
+  }
 });
 
 // export const {
@@ -61,13 +60,13 @@ const isLogoutLoading = (state: RootState) => state.logoutSlice.isLogoutLoading;
 const isLogoutError = (state: RootState) => state.logoutSlice.isLogoutError;
 
 export const getStateLogout = createSelector(
-    [logout], logout => logout
+  [logout], logout => logout
 );
 
 export const getStateLoadingLogout = createSelector(
-    [isLogoutLoading], isLogoutLoading => isLogoutLoading
+  [isLogoutLoading], isLogoutLoading => isLogoutLoading
 );
 
 export const getStateErrorLogout = createSelector(
-    [isLogoutError], isLogoutError => isLogoutError
+  [isLogoutError], isLogoutError => isLogoutError
 );

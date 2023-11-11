@@ -13,66 +13,66 @@ import { useModal } from '../../hooks/useModal';
 import { ModalStatus } from '../../components/modal-status/modal-status';
 
 export const RegisterPage = () => {
-    const dispatch = useAppDispatch();
-    const [name, setName] = useInput();
-    const [email, setEmail] = useInput();
-    const [password, setPassword] = useInput();
-    const registerData = useAppSelector(getStateRegisterData);
-    const isRegisterLoading = useAppSelector(getStateLoadingRegisterData);
-    const isRegisterError = useAppSelector(getStateErrorRegisterData);
-    const {isModalOpen, closeModal, openModal} = useModal();
+  const dispatch = useAppDispatch();
+  const [name, setName] = useInput();
+  const [email, setEmail] = useInput();
+  const [password, setPassword] = useInput();
+  const registerData = useAppSelector(getStateRegisterData);
+  const isRegisterLoading = useAppSelector(getStateLoadingRegisterData);
+  const isRegisterError = useAppSelector(getStateErrorRegisterData);
+  const { isModalOpen, closeModal, openModal } = useModal();
     
-    const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
-        e.preventDefault();
-        dispatch(postRegister({email, password, name}));
-    };
+  const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    dispatch(postRegister({ email, password, name }));
+  };
 
-    useEffect(() => {
-        if (isRegisterError) {
-            openModal();
-        }
-    }, [isRegisterError]);
+  useEffect(() => {
+    if (isRegisterError) {
+      openModal();
+    }
+  }, [isRegisterError]);
 
-    return (
-        <>
-            {(isRegisterLoading)
-                ?   <Status status='Проверка данных...' />
-                :   (!registerData.success) ?
-                        <div
-                            className={`${styles.center}`}
-                            style={{height: HEIGHT_WITHOUT_HEADER}}
-                        >
-                            <p className={`text text_type_main-medium mb-6`}>
-                                Регистрация
-                            </p>
-                            <form onSubmit={onSubmitClick} className={`${styles.center}`}>
-                                <div className='mb-6'>
-                                    <Input placeholder='Имя' value={name} onChange={setName}/>
-                                </div>
-                                <div className='mb-6'>
-                                    <Input placeholder='E-mail' value={email} onChange={setEmail}/>
-                                </div>
-                                <div className='mb-6'>
-                                    <PasswordInput placeholder='Пароль' value={password} onChange={setPassword}/>
-                                </div>
-                                <div className='mb-20'>
-                                    <Button htmlType="submit" type="primary" size="medium">
-                                        Зарегистрироваться
-                                    </Button>
-                                </div>
-                            </form>
-                            <p className={`text text_type_main-default text_color_inactive`}>
-                                Уже зарегистрированы? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
-                            </p>
-                        </div>
-                    :   <Navigate to={localStorage.getItem('noLogin') || HOME} />
-            }
-            {isModalOpen &&
-                <ModalStatus
-                    header='Заполните все поля ввода данными'
-                    closeModal={closeModal}
-                />
-            }
-        </>
-    );
-}
+  return (
+    <>
+      {(isRegisterLoading)
+        ?   <Status status='Проверка данных...' />
+        :   (!registerData.success) ?
+          <div
+            className={`${styles.center}`}
+            style={{ height: HEIGHT_WITHOUT_HEADER }}
+          >
+            <p className={`text text_type_main-medium mb-6`}>
+              Регистрация
+            </p>
+            <form onSubmit={onSubmitClick} className={`${styles.center}`}>
+              <div className='mb-6'>
+                <Input placeholder='Имя' value={name} onChange={setName}/>
+              </div>
+              <div className='mb-6'>
+                <Input placeholder='E-mail' value={email} onChange={setEmail}/>
+              </div>
+              <div className='mb-6'>
+                <PasswordInput placeholder='Пароль' value={password} onChange={setPassword}/>
+              </div>
+              <div className='mb-20'>
+                <Button htmlType="submit" type="primary" size="medium">
+                  Зарегистрироваться
+                </Button>
+              </div>
+            </form>
+            <p className={`text text_type_main-default text_color_inactive`}>
+              Уже зарегистрированы? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
+            </p>
+          </div>
+          :   <Navigate to={localStorage.getItem('noLogin') || HOME} />
+      }
+      {isModalOpen &&
+        <ModalStatus
+          header='Заполните все поля ввода данными'
+          closeModal={closeModal}
+        />
+      }
+    </>
+  );
+};

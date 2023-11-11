@@ -11,45 +11,44 @@ export interface IResetPassword {
 }
 
 const initialState: IResetPassword = {
-    resetPassword: baseResetResponse,
-    isLoadingResetPassword: false,
-    isErrorResetPassword: false,
-}
+  resetPassword: baseResetResponse,
+  isLoadingResetPassword: false,
+  isErrorResetPassword: false
+};
 
 export const postResetPassword = createAsyncThunk<IResetPasswordStatus, IResetPasswordRequest>(
-    'postResetEmail',
-    async (params, {rejectWithValue}) => {
-        const response = await postPasswordResetServices(params);
+  'postResetEmail',
+  async (params, { rejectWithValue }) => {
+    const response = await postPasswordResetServices(params);
 
-        if (!response.ok) {
-            return rejectWithValue(true);
-        }
-
-        const data = await response.json();
-        return data;
+    if (!response.ok) {
+      return rejectWithValue(true);
     }
-)
+
+    return await response.json();
+  }
+);
 
 const resetPasswordSlice = createSlice({
-    name: 'resetPasswordSlice',
-    initialState: initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder
-            .addCase(postResetPassword.fulfilled, (state, action) => {
-                state.resetPassword = action.payload;
-                state.isLoadingResetPassword = false;
-                state.isErrorResetPassword = false;
-            })
-            .addCase(postResetPassword.pending, (state) => {
-                state.isLoadingResetPassword = true;
-                state.isErrorResetPassword = false;
-            })
-            .addCase(postResetPassword.rejected, (state) => {
-                state.isLoadingResetPassword = false;
-                state.isErrorResetPassword = true;
-            })
-    }
+  name: 'resetPasswordSlice',
+  initialState: initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(postResetPassword.fulfilled, (state, action) => {
+        state.resetPassword = action.payload;
+        state.isLoadingResetPassword = false;
+        state.isErrorResetPassword = false;
+      })
+      .addCase(postResetPassword.pending, (state) => {
+        state.isLoadingResetPassword = true;
+        state.isErrorResetPassword = false;
+      })
+      .addCase(postResetPassword.rejected, (state) => {
+        state.isLoadingResetPassword = false;
+        state.isErrorResetPassword = true;
+      });
+  }
 });
 
 // export const {
@@ -61,13 +60,13 @@ const isLoadingResetPassword = (state: RootState) => state.resetPasswordSlice.is
 const isErrorResetPassword = (state: RootState) => state.resetPasswordSlice.isErrorResetPassword;
 
 export const getStateResetPassword = createSelector(
-    [resetPassword], resetPassword => resetPassword
+  [resetPassword], resetPassword => resetPassword
 );
 
 export const getStateResetPasswordLoading = createSelector(
-    [isLoadingResetPassword], isLoadingResetPassword => isLoadingResetPassword
+  [isLoadingResetPassword], isLoadingResetPassword => isLoadingResetPassword
 );
 
 export const getStateResetPasswordError = createSelector(
-    [isErrorResetPassword], isErrorResetPassword => isErrorResetPassword
+  [isErrorResetPassword], isErrorResetPassword => isErrorResetPassword
 );

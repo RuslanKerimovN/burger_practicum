@@ -13,47 +13,46 @@ interface IRegister {
 }
 
 const initialState: IRegister = {
-    registerData: baseRegisterResponse,
-    isRegisterLoading: false,
-    isRegisterError: false,
-}
+  registerData: baseRegisterResponse,
+  isRegisterLoading: false,
+  isRegisterError: false
+};
 
 export const postRegister = createAsyncThunk<IRegisterResponse, IRegisterRequest>(
-    'postRegister',
-    async (params, {rejectWithValue}) => {
-        const response = await postRegisterService(params);
+  'postRegister',
+  async (params, { rejectWithValue }) => {
+    const response = await postRegisterService(params);
 
-        if (!response.ok) {
-            return rejectWithValue(true);
-        }
-
-        const data: IRegisterResponse = await response.json();
-        return data;
+    if (!response.ok) {
+      return rejectWithValue(true);
     }
-)
+
+    return await response.json();
+  }
+);
 
 const registerSlice = createSlice({
-    name: 'registerSlice',
-    initialState: initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder
-            .addCase(postRegister.fulfilled, (state, action) => {
-                state.registerData = action.payload;
-                localStorage.setItem(REFRESH_TOKEN, `${(action.payload.refreshToken)}`);
-                setCookie(ACCESS_TOKEN, `${(action.payload.accessToken).split('Bearer ')[1]}`);
-                state.isRegisterLoading = false;
-                state.isRegisterError = false;
-            })
-            .addMatcher(isAnyOf(postRegister.pending), (state) => {
-                state.isRegisterLoading = true;
-                state.isRegisterError = false;
-            })
-            .addMatcher(isAnyOf(postRegister.rejected), (state) => {
-                state.isRegisterLoading = false;
-                state.isRegisterError = true;
-            })
-    }
+  name: 'registerSlice',
+  initialState: initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(postRegister.fulfilled, (state, action) => {
+        state.registerData = action.payload;
+        localStorage.setItem(REFRESH_TOKEN, `${(action.payload.refreshToken)}`);
+        setCookie(ACCESS_TOKEN, `${(action.payload.accessToken).split('Bearer ')[1]}`);
+        state.isRegisterLoading = false;
+        state.isRegisterError = false;
+      })
+      .addMatcher(isAnyOf(postRegister.pending), (state) => {
+        state.isRegisterLoading = true;
+        state.isRegisterError = false;
+      })
+      .addMatcher(isAnyOf(postRegister.rejected), (state) => {
+        state.isRegisterLoading = false;
+        state.isRegisterError = true;
+      });
+  }
 });
 
 // export const {
@@ -65,13 +64,13 @@ const isRegisterLoading = (state: RootState) => state.registerSlice.isRegisterLo
 const isRegisterError = (state: RootState) => state.registerSlice.isRegisterError;
 
 export const getStateRegisterData = createSelector(
-    [registerData], registerData => registerData
+  [registerData], registerData => registerData
 );
 
 export const getStateLoadingRegisterData = createSelector(
-    [isRegisterLoading], isRegisterLoading => isRegisterLoading
+  [isRegisterLoading], isRegisterLoading => isRegisterLoading
 );
 
 export const getStateErrorRegisterData = createSelector(
-    [isRegisterError], isRegisterError => isRegisterError
+  [isRegisterError], isRegisterError => isRegisterError
 );

@@ -1,6 +1,6 @@
 import { IBurgerIngredients } from "../../types/types";
 import { createAsyncThunk, createSelector, createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { getIngredientsServices } from '../../services/api/services';
+import { getIngredientsServices } from '../api/services.ts';
 import { RootState } from "../../store/store";
 
 export interface IIngredients {
@@ -10,47 +10,46 @@ export interface IIngredients {
 }
 
 const initialState: IIngredients = {
-    ingredients: [],
-    isLoadingIngredients: false,
-    isErrorIngredients: false,
-}
+  ingredients: [],
+  isLoadingIngredients: false,
+  isErrorIngredients: false
+};
 
 export const getIngredients = createAsyncThunk<IBurgerIngredients[], undefined>(
-    'getIngredients',
-    async (_, {rejectWithValue}) => {
-        const response = await getIngredientsServices();
+  'getIngredients',
+  async (_, { rejectWithValue }) => {
+    const response = await getIngredientsServices();
 
-        if (!response.ok) {
-            return rejectWithValue(true);
-        }
-
-        const data = await response.json().then(res => res.data);
-        return data;
+    if (!response.ok) {
+      return rejectWithValue(true);
     }
-)
+
+    return await response.json().then(res => res.data);
+  }
+);
 
 const ingredientsSlice = createSlice({
-    name: 'ingredientsSlice',
-    initialState: initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder
-            .addCase(getIngredients.fulfilled, (state, action) => {
-                state.ingredients = action.payload.map((el) => {
-                    return {...el,constructorId: `${Math.random()}`};
-                });
-                state.isLoadingIngredients = false;
-                state.isErrorIngredients = false;
-            })
-            .addMatcher(isAnyOf(getIngredients.pending), (state) => {
-                state.isLoadingIngredients = true;
-                state.isErrorIngredients = false;
-            })
-            .addMatcher(isAnyOf(getIngredients.rejected), (state) => {
-                state.isLoadingIngredients = false;
-                state.isErrorIngredients = true;
-            })
-    }
+  name: 'ingredientsSlice',
+  initialState: initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getIngredients.fulfilled, (state, action) => {
+        state.ingredients = action.payload.map((el) => {
+          return { ...el,constructorId: `${Math.random()}` };
+        });
+        state.isLoadingIngredients = false;
+        state.isErrorIngredients = false;
+      })
+      .addMatcher(isAnyOf(getIngredients.pending), (state) => {
+        state.isLoadingIngredients = true;
+        state.isErrorIngredients = false;
+      })
+      .addMatcher(isAnyOf(getIngredients.rejected), (state) => {
+        state.isLoadingIngredients = false;
+        state.isErrorIngredients = true;
+      });
+  }
 });
 
 // export const {
@@ -62,13 +61,13 @@ const isLoadingIngredients = (state: RootState) => state.ingredientsSlice.isLoad
 const isErrorIngredients = (state: RootState) => state.ingredientsSlice.isErrorIngredients;
 
 export const getStateIngredients = createSelector(
-    [ingredients], ingredients => ingredients
+  [ingredients], ingredients => ingredients
 );
 
 export const getStateLoadingIngredients = createSelector(
-    [isLoadingIngredients], isLoadingIngredients => isLoadingIngredients
+  [isLoadingIngredients], isLoadingIngredients => isLoadingIngredients
 );
 
 export const getStateErrorIngredients = createSelector(
-    [isErrorIngredients], isErrorIngredients => isErrorIngredients
+  [isErrorIngredients], isErrorIngredients => isErrorIngredients
 );
