@@ -3,7 +3,7 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { SvgOrder } from '../../images/svg-order';
 import { getStateErrorOrder, getStateLoadingOrder, getStateOrder, postOrder } from '../../services/slices/orderSlice';
 import detailsStyle from './order-details.module.css';
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 interface Props {
     ids: string[];

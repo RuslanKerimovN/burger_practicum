@@ -1,8 +1,8 @@
-import { IOrderResponse } from "../../types/types";
+import { IOrderResponse } from '../../types/types';
 import { baseOrder } from '../../types/baseObjects';
-import { createAsyncThunk, createSelector, createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSelector, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { postOrderServices } from '../api/services.ts';
-import { RootState } from "../../store/store";
+import { RootState } from '../../store/store';
 
 interface IOrder {
     order: IOrderResponse,
@@ -31,7 +31,7 @@ export const postOrder = createAsyncThunk<IOrderResponse, string[]>(
 
 const orderSlice = createSlice({
   name: 'orderSlice',
-  initialState: initialState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -60,13 +60,13 @@ const isLoadingOrder = (state: RootState) => state.orderSlice.isLoadingOrder;
 const isErrorOrder = (state: RootState) => state.orderSlice.isErrorOrder;
 
 export const getStateOrder = createSelector(
-  [order], order => order
+  [order], (order) => order
 );
 
 export const getStateLoadingOrder = createSelector(
-  [isLoadingOrder], isLoadingOrder => isLoadingOrder
+  [isLoadingOrder], (isLoadingOrder) => isLoadingOrder
 );
 
 export const getStateErrorOrder = createSelector(
-  [isErrorOrder], isErrorOrder => isErrorOrder
+  [isErrorOrder], (isErrorOrder) => isErrorOrder
 );

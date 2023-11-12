@@ -16,7 +16,7 @@ export interface IBurgerIngredients {
 
 export interface IOrderResponse {
   name: string;
-  order: {"number": number};
+  order: {'number': number};
   success: boolean;
 }
 

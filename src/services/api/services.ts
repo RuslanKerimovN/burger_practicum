@@ -1,4 +1,9 @@
-import { IAuthTokenRequest, IPatchUserRequest, IRegisterRequest, IResetPasswordRequest } from "../../types/types";
+import {
+  IAuthTokenRequest,
+  IPatchUserRequest,
+  IRegisterRequest,
+  IResetPasswordRequest
+} from '../../types/types';
 
 const ADDRESS = 'https://norma.nomoreparties.space/api';
 const AUTH = `${ADDRESS}/auth`;
@@ -19,7 +24,7 @@ export const postConfirmationEmailServices = (email: string): Promise<Response> 
   return fetch(`${ADDRESS}/password-reset`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: email })
+    body: JSON.stringify({ email })
   });
 };
 
@@ -51,7 +56,7 @@ export const postLogoutService = (token: string): Promise<Response> => {
   return fetch(`${AUTH}/logout`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ token: token })
+    body: JSON.stringify({ token })
   });
 };
  
@@ -59,7 +64,7 @@ export const postUpdateTokenService = (token: string): Promise<Response> => {
   return fetch(`${AUTH}/token`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ token: token })
+    body: JSON.stringify({ token })
   });
 };
 

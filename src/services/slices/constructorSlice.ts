@@ -1,6 +1,6 @@
-import { IBurgerIngredients } from "../../types/types";
-import { PayloadAction, createSelector, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../store/store";
+import { IBurgerIngredients } from '../../types/types';
+import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../../store/store';
 
 interface IConstructor {
     constructor: IBurgerIngredients[];
@@ -12,7 +12,7 @@ const initialState: IConstructor = {
 
 const constructorSlice = createSlice({
   name: 'constructorSlice',
-  initialState: initialState,
+  initialState,
   reducers: {
     addIngredientInConstructor(state, action: PayloadAction<{ingredient: IBurgerIngredients, uniqId: string}>) {
       const { ingredient, uniqId } = action.payload;
@@ -50,5 +50,5 @@ export default constructorSlice.reducer;
 const constructor = (state: RootState) => state.constructorSlice.constructor;
 
 export const getStateConstructor = createSelector(
-  [constructor], constructor => constructor
+  [constructor], (constructor) => constructor
 );

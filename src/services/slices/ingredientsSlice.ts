@@ -1,7 +1,7 @@
-import { IBurgerIngredients } from "../../types/types";
-import { createAsyncThunk, createSelector, createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { IBurgerIngredients } from '../../types/types';
+import { createAsyncThunk, createSelector, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { getIngredientsServices } from '../api/services.ts';
-import { RootState } from "../../store/store";
+import { RootState } from '../../store/store';
 
 export interface IIngredients {
     ingredients: IBurgerIngredients[];
@@ -24,13 +24,13 @@ export const getIngredients = createAsyncThunk<IBurgerIngredients[], undefined>(
       return rejectWithValue(true);
     }
 
-    return await response.json().then(res => res.data);
+    return await response.json().then((res) => res.data);
   }
 );
 
 const ingredientsSlice = createSlice({
   name: 'ingredientsSlice',
-  initialState: initialState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -61,13 +61,13 @@ const isLoadingIngredients = (state: RootState) => state.ingredientsSlice.isLoad
 const isErrorIngredients = (state: RootState) => state.ingredientsSlice.isErrorIngredients;
 
 export const getStateIngredients = createSelector(
-  [ingredients], ingredients => ingredients
+  [ingredients], (ingredients) => ingredients
 );
 
 export const getStateLoadingIngredients = createSelector(
-  [isLoadingIngredients], isLoadingIngredients => isLoadingIngredients
+  [isLoadingIngredients], (isLoadingIngredients) => isLoadingIngredients
 );
 
 export const getStateErrorIngredients = createSelector(
-  [isErrorIngredients], isErrorIngredients => isErrorIngredients
+  [isErrorIngredients], (isErrorIngredients) => isErrorIngredients
 );

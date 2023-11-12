@@ -1,8 +1,8 @@
-import { IResetPasswordStatus } from "../../types/types";
-import { createAsyncThunk, createSelector, createSlice } from "@reduxjs/toolkit";
+import { IResetPasswordStatus } from '../../types/types';
+import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
 import { postConfirmationEmailServices } from '../api/services';
-import { RootState } from "../../store/store";
-import { baseResetResponse } from "../../types/baseObjects";
+import { RootState } from '../../store/store';
+import { baseResetResponse } from '../../types/baseObjects';
 
 export interface IResetPassword {
     confirmationEmail: IResetPasswordStatus;
@@ -31,7 +31,7 @@ export const postConfirmationEmail = createAsyncThunk<IResetPasswordStatus, stri
 
 const confirmationEmailSlice = createSlice({
   name: 'confirmationEmailSlice',
-  initialState: initialState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -60,13 +60,13 @@ const isLoadingConfirmationEmail = (state: RootState) => state.confirmationEmail
 const isErrorConfirmationEmail = (state: RootState) => state.confirmationEmailSlice.isErrorConfirmationEmail;
 
 export const getStateConfirmationEmail = createSelector(
-  [confirmationEmail], confirmationEmail => confirmationEmail
+  [confirmationEmail], (confirmationEmail) => confirmationEmail
 );
 
 export const getStateConfirmationEmailLoading = createSelector(
-  [isLoadingConfirmationEmail], isLoadingConfirmationEmail => isLoadingConfirmationEmail
+  [isLoadingConfirmationEmail], (isLoadingConfirmationEmail) => isLoadingConfirmationEmail
 );
 
 export const getStateConfirmationEmailError = createSelector(
-  [isErrorConfirmationEmail], isErrorConfirmationEmail => isErrorConfirmationEmail
+  [isErrorConfirmationEmail], (isErrorConfirmationEmail) => isErrorConfirmationEmail
 );

@@ -42,7 +42,7 @@ export const LoginPage = () => {
             className={`${styles.login}`}
             style={{ height: HEIGHT_WITHOUT_HEADER }}
           >
-            <p className={`text text_type_main-medium mb-6`}>
+            <p className='text text_type_main-medium mb-6'>
                 Вход
             </p>
             <form onSubmit={onSubmitClick} className={`${styles.login}`}>
@@ -58,7 +58,7 @@ export const LoginPage = () => {
                 </Button>
               </div>
             </form>
-            <p className={`text text_type_main-default text_color_inactive mb-4`}>
+            <p className='text text_type_main-default text_color_inactive mb-4'>
                 Вы - новый пользователь? <Link to={REGISTER} className={`${styles.text}`}>Зарегистрироваться</Link>
             </p>
             <p className="text text_type_main-default text_color_inactive">

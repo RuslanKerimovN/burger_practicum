@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from 'react';
 
 export const useInput = (param: string = ''):  [string, (e: ChangeEvent<HTMLInputElement>) => void] => {
   const [input, setInput] = useState<string>(param);

@@ -7,7 +7,20 @@ import { LOGIN, PROFILE, PROFILE_ORDERS } from '../../constants/path';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { postLogout } from '../../services/slices/logoutSlice';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { deleteUser, getStateIsChangeData, getStateName, getStateUserEmail, getStateUserName, getStateUserPassword, getUser, patchUser, resetChanges, setUserEmail, setUserName, setUserPassword } from '../../services/slices/userSlice';
+import {
+  deleteUser,
+  getStateIsChangeData,
+  getStateName,
+  getStateUserEmail,
+  getStateUserName,
+  getStateUserPassword,
+  getUser,
+  patchUser,
+  resetChanges,
+  setUserEmail,
+  setUserName,
+  setUserPassword
+} from '../../services/slices/userSlice';
 import { deleteCookie } from '../../helpers/helpers';
 import { clearLogin, setLoginName } from '../../services/slices/loginSlice';
 
@@ -77,7 +90,7 @@ export const ProfilePage = () => {
             </NavLink>
           </div>
           <div className={`${styles.nav}`}>
-            <p className="text text_type_main-default text_color_inactive">
+            <p className='text text_type_main-default text_color_inactive'>
               В этом разделе вы можете изменить свои персональные данные
             </p>
           </div>

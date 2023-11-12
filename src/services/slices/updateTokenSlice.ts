@@ -1,9 +1,9 @@
-import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { baseAuthToken } from "../../types/baseObjects";
-import { IAuthTokenResponse } from "../../types/types";
-import { postUpdateTokenService } from "../api/services";
-import { setCookie } from "../../helpers/helpers";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants/constants";
+import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { baseAuthToken } from '../../types/baseObjects';
+import { IAuthTokenResponse } from '../../types/types';
+import { postUpdateTokenService } from '../api/services';
+import { setCookie } from '../../helpers/helpers';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../constants/constants';
 
 interface IUpdateToken {
     token: IAuthTokenResponse;
@@ -32,7 +32,7 @@ export const postUpdateToken = createAsyncThunk<IAuthTokenResponse, string>(
 
 const updateTokenSlice = createSlice({
   name: 'updateTokenSlice',
-  initialState: initialState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder

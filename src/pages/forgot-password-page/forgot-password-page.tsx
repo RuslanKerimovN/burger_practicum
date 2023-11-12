@@ -43,7 +43,7 @@ export const ForgotPasswordPage = () => {
         ?   <Status status='Проверка данных...'/>
         :   (!confirmationEmail.success) ?
           <div className={`${styles.center}`} style={{ height: HEIGHT_WITHOUT_HEADER }}>
-            <p className={`text text_type_main-medium mb-6`}>
+            <p className='text text_type_main-medium mb-6'>
               Восстановление пароля
             </p>
             <form onSubmit={onSubmitClick} className={`${styles.center}`}>
@@ -56,7 +56,7 @@ export const ForgotPasswordPage = () => {
                 </Button>
               </div>
             </form>
-            <p className={`text text_type_main-default text_color_inactive`}>
+            <p className='text text_type_main-default text_color_inactive'>
               Вспомнили пароль? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
             </p>
           </div>

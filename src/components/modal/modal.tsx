@@ -15,7 +15,7 @@ const portal = document.getElementById('portal') as Element;
 
 export const Modal = ({ closeModal = () => {}, children=<></> }: Props) => {
   const navigate = useNavigate();
-  const { id } = useParams<"id">();
+  const { id } = useParams<'id'>();
 
   const onDismiss = () => {
     id ? navigate(-1) : closeModal();

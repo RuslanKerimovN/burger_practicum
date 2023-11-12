@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSelector, createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { baseLogout } from "../../types/baseObjects";
-import { ILogoutResponse } from "../../types/types";
-import { postLogoutService } from "../api/services";
-import { RootState } from "../../store/store";
+import { createAsyncThunk, createSelector, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { baseLogout } from '../../types/baseObjects';
+import { ILogoutResponse } from '../../types/types';
+import { postLogoutService } from '../api/services';
+import { RootState } from '../../store/store';
 
 interface ILogout {
     logout: ILogoutResponse;
@@ -31,7 +31,7 @@ export const postLogout = createAsyncThunk<ILogoutResponse, string>(
 
 const logoutSlice = createSlice({
   name: 'logoutSlice',
-  initialState: initialState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -60,13 +60,13 @@ const isLogoutLoading = (state: RootState) => state.logoutSlice.isLogoutLoading;
 const isLogoutError = (state: RootState) => state.logoutSlice.isLogoutError;
 
 export const getStateLogout = createSelector(
-  [logout], logout => logout
+  [logout], (logout) => logout
 );
 
 export const getStateLoadingLogout = createSelector(
-  [isLogoutLoading], isLogoutLoading => isLogoutLoading
+  [isLogoutLoading], (isLogoutLoading) => isLogoutLoading
 );
 
 export const getStateErrorLogout = createSelector(
-  [isLogoutError], isLogoutError => isLogoutError
+  [isLogoutError], (isLogoutError) => isLogoutError
 );

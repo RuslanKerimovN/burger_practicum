@@ -14,10 +14,13 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    "indent": ["error", 2],
-    "eol-last": "error",
-    "object-curly-spacing": ["error", "always"],
-    "comma-dangle": "error",
-    "semi": "error"
+    'indent': ["error", 2],
+    'object-curly-spacing': ['error', 'always'],
+    'comma-dangle': 'error',
+    'semi': 'error',
+    'object-shorthand': 'error',
+    'quotes': ['error', 'single'],
+    'arrow-parens': 'error',
+    'eol-last': 'error'
   },
 }

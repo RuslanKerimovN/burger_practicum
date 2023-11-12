@@ -6,7 +6,7 @@ import {
   IRegisterResponse,
   IResetPasswordStatus,
   IUserResponse
-} from "./types";
+} from './types';
 
 export const baseOrder: IOrderResponse = {
   name: '',

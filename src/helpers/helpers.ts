@@ -6,8 +6,8 @@ import {
   PROFILE_TAPE,
   REGISTER,
   RESET_PASSWORD
-} from "../constants/path";
-import { IBurgerIngredients, IIngredientsArray } from "../types/types";
+} from '../constants/path';
+import { IBurgerIngredients, IIngredientsArray } from '../types/types';
 
 export const tabArray = (ingredients: IBurgerIngredients[]): IIngredientsArray[] => {
   let bun: IBurgerIngredients[] = [];
@@ -54,7 +54,7 @@ export const getIconType = (location: string, nav: string): 'primary' | 'seconda
 
 export const getCookie = (name: string): string | undefined => {
   const matches = document.cookie.match(new RegExp(
-    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    '(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'
   ));
   return matches ? decodeURIComponent(matches[1]) : undefined;
 };

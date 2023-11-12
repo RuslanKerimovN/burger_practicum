@@ -1,18 +1,18 @@
-import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import constructorStyle from './burger-constructor.module.css';
-import { useEffect, useState } from "react";
-import { Modal } from "../modal/modal";
-import { OrderDetails } from "../order-details/order-details";
-import { useModal } from "../../hooks/useModal";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { useDrop } from "react-dnd";
+import { useEffect, useState } from 'react';
+import { Modal } from '../modal/modal';
+import { OrderDetails } from '../order-details/order-details';
+import { useModal } from '../../hooks/useModal';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { useDrop } from 'react-dnd';
 import { Constructor } from '../constructor/constructor';
-import { IBurgerIngredients } from "../../types/types";
-import { getStateConstructor } from "../../services/slices/constructorSlice";
-import { ACCESS_TOKEN, CONSTRUCTOR_HEIGHT, REFRESH_TOKEN } from "../../constants/constants";
-import { getCookie } from "../../helpers/helpers";
-import { useNavigate } from "react-router";
-import { LOGIN } from "../../constants/path";
+import { IBurgerIngredients } from '../../types/types';
+import { getStateConstructor } from '../../services/slices/constructorSlice';
+import { ACCESS_TOKEN, CONSTRUCTOR_HEIGHT, REFRESH_TOKEN } from '../../constants/constants';
+import { getCookie } from '../../helpers/helpers';
+import { useNavigate } from 'react-router';
+import { LOGIN } from '../../constants/path';
 
 export const BurgerConstructor = () => {
   const { isModalOpen, openModal, closeModal } = useModal();
@@ -63,7 +63,7 @@ export const BurgerConstructor = () => {
           <ConstructorElement
             type={'top'}
             isLocked={true}
-            text={bun?.name || `Выберите самую вкусную булку во всей галактике (верх)`}
+            text={bun?.name || 'Выберите самую вкусную булку во всей галактике (верх)'}
             price={bun?.price || 0}
             thumbnail={bun?.image_mobile || 'https://www.svgrepo.com/show/286913/close-error.svg'}
           />
@@ -75,7 +75,7 @@ export const BurgerConstructor = () => {
           <ConstructorElement
             type={'bottom'}
             isLocked={true}
-            text={bun?.name || `Выберите самую вкусную булку во всей галактике (низ)`}
+            text={bun?.name || 'Выберите самую вкусную булку во всей галактике (низ)'}
             price={bun?.price || 0}
             thumbnail={bun?.image_mobile || 'https://www.svgrepo.com/show/286913/close-error.svg'}
           />

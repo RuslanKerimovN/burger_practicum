@@ -26,7 +26,7 @@ const OneSection = ({ name, params, padding }: ISectionProps) => (
 
 export const IngredientDetails = () => {
   const dispatch = useAppDispatch();
-  const { id } = useParams<"id">();
+  const { id } = useParams<'id'>();
   const ingredients = useAppSelector(getStateIngredients);
   const [showElement, setShowElement] = useState<IBurgerIngredients>(baseIngredient);
   const { image_large, name, calories, proteins, fat, carbohydrates } = showElement;

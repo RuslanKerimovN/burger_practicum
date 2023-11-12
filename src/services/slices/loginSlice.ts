@@ -1,10 +1,10 @@
-import { PayloadAction, createAsyncThunk, createSelector, createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { baseAuthToken } from "../../types/baseObjects";
-import { IAuthTokenRequest, IAuthTokenResponse } from "../../types/types";
-import { postLoginService } from "../api/services";
-import { RootState } from "../../store/store";
-import { setCookie } from "../../helpers/helpers";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants/constants";
+import { PayloadAction, createAsyncThunk, createSelector, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { baseAuthToken } from '../../types/baseObjects';
+import { IAuthTokenRequest, IAuthTokenResponse } from '../../types/types';
+import { postLoginService } from '../api/services';
+import { RootState } from '../../store/store';
+import { setCookie } from '../../helpers/helpers';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../constants/constants';
 
 interface ILogin {
     login: IAuthTokenResponse;
@@ -35,7 +35,7 @@ export const postLogin = createAsyncThunk<IAuthTokenResponse, IAuthTokenRequest>
 
 const loginSlice = createSlice({
   name: 'loginSlice',
-  initialState: initialState,
+  initialState,
   reducers: {
     setLoginName(state, action: PayloadAction<string>) {
       state.loginName = action.payload;
@@ -76,17 +76,17 @@ const isLoginLoading = (state: RootState) => state.loginSlice.isLoginLoading;
 const isLoginError = (state: RootState) => state.loginSlice.isLoginError;
 
 export const getStateLogin = createSelector(
-  [login], login => login
+  [login], (login) => login
 );
 
 export const getStateLoginName = createSelector(
-  [loginName], loginName => loginName
+  [loginName], (loginName) => loginName
 );
 
 export const getStateLoadingLogin = createSelector(
-  [isLoginLoading], isLoginLoading => isLoginLoading
+  [isLoginLoading], (isLoginLoading) => isLoginLoading
 );
 
 export const getStateErrorLogin = createSelector(
-  [isLoginError], isLoginError => isLoginError
+  [isLoginError], (isLoginError) => isLoginError
 );

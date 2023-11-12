@@ -1,10 +1,10 @@
-import { PayloadAction, createAsyncThunk, createSelector, createSlice } from "@reduxjs/toolkit";
-import { baseUser } from "../../types/baseObjects";
-import { IPatchUserRequest, IUserResponse } from "../../types/types";
-import { getUserService, patchUserService, postUpdateTokenService } from "../api/services";
-import { RootState } from "../../store/store";
-import { getCookie, setCookie } from "../../helpers/helpers";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants/constants";
+import { PayloadAction, createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
+import { baseUser } from '../../types/baseObjects';
+import { IPatchUserRequest, IUserResponse } from '../../types/types';
+import { getUserService, patchUserService, postUpdateTokenService } from '../api/services';
+import { RootState } from '../../store/store';
+import { getCookie, setCookie } from '../../helpers/helpers';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../constants/constants';
 
 interface IUserInfo {
     user: IUserResponse;
@@ -138,7 +138,7 @@ export const getUser = createAsyncThunk<IUserResponse, undefined>(
 
 const userSlice = createSlice({
   name: 'userSlice',
-  initialState: initialState,
+  initialState,
   reducers: {
     setUserEmail(state, action: PayloadAction<string>) {
       if (!state.isChangeData) {
@@ -237,41 +237,41 @@ const isChangeData = (state: RootState) => state.userSlice.isChangeData;
 const name = (state: RootState) => state.userSlice.name;
 
 export const getStateUser = createSelector(
-  [user], user => user
+  [user], (user) => user
 );
 
 export const getStateUserEmail = createSelector(
-  [userEmail], userEmail => userEmail
+  [userEmail], (userEmail) => userEmail
 );
 
 export const getStateUserName = createSelector(
-  [userName], userName => userName
+  [userName], (userName) => userName
 );
 
 export const getStateUserPassword = createSelector(
-  [userPassword], userPassword => userPassword
+  [userPassword], (userPassword) => userPassword
 );
 
 export const getStateLoadingUser = createSelector(
-  [isLoadingUser], isLoadingUser => isLoadingUser
+  [isLoadingUser], (isLoadingUser) => isLoadingUser
 );
 
 export const getStateErrorUser = createSelector(
-  [isErrorUser], isErrorUser => isErrorUser
+  [isErrorUser], (isErrorUser) => isErrorUser
 );
 
 export const getStatePatchLoadingUser = createSelector(
-  [isPatchLoadingUser], isPatchLoadingUser => isPatchLoadingUser
+  [isPatchLoadingUser], (isPatchLoadingUser) => isPatchLoadingUser
 );
 
 export const getStatePatchErrorUser = createSelector(
-  [isPatchErrorUser], isPatchErrorUser => isPatchErrorUser
+  [isPatchErrorUser], (isPatchErrorUser) => isPatchErrorUser
 );
 
 export const getStateIsChangeData = createSelector(
-  [isChangeData], isChangeData => isChangeData
+  [isChangeData], (isChangeData) => isChangeData
 );
 
 export const getStateName = createSelector(
-  [name], name => name
+  [name], (name) => name
 );

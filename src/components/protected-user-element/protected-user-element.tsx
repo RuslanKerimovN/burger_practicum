@@ -1,7 +1,7 @@
-import { ReactNode, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router";
-import { findRoute, getCookie } from "../../helpers/helpers";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants/constants";
+import { ReactNode, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router';
+import { findRoute, getCookie } from '../../helpers/helpers';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../constants/constants';
 
 interface Props {
     children: ReactNode;

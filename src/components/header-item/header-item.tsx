@@ -13,7 +13,7 @@ export const HeaderItem = ({ children, text }: Props) => {
         {children}
       </div>
       <div>
-        <p className={`text text_type_main-default`}>
+        <p className='text text_type_main-default'>
           {text}
         </p>
       </div>
