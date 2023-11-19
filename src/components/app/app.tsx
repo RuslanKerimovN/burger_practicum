@@ -21,9 +21,9 @@ export const App = () => {
   }, [location.pathname]);
 
   return (
-    <div>
+    <main>
       <AppHeader/>
       <RoutesComponent />
-    </div>
+    </main>
   );
 };

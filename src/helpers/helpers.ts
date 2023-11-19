@@ -3,7 +3,7 @@ import {
   HOME,
   LOGIN,
   PROFILE,
-  PROFILE_TAPE,
+  FEED,
   REGISTER,
   RESET_PASSWORD
 } from '../constants/path';
@@ -44,7 +44,7 @@ export const findCount = (array: IBurgerIngredients[], name: string): number => 
 export const getIconType = (location: string, nav: string): 'primary' | 'secondary' => {
   if (location === HOME && nav === 'constructor') {
     return 'primary';
-  } else if (location === PROFILE_TAPE && nav === 'tape') {
+  } else if (location === FEED && nav === 'tape') {
     return 'primary';
   } else if (location === PROFILE && nav === 'profile') {
     return 'primary';

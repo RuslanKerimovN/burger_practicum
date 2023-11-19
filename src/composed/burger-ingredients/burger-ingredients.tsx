@@ -1,15 +1,15 @@
 import { memo, useEffect, useState } from 'react';
-import { Tabs } from '../tabs/tabs';
+import { Tabs } from '../../components/tabs/tabs.tsx';
 import ingredientsStyle from './burger-ingredients.module.css';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector.tsx';
+import { useAppDispatch } from '../../hooks/useAppDispatch.tsx';
 import {
   getIngredients,
   getStateIngredients,
   getStateLoadingIngredients
-} from '../../services/slices/ingredientsSlice';
-import { IIngredientsArray } from '../../types/types';
-import { tabArray } from '../../helpers/helpers';
+} from '../../services/slices/ingredientsSlice.ts';
+import { IIngredientsArray } from '../../types/types.ts';
+import { tabArray } from '../../helpers/helpers.ts';
 
 export const BurgerIngredients = memo(() => {
   const dispatch = useAppDispatch();

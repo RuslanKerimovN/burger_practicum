@@ -1,0 +1,15 @@
+.content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.orders {
+    display: flex;
+    justify-content: end;
+}
+
+.info {
+    display: flex;
+    justify-content: start;
+}
