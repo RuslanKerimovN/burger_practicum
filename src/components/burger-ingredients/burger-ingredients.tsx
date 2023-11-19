@@ -3,7 +3,11 @@ import { Tabs } from '../tabs/tabs';
 import ingredientsStyle from './burger-ingredients.module.css';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { getIngredients, getStateIngredients, getStateLoadingIngredients } from '../../services/slices/ingredientsSlice';
+import {
+  getIngredients,
+  getStateIngredients,
+  getStateLoadingIngredients
+} from '../../services/slices/ingredientsSlice';
 import { IIngredientsArray } from '../../types/types';
 import { tabArray } from '../../helpers/helpers';
 

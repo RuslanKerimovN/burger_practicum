@@ -5,7 +5,12 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { FORGOT_PASSWORD, LOGIN } from '../../constants/path';
 import { useInput } from '../../hooks/useInput';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { getStateResetPassword, getStateResetPasswordError, getStateResetPasswordLoading, postResetPassword } from '../../services/slices/resetPasswordSlice';
+import {
+  getStateResetPassword,
+  getStateResetPasswordError,
+  getStateResetPasswordLoading,
+  postResetPassword
+} from '../../services/slices/resetPasswordSlice';
 import { FormEvent, useEffect } from 'react';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useModal } from '../../hooks/useModal';

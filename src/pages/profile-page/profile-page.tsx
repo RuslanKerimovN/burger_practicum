@@ -71,19 +71,31 @@ export const ProfilePage = () => {
       <div className={`${styles.page}`}>
         <div className={`${styles.items} mr-15 mt-30`}>
           <div className={`${styles.nav}`}>
-            <NavLink to={PROFILE} className={({ isActive }) =>  isActive ? `text text_type_main-medium ${styles.active}` : `text text_type_main-medium ${styles.notActive}`}>
+            <NavLink
+              to={PROFILE}
+              className={({ isActive }) =>  isActive
+                ? `text text_type_main-medium ${styles.active}`
+                : `text text_type_main-medium ${styles.notActive}`}
+            >
               Профиль
             </NavLink>
           </div>
           <div className={`${styles.nav}`}>
-            <NavLink to={PROFILE_ORDERS} className={({ isActive }) =>  isActive ? `text text_type_main-medium ${styles.active}` : `text text_type_main-medium ${styles.notActive}`}>
+            <NavLink
+              to={PROFILE_ORDERS}
+              className={({ isActive }) =>  isActive
+                ? `text text_type_main-medium ${styles.active}`
+                : `text text_type_main-medium ${styles.notActive}`}
+            >
               История заказов
             </NavLink>
           </div>
           <div className={`${styles.nav} mb-20`}>
             <NavLink
               to={LOGIN}
-              className={({ isActive }) =>  isActive ? `text text_type_main-medium ${styles.active}` : `text text_type_main-medium ${styles.notActive}`}
+              className={({ isActive }) =>  isActive
+                ? `text text_type_main-medium ${styles.active}`
+                : `text text_type_main-medium ${styles.notActive}`}
               onClick={onLogoutClick}
             >
               Выход
@@ -100,13 +112,28 @@ export const ProfilePage = () => {
           style={{ height: HEIGHT_WITHOUT_HEADER }}
         >
           <div className='mb-6'>
-            <Input placeholder='Имя' value={userName} onChange={(e) => onChange(e, 'name')} icon={'EditIcon'}/>
+            <Input
+              placeholder='Имя'
+              value={userName}
+              onChange={(e) => onChange(e, 'name')}
+              icon={'EditIcon'}
+            />
           </div>
           <div className='mb-6'>
-            <Input placeholder='Логин' value={userEmail} onChange={(e) => onChange(e, 'email')} icon={'EditIcon'}/>
+            <Input
+              placeholder='Логин'
+              value={userEmail}
+              onChange={(e) => onChange(e, 'email')}
+              icon={'EditIcon'}
+            />
           </div>
           <div className='mb-6'>
-            <Input placeholder='Пароль' value={userPassword} onChange={(e) => onChange(e, 'password')} icon={'EditIcon'}/>
+            <Input
+              placeholder='Пароль'
+              value={userPassword}
+              onChange={(e) => onChange(e, 'password')}
+              icon={'EditIcon'}
+            />
           </div>
           {isChangeData ? 
             <div>

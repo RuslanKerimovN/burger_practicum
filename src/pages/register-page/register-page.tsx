@@ -6,7 +6,12 @@ import { Link, Navigate } from 'react-router-dom';
 import { HOME, LOGIN } from '../../constants/path';
 import { useInput } from '../../hooks/useInput';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { getStateErrorRegisterData, getStateLoadingRegisterData, getStateRegisterData, postRegister } from '../../services/slices/registerSlice';
+import {
+  getStateErrorRegisterData,
+  getStateLoadingRegisterData,
+  getStateRegisterData,
+  postRegister
+} from '../../services/slices/registerSlice';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { Status } from '../../components/status/status';
 import { useModal } from '../../hooks/useModal';
