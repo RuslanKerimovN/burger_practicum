@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.number {
+    text-align: center;
+}
+
+.status {
+    color: rgb(0, 204, 204);
+}
+
+.dateAndPrice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+}

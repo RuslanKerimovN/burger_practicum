@@ -1,0 +1,17 @@
+.panel {
+    width: 600px;
+    overflow-y: auto;
+}
+
+.orderNumbers {
+    display: grid;
+    grid-template-columns: 1fr 36px 1fr;
+}
+
+.success {
+    color: rgb(0, 204, 204);
+}
+
+.shadow {
+    text-shadow: #681abb 0 0 10px;
+}

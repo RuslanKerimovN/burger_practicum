@@ -16,14 +16,16 @@ import {
   REGISTER,
   RESET_PASSWORD
 } from '../../constants/path';
-import { HistoryOrdersPage } from '../../pages/history-orders-page/history-orders-page';
 import { FeedPage } from '../../pages/feed-page/feed-page.tsx';
 import { ProtectedRouteElement } from '../protected-route-element/protected-route-element';
 import { ProtectedUserElement } from '../protected-user-element/protected-user-element';
 import { Modal } from '../modal/modal';
 import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { IngredientsPage } from '../../pages/ingredients-page/ingredients-page';
-import { OrderDetailsPage } from '../../pages/order-details-page/order-details-page.tsx';
+import { OrderPage } from '../../pages/order-page/order-page.tsx';
+import { Order } from '../order/order.tsx';
+import { ChangeProfile } from '../change-profile/change-profile.tsx';
+import { HistoryOrdersPage } from '../../pages/history-orders-page/history-orders-page.tsx';
 
 export const  RoutesComponent = () => {
   const location = useLocation();
@@ -38,16 +40,18 @@ export const  RoutesComponent = () => {
         <Route path={REGISTER} element={<ProtectedUserElement><RegisterPage /></ProtectedUserElement>} />
         <Route path={FORGOT_PASSWORD} element={<ProtectedUserElement><ForgotPasswordPage /></ProtectedUserElement>} />
         <Route path={RESET_PASSWORD} element={<ProtectedUserElement><ResetPasswordPage /></ProtectedUserElement>} />
-        <Route path={PROFILE} element={<ProtectedRouteElement><ProfilePage/></ProtectedRouteElement>}/>
-        <Route path={PROFILE_ORDERS} element={<ProtectedRouteElement><HistoryOrdersPage /></ProtectedRouteElement>} />
+        <Route path={PROFILE} element={<ProtectedRouteElement><ProfilePage/></ProtectedRouteElement>}>
+          <Route path={''} element={<ChangeProfile />}/>
+          <Route path={PROFILE_ORDERS} element={<HistoryOrdersPage />} />
+        </Route>
         <Route path={FEED} element={<FeedPage />} />
 
         {/* dynamic paths */}
         <Route path="/ingredients/:id" element={<IngredientsPage />} />
-        <Route path={`${FEED}/:id`} element={<OrderDetailsPage />} />
+        <Route path={`${FEED}/:id`} element={<OrderPage />} />
         <Route
-          path={`${PROFILE_ORDERS}/:id`}
-          element={<ProtectedRouteElement><OrderDetailsPage /></ProtectedRouteElement>}
+          path={`${PROFILE}/${PROFILE_ORDERS}/:id`}
+          element={<ProtectedRouteElement><OrderPage /></ProtectedRouteElement>}
         />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
@@ -55,6 +59,8 @@ export const  RoutesComponent = () => {
       {state?.backgroundLocation && (
         <Routes>
           <Route path="/ingredients/:id" element={<Modal><IngredientDetails/></Modal>} />
+          <Route path={`${FEED}/:id`} element={<Modal><Order /></Modal>} />
+          <Route path={`${PROFILE}/${PROFILE_ORDERS}/:id`} element={<Modal><Order /></Modal>} />
         </Routes>
       )}
     </>
