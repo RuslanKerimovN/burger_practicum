@@ -5,6 +5,7 @@ import modalStyle from './modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useNavigate, useParams } from 'react-router';
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 interface Props {
     closeModal?: () => void;
@@ -16,6 +17,9 @@ const portal = document.getElementById('portal') as Element;
 export const Modal = ({ closeModal = () => {}, children=<></> }: Props) => {
   const navigate = useNavigate();
   const { id } = useParams<'id'>();
+  const { pathname } = useLocation();
+
+  const header: boolean = pathname.includes('ingredients');
 
   const onDismiss = () => {
     id ? navigate(-1) : closeModal();
@@ -40,7 +44,7 @@ export const Modal = ({ closeModal = () => {}, children=<></> }: Props) => {
         <div className={`${modalStyle.header}`}>
           <div >
             <p className="text text_type_main-large">
-              {id ? 'Детали ингредиента' : ''}
+              {header ? 'Детали ингредиента' : ''}
             </p>
           </div>
           <div className={`${modalStyle.exit}`}>

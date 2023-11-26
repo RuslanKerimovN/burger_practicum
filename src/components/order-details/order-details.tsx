@@ -27,7 +27,7 @@ export const OrderDetails = ({ ids }: Props) => {
           :
           <div className={`${detailsStyle.card}`}>
             <div>
-              <p className={`${detailsStyle.text} text text_type_digits-large mb-8`}>
+              <p className={`${detailsStyle.text} ${detailsStyle.shadow} text text_type_digits-large mb-8`}>
                 {order.order.number}
               </p>
             </div>

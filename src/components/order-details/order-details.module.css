@@ -9,3 +9,7 @@
 .text {
     text-align: center;
 }
+
+.shadow {
+    text-shadow: #681abb 0 0 10px;
+}
