@@ -43,7 +43,7 @@ export const LoginPage = () => {
             style={{ height: HEIGHT_WITHOUT_HEADER }}
           >
             <p className='text text_type_main-medium mb-6'>
-                Вход
+              Вход
             </p>
             <form onSubmit={onSubmitClick} className={`${styles.login}`}>
               <div className='mb-6'>
@@ -54,15 +54,15 @@ export const LoginPage = () => {
               </div>
               <div className='mb-20'>
                 <Button htmlType="submit" type="primary" size="medium">
-                    Войти
+                  Войти
                 </Button>
               </div>
             </form>
             <p className='text text_type_main-default text_color_inactive mb-4'>
-                Вы - новый пользователь? <Link to={REGISTER} className={`${styles.text}`}>Зарегистрироваться</Link>
+              Вы - новый пользователь? <Link to={REGISTER} className={`${styles.text}`}>Зарегистрироваться</Link>
             </p>
             <p className="text text_type_main-default text_color_inactive">
-                Забыли пароль? <Link to={FORGOT_PASSWORD} className={`${styles.text}`}>Восстановить пароль</Link>
+              Забыли пароль? <Link to={FORGOT_PASSWORD} className={`${styles.text}`}>Восстановить пароль</Link>
             </p>
           </div>
           :   <Navigate to={localStorage.getItem('noLogin') || HOME} />

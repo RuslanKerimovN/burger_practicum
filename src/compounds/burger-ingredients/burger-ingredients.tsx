@@ -9,7 +9,7 @@ import {
   getStateLoadingIngredients
 } from '../../services/slices/ingredientsSlice.ts';
 import { IIngredientsArray } from '../../types/types.ts';
-import { tabArray } from '../../helpers/helpers.ts';
+import { getTabs } from '../../helpers/helpers.ts';
 
 export const BurgerIngredients = memo(() => {
   const dispatch = useAppDispatch();
@@ -24,10 +24,10 @@ export const BurgerIngredients = memo(() => {
   }, [dispatch, ingredients]);
 
   useEffect(() => {
-    const tmp = tabArray(ingredients);
+    const tmp = getTabs(ingredients);
     setIngredientsArray(tmp);
   }, [ingredients]);
-    
+
   return (
     <section className={`${ingredientsStyle.panel} mt-10 mr-5 ml-5`}>
       {ingredients.length ?

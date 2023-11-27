@@ -9,7 +9,7 @@ import {
 } from '../constants/path';
 import { IBurgerIngredients, IIngredientsArray } from '../types/types';
 
-export const tabArray = (ingredients: IBurgerIngredients[]): IIngredientsArray[] => {
+export const getTabs = (ingredients: IBurgerIngredients[]): IIngredientsArray[] => {
   let bun: IBurgerIngredients[] = [];
   let main: IBurgerIngredients[] = [];
   let sauce: IBurgerIngredients[] = [];
