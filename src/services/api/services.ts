@@ -90,3 +90,9 @@ export const patchUserService = (cookie: string, params: IPatchUserRequest): Pro
     body: JSON.stringify(params)
   });
 };
+
+export const getOrderInfoService = (orderNum: string): Promise<Response> => {
+  return fetch(`${ADDRESS}/orders/${orderNum}`, {
+    headers: { 'Content-Type': 'application/json' }
+  });
+};

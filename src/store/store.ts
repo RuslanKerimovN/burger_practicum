@@ -15,7 +15,7 @@ import {  socketMiddleware } from '../services/middleware/socket-middleware.ts';
 import  feedSlice  from '../services/slices/feedSlice.ts';
 import { wsActionsFeed, wsActionsHistoryOrders } from '../services/actions/web-socket-actions.ts';
 import historyOrdersSlice from '../services/slices/historyOrdersSlice.ts';
-
+import orderInfoSlice from '../services/slices/orderInfoSlice.ts';
 
 export const rootReducer = combineReducers({
   constructorSlice,
@@ -30,7 +30,8 @@ export const rootReducer = combineReducers({
   updateTokenSlice,
   userSlice,
   feedSlice,
-  historyOrdersSlice
+  historyOrdersSlice,
+  orderInfoSlice
 });
 
 const feedMiddleware = socketMiddleware(wsActionsFeed);

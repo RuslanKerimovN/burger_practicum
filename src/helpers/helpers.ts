@@ -90,3 +90,12 @@ export const getPriceOneOrder = (orderIngredients: string[], ingredients: IBurge
   }
   return price;
 };
+
+export const getStatus = (status: string): string => {
+  if (status === 'created') {
+    return 'Отменен';
+  } else if (status === 'done') {
+    return 'Готов';
+  }
+  return 'В работе';
+};

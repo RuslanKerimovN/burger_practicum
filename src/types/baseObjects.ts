@@ -3,6 +3,7 @@ import {
   IBurgerIngredients,
   ILogoutResponse,
   IOrderResponse,
+  IOrders,
   IRegisterResponse,
   IResetPasswordStatus,
   IUserResponse
@@ -66,4 +67,14 @@ export const baseUser: IUserResponse = {
     email: '',
     name: ''
   }
+};
+
+export const baseOrderInfo: IOrders = {
+  ingredients: [],
+  _id: '',
+  status: '',
+  number: -1,
+  createdAt: '',
+  updatedAt: '',
+  name: ''
 };
