@@ -1,11 +1,11 @@
 import styles from './tape-orders-element.module.css';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 
 interface Props {
     orderNumber: string;
     orderDate: string;
     orderName: string;
-    orderPrice: string;
+    orderPrice: number;
     // orderIngredients: string[];
 }
 export const TapeOrdersElement = ({ orderNumber, orderDate, orderName, orderPrice }: Props) => {
@@ -16,7 +16,7 @@ export const TapeOrdersElement = ({ orderNumber, orderDate, orderName, orderPric
           {orderNumber}
         </p>
         <p className='text text_type_main-default text_color_inactive'>
-          {orderDate}
+          <FormattedDate date={new Date(orderDate)} />
         </p>
       </div>
       <p className='text text_type_main-medium mb-6'>{orderName}</p>

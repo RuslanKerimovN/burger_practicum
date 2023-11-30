@@ -76,3 +76,17 @@ export const findRoute = (path: string): boolean => {
   ];
   return routesArray.includes(path);
 };
+
+export const getPriceOneOrder = (orderIngredients: string[], ingredients: IBurgerIngredients[]): number => {
+  let price: number = 0;
+
+  for (let i = 0; i < orderIngredients.length; i++) {
+    for (let j = 0; j < ingredients.length; j++) {
+      if (ingredients[j]._id === orderIngredients[i]) {
+        price += ingredients[j].price;
+        break;
+      }
+    }
+  }
+  return price;
+};

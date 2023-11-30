@@ -1,3 +1,5 @@
+import { ActionCreatorWithoutPayload, ActionCreatorWithPayload } from '@reduxjs/toolkit';
+
 export interface IBurgerIngredients {
     _id: string;
   name: string;
@@ -47,7 +49,7 @@ export interface IRegisterResponse {
     email: string;
     name: string;
   };
-  accessToken: string; //"Bearer ...",
+  accessToken: string;
   refreshToken: string;
 }
 
@@ -58,7 +60,7 @@ export interface IAuthTokenRequest {
 
 export interface IAuthTokenResponse {
   success: boolean;
-  accessToken: string; //"Bearer ...",
+  accessToken: string;
   refreshToken: string;
   user: {
     email: string;
@@ -72,7 +74,7 @@ export interface IUpdateTokenRequest {
 
 export interface IUpdateTokenResponse {
   success: boolean;
-  accessToken: string; //"Bearer ...",
+  accessToken: string;
   refreshToken: string;
 }
 
@@ -93,4 +95,39 @@ export interface IPatchUserRequest {
   name: string;
   email: string;
   password: string;
+}
+
+export enum WebSocketStatus {
+  ONLINE = 'ONLINE',
+  OFFLINE = 'OFFLINE',
+  CONNECTING = 'CONNECTING'
+}
+
+export interface ITapeOrders {
+  success: boolean;
+  orders: IOrders[],
+  total: number;
+  totalToday: number;
+}
+
+export interface IOrders {
+  ingredients: string[],
+  _id: string;
+  status: string;
+  number: number;
+  createdAt: string;
+  updatedAt: string;
+  name: string;
+}
+
+export interface IwsActionTypes {
+  wsConnect: ActionCreatorWithPayload<string>;
+  wsDisconnect: ActionCreatorWithoutPayload;
+  wsSendMessage?: ActionCreatorWithPayload<unknown>;
+  wsConnecting: ActionCreatorWithoutPayload;
+
+  onOpen: ActionCreatorWithoutPayload;
+  onClose: ActionCreatorWithoutPayload;
+  onError: ActionCreatorWithPayload<string>;
+  onMessage: ActionCreatorWithPayload<ITapeOrders>;
 }

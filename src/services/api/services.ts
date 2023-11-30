@@ -12,10 +12,13 @@ export const getIngredientsServices = (): Promise<Response> => {
   return fetch(`${ADDRESS}/ingredients`);
 };
 
-export const postOrderServices = (order: string[]): Promise<Response> => {
+export const postOrderServices = (cookie: string, order: string[]): Promise<Response> => {
   return fetch(`${ADDRESS}/orders`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'authorization': `Bearer ${cookie}`
+    },
     body: JSON.stringify({ ingredients: order })
   });
 };
@@ -59,7 +62,7 @@ export const postLogoutService = (token: string): Promise<Response> => {
     body: JSON.stringify({ token })
   });
 };
- 
+
 export const postUpdateTokenService = (token: string): Promise<Response> => {
   return fetch(`${AUTH}/token`, {
     method: 'POST',

@@ -14,10 +14,11 @@ export const OrderDetails = ({ ids }: Props) => {
   const order = useAppSelector(getStateOrder);
   const isLoadingOrder = useAppSelector(getStateLoadingOrder);
   const isErrorOrder = useAppSelector(getStateErrorOrder);
-    
+
   useEffect(() => {
-    dispatch(postOrder(ids));
-  }, [dispatch, ids]); 
+    const twoBunsIds = [...ids, ids[0]];
+    dispatch(postOrder(twoBunsIds));
+  }, [dispatch, ids]);
 
   return (
     <>
@@ -41,7 +42,7 @@ export const OrderDetails = ({ ids }: Props) => {
             <div className="mb-15">
               <SvgOrder />
             </div>
-                            
+
             <section>
               <p className={`${detailsStyle.text} text text_type_main-default mb-2`}>
                 Ваш заказ начали готовить
