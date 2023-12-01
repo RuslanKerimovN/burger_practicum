@@ -11,7 +11,8 @@ import {
 } from '../../services/slices/orderInfoSlice.ts';
 import { useAppSelector } from '../../hooks/useAppSelector.tsx';
 import { getIngredients, getStateIngredients } from '../../services/slices/ingredientsSlice.ts';
-import { getPriceOneOrder, getStatus } from '../../helpers/helpers.ts';
+import { getOrderStucture, getPriceOneOrder, getStatus } from '../../helpers/helpers.ts';
+import { IOrderStructure } from '../../types/types.ts';
 
 export const Order = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +23,9 @@ export const Order = () => {
   const isErrorOrderInfo = useAppSelector(getStateErrorOrderInfo);
   const price: number = useMemo(() => {
     return getPriceOneOrder(orderInfo.ingredients, allIngredients);
+  }, [orderInfo, allIngredients]);
+  const orderStructure: IOrderStructure[] = useMemo(() => {
+    return getOrderStucture(orderInfo.ingredients, allIngredients);
   }, [orderInfo, allIngredients]);
 
   useEffect(() => {
@@ -69,12 +73,33 @@ export const Order = () => {
         {getStatus(orderInfo.status)}
       </p>
       <p className='text text_type_main-medium mb-6'>Состав:</p>
-      <div className='mb-10' style={{ background: 'red', height: '300px', overflowY: 'auto' }}>
-
+      <div className='mb-10' style={{ height: '300px', overflowY: 'auto' }}>
+        {
+          orderStructure.map((el) => (
+            <div key={el._id} className={`${styles.structureContainer} pr-6 mb-4`}>
+              <div className={`${styles.structureImgAndName} mr-4`}>
+                <div className={`${styles.circleImage} mr-4`}>
+                  <img
+                    alt={el.name}
+                    src={el.image_mobile}
+                    className={`${styles.img}`}
+                  />
+                </div>
+                <p className='text text_type_main-default'>{el.name}</p>
+              </div>
+              <div className={`${styles.structurePrice}`}>
+                <p className='text text_type_digits-default'>
+                  {`${el.quantityOneIngredient} x ${el.priceIngredient}`}
+                </p>
+                <CurrencyIcon type="primary" />
+              </div>
+            </div>
+          ))
+        }
       </div>
       <div className={`${styles.dateAndPrice}`}>
         <p className='text text_type_main-default text_color_inactive'>
-          <FormattedDate date={new Date(orderInfo.createdAt)} />
+          <FormattedDate date={new Date(orderInfo.updatedAt)} />
         </p>
         <p className={`${styles.price} text text_type_digits-default`}>{price}<CurrencyIcon type="primary" /></p>
       </div>

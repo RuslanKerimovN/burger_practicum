@@ -7,7 +7,7 @@ import {
   REGISTER,
   RESET_PASSWORD
 } from '../constants/path';
-import { IBurgerIngredients, IIngredientsArray } from '../types/types';
+import { IBurgerIngredients, IIngredientsArray, IOrderStructure, TOrderImages } from '../types/types';
 
 export const getTabs = (ingredients: IBurgerIngredients[]): IIngredientsArray[] => {
   let bun: IBurgerIngredients[] = [];
@@ -98,4 +98,52 @@ export const getStatus = (status: string): string => {
     return 'Готов';
   }
   return 'В работе';
+};
+
+export const getOrderStucture = (orderIngredient: string[], ingredients: IBurgerIngredients[]): IOrderStructure[] => {
+  const orderStructue: IOrderStructure[] = [];
+
+  for (const oneIngredient of orderIngredient) {
+    const indexIngredient: number = ingredients.findIndex((el) => el._id === oneIngredient);
+    const indexOrderStructueIngredient: number = orderStructue.findIndex((el) => el._id === oneIngredient);
+    if (indexIngredient === -1) {
+      return [];
+    } else if (!orderStructue.length || indexOrderStructueIngredient === -1) {
+      const { _id, name, price, image_mobile } = ingredients[indexIngredient];
+      orderStructue.push({
+        _id,
+        image_mobile,
+        name,
+        priceIngredient: price,
+        quantityOneIngredient: 1
+      });
+    } else {
+      orderStructue[indexOrderStructueIngredient] = {
+        ...orderStructue[indexOrderStructueIngredient],
+        quantityOneIngredient: orderStructue[indexOrderStructueIngredient].quantityOneIngredient + 1
+      };
+    }
+  }
+  return orderStructue;
+};
+
+export const getOrderImages = (orderIngredient: string[], ingredients: IBurgerIngredients[]): TOrderImages[] => {
+  const orderImages: TOrderImages[] = [];
+
+  for (const oneIngredient of orderIngredient) {
+    const indexIngredient: number = ingredients.findIndex((el) => el._id === oneIngredient);
+    const indexOrderImages: number = orderImages.findIndex((el) => el._id === oneIngredient);
+    if (indexIngredient === -1) {
+      return [];
+    } else if (!orderImages.length || indexOrderImages === -1) {
+      const { image_mobile, _id, name } = ingredients[indexIngredient];
+      orderImages.push({ _id, name, image_mobile, quantityOneIngredient: 1 });
+    } else {
+      orderImages[indexOrderImages] = {
+        ...orderImages[indexOrderImages],
+        quantityOneIngredient: orderImages[indexOrderImages].quantityOneIngredient + 1
+      };
+    }
+  }
+  return orderImages;
 };

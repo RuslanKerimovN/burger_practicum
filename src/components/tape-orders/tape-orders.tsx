@@ -45,11 +45,8 @@ export const TapeOrders = ({ label, orders }: Partial<Props>) => {
                 className={`${styles.links}`}
               >
                 <TapeOrdersElement
-                  orderNumber={`#${el.number}`}
-                  orderDate={el.updatedAt}
-                  orderName={el.name}
-                  orderPrice={getPriceOneOrder(el.ingredients, ingredients)}
-                  // orderIngredients={[el]}
+                  order={el}
+                  price={getPriceOneOrder(el.ingredients, ingredients)}
                 />
               </Link>
             </div>

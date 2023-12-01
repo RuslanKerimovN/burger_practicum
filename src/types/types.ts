@@ -131,3 +131,18 @@ export interface IwsActionTypes {
   onError: ActionCreatorWithPayload<string>;
   onMessage: ActionCreatorWithPayload<ITapeOrders>;
 }
+
+export interface IOrderStructure {
+  _id: string;
+  image_mobile: string;
+  name: string;
+  quantityOneIngredient: number;
+  priceIngredient: number;
+}
+
+export type TOrderImages = {
+  _id: string;
+  name: string;
+  image_mobile: string;
+  quantityOneIngredient: number;
+}

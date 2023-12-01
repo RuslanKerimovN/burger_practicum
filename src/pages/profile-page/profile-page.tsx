@@ -22,13 +22,13 @@ export const ProfilePage = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const token = localStorage.getItem(REFRESH_TOKEN); 
-    if (token) setToken(token);
-        
-    if (!name && token) {
+    const tokenCheck = localStorage.getItem(REFRESH_TOKEN);
+    if (tokenCheck) setToken(tokenCheck);
+
+    if (!name && tokenCheck) {
       dispatch(getUser());
     }
-  }, [name]);
+  }, [name, dispatch]);
 
   const onLogoutClick = async () => {
     await dispatch(postLogout(token));
