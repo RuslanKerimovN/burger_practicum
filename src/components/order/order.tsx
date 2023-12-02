@@ -21,11 +21,11 @@ export const Order = () => {
   const orderInfo = useAppSelector(getStateOrderInfo);
   const isLoadingOrderInfo = useAppSelector(getStateLoadingOrderInfo);
   const isErrorOrderInfo = useAppSelector(getStateErrorOrderInfo);
-  const price: number = useMemo(() => {
-    return getPriceOneOrder(orderInfo.ingredients, allIngredients);
-  }, [orderInfo, allIngredients]);
-  const orderStructure: IOrderStructure[] = useMemo(() => {
-    return getOrderStucture(orderInfo.ingredients, allIngredients);
+  const validOrderInfo: {orderStructure: IOrderStructure[], price: number } = useMemo(() => {
+    return {
+      price: getPriceOneOrder(orderInfo.ingredients, allIngredients),
+      orderStructure: getOrderStucture(orderInfo.ingredients, allIngredients)
+    };
   }, [orderInfo, allIngredients]);
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export const Order = () => {
       <p className='text text_type_main-medium mb-6'>Состав:</p>
       <div className='mb-10' style={{ height: '300px', overflowY: 'auto' }}>
         {
-          orderStructure.map((el) => (
+          validOrderInfo.orderStructure.map((el) => (
             <div key={el._id} className={`${styles.structureContainer} pr-6 mb-4`}>
               <div className={`${styles.structureImgAndName} mr-4`}>
                 <div className={`${styles.circleImage} mr-4`}>
@@ -101,7 +101,9 @@ export const Order = () => {
         <p className='text text_type_main-default text_color_inactive'>
           <FormattedDate date={new Date(orderInfo.updatedAt)} />
         </p>
-        <p className={`${styles.price} text text_type_digits-default`}>{price}<CurrencyIcon type="primary" /></p>
+        <p className={`${styles.price} text text_type_digits-default`}>
+          {validOrderInfo.price}<CurrencyIcon type="primary" />
+        </p>
       </div>
     </div>
   );
