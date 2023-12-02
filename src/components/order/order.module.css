@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.number {
+    text-align: center;
+}
+
+.status {
+    color: rgb(0, 204, 204);
+}
+
+.dateAndPrice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+}
+
+.structureContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.structureImgAndName {
+  composes: price;
+  justify-content: start;
+}
+
+.structurePrice {
+  composes: price;
+  justify-content: end;
+}
+
+.circleImage{
+  display: inline-block;
+  border-radius: 50%;
+  border: 3px solid #681abb;
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+}
+.img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+}

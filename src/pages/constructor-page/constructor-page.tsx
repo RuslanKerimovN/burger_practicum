@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router';
-import { BurgerConstructor } from '../../components/burger-constructor/burger-constructor';
-import { BurgerIngredients } from '../../components/burger-ingredients/burger-ingredients';
+import { BurgerConstructor } from '../../compounds/burger-constructor/burger-constructor';
+import { BurgerIngredients } from '../../compounds/burger-ingredients/burger-ingredients';
 import appStyle from './constructor-page.module.css';
 
 export const ConstructorPage = () => {
@@ -9,14 +9,14 @@ export const ConstructorPage = () => {
 
   return (
     <>
-      <main className={`${appStyle.content}`}>
+      <div className={`${appStyle.content}`}>
         <div className={`${appStyle.ingredients}`}>
           <BurgerIngredients/>
         </div>
         <div className={`${appStyle.constructor}`}>
           <BurgerConstructor/>
         </div>
-      </main>
+      </div>
     </>
   );
 };

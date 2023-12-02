@@ -21,6 +21,7 @@ module.exports = {
     'object-shorthand': 'error',
     'quotes': ['error', 'single'],
     'arrow-parens': 'error',
-    'eol-last': 'error'
+    'eol-last': 'error',
+    'max-len': ["error", { "code": 120 }]
   },
 }

@@ -1,11 +1,15 @@
 import { memo, useEffect, useState } from 'react';
-import { Tabs } from '../tabs/tabs';
+import { Tabs } from '../../components/tabs/tabs.tsx';
 import ingredientsStyle from './burger-ingredients.module.css';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { getIngredients, getStateIngredients, getStateLoadingIngredients } from '../../services/slices/ingredientsSlice';
-import { IIngredientsArray } from '../../types/types';
-import { tabArray } from '../../helpers/helpers';
+import { useAppSelector } from '../../hooks/useAppSelector.tsx';
+import { useAppDispatch } from '../../hooks/useAppDispatch.tsx';
+import {
+  getIngredients,
+  getStateIngredients,
+  getStateLoadingIngredients
+} from '../../services/slices/ingredientsSlice.ts';
+import { IIngredientsArray } from '../../types/types.ts';
+import { getTabs } from '../../helpers/helpers.ts';
 
 export const BurgerIngredients = memo(() => {
   const dispatch = useAppDispatch();
@@ -20,10 +24,10 @@ export const BurgerIngredients = memo(() => {
   }, [dispatch, ingredients]);
 
   useEffect(() => {
-    const tmp = tabArray(ingredients);
+    const tmp = getTabs(ingredients);
     setIngredientsArray(tmp);
   }, [ingredients]);
-    
+
   return (
     <section className={`${ingredientsStyle.panel} mt-10 mr-5 ml-5`}>
       {ingredients.length ?

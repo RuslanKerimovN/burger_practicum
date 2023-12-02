@@ -1,0 +1,30 @@
+.panel {
+    width: 600px;
+    overflow-y: auto;
+}
+
+.orderNumbers {
+    display: grid;
+    grid-template-columns: 1fr 36px 1fr;
+}
+
+.section {
+  height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionContent {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.success {
+  color: rgb(0, 204, 204);
+  margin-right: 10px;
+}
+
+.shadow {
+  text-shadow: #681abb 0 0 10px;
+}

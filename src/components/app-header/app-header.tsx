@@ -2,7 +2,7 @@ import { BurgerIcon, ListIcon, ProfileIcon, Logo } from '@ya.praktikum/react-dev
 import styles from './app-header.module.css';
 import { HeaderItem } from '../header-item/header-item';
 import { NavLink, useLocation } from 'react-router-dom';
-import { HOME, PROFILE, PROFILE_TAPE } from '../../constants/path';
+import { HOME, PROFILE, FEED } from '../../constants/path';
 import { getIconType } from '../../helpers/helpers';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { getStateName } from '../../services/slices/userSlice';
@@ -24,7 +24,7 @@ export const AppHeader = () => {
             </HeaderItem>
           </NavLink>
           <NavLink
-            to={PROFILE_TAPE}
+            to={FEED}
             className={({ isActive }) =>  isActive ? `${styles.active}` : `${styles.notActive}`}
           >
             <HeaderItem text={'Лента заказов'}>

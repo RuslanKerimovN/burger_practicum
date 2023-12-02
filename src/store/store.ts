@@ -11,6 +11,11 @@ import loginSlice from '../services/slices/loginSlice';
 import logoutSlice from '../services/slices/logoutSlice';
 import updateTokenSlice from '../services/slices/updateTokenSlice';
 import userSlice from '../services/slices/userSlice';
+import {  socketMiddleware } from '../services/middleware/socket-middleware.ts';
+import  feedSlice  from '../services/slices/feedSlice.ts';
+import { wsActionsFeed, wsActionsHistoryOrders } from '../services/actions/web-socket-actions.ts';
+import historyOrdersSlice from '../services/slices/historyOrdersSlice.ts';
+import orderInfoSlice from '../services/slices/orderInfoSlice.ts';
 
 export const rootReducer = combineReducers({
   constructorSlice,
@@ -23,12 +28,19 @@ export const rootReducer = combineReducers({
   loginSlice,
   logoutSlice,
   updateTokenSlice,
-  userSlice
+  userSlice,
+  feedSlice,
+  historyOrdersSlice,
+  orderInfoSlice
 });
+
+const feedMiddleware = socketMiddleware(wsActionsFeed);
+const historyOrdersMiddleware  = socketMiddleware(wsActionsHistoryOrders);
 
 export const setupStore = () => {
   return configureStore({
-    reducer: rootReducer
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(feedMiddleware, historyOrdersMiddleware)
   });
 };
 

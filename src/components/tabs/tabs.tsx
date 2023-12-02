@@ -70,7 +70,12 @@ export const Tabs = ({ ingredients }: Props) => {
                       key={el['_id']}
                       className={`${(index % 2 === 0) ? 'mr-6' : ''} ${tabsStyle.card}`}
                     >
-                      <Link key={el._id} to={`/ingredients/${el._id}`} state={{ backgroundLocation: location }} className={`${tabsStyle.links}`}>
+                      <Link
+                        key={el._id}
+                        to={`/ingredients/${el._id}`}
+                        state={{ backgroundLocation: location }}
+                        className={`${tabsStyle.links}`}
+                      >
                         <IngredientCard ingredient={el} />
                       </Link>
                     </div>
