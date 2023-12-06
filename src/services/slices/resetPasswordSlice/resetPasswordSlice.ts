@@ -1,8 +1,7 @@
-import { IResetPasswordRequest, IResetPasswordStatus } from '../../types/types';
-import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
-import { postPasswordResetServices } from '../api/services';
-import { RootState } from '../../store/store';
-import { baseResetResponse } from '../../types/baseObjects';
+import { IResetPasswordRequest, IResetPasswordStatus } from '../../../types/types.ts';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { postPasswordResetServices } from '../../api/services.ts';
+import { baseResetResponse } from '../../../types/baseObjects.ts';
 
 export interface IResetPassword {
     resetPassword: IResetPasswordStatus;
@@ -51,22 +50,4 @@ const resetPasswordSlice = createSlice({
   }
 });
 
-// export const {
-// } = ingredientsSlice.actions;
 export default resetPasswordSlice.reducer;
-
-const resetPassword = (state: RootState) => state.resetPasswordSlice.resetPassword;
-const isLoadingResetPassword = (state: RootState) => state.resetPasswordSlice.isLoadingResetPassword;
-const isErrorResetPassword = (state: RootState) => state.resetPasswordSlice.isErrorResetPassword;
-
-export const getStateResetPassword = createSelector(
-  [resetPassword], (resetPassword) => resetPassword
-);
-
-export const getStateResetPasswordLoading = createSelector(
-  [isLoadingResetPassword], (isLoadingResetPassword) => isLoadingResetPassword
-);
-
-export const getStateResetPasswordError = createSelector(
-  [isErrorResetPassword], (isErrorResetPassword) => isErrorResetPassword
-);

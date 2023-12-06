@@ -3,16 +3,17 @@ import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burge
 import { useAppDispatch } from '../../hooks/useAppDispatch.tsx';
 import { useParams } from 'react-router';
 import { useEffect, useMemo } from 'react';
+import { getOrderInfo } from '../../services/slices/orderInfoSlice/orderInfoSlice.ts';
+import { useAppSelector } from '../../hooks/useAppSelector.tsx';
+import { getIngredients } from '../../services/slices/ingredientsSlice/ingredientsSlice.ts';
+import { getOrderStucture, getPriceOneOrder, getStatus } from '../../helpers/helpers.ts';
+import { IOrderStructure } from '../../types/types.ts';
+import { getStateIngredients } from '../../services/slices/ingredientsSlice/ingredientsSelector.ts';
 import {
-  getOrderInfo,
   getStateErrorOrderInfo,
   getStateLoadingOrderInfo,
   getStateOrderInfo
-} from '../../services/slices/orderInfoSlice.ts';
-import { useAppSelector } from '../../hooks/useAppSelector.tsx';
-import { getIngredients, getStateIngredients } from '../../services/slices/ingredientsSlice.ts';
-import { getOrderStucture, getPriceOneOrder, getStatus } from '../../helpers/helpers.ts';
-import { IOrderStructure } from '../../types/types.ts';
+} from '../../services/slices/orderInfoSlice/orderInfoSelector.ts';
 
 export const Order = () => {
   const dispatch = useAppDispatch();

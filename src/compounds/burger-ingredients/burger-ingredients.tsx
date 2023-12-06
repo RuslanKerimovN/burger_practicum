@@ -3,13 +3,13 @@ import { Tabs } from '../../components/tabs/tabs.tsx';
 import ingredientsStyle from './burger-ingredients.module.css';
 import { useAppSelector } from '../../hooks/useAppSelector.tsx';
 import { useAppDispatch } from '../../hooks/useAppDispatch.tsx';
-import {
-  getIngredients,
-  getStateIngredients,
-  getStateLoadingIngredients
-} from '../../services/slices/ingredientsSlice.ts';
+import { getIngredients } from '../../services/slices/ingredientsSlice/ingredientsSlice.ts';
 import { IIngredientsArray } from '../../types/types.ts';
 import { getTabs } from '../../helpers/helpers.ts';
+import {
+  getStateIngredients,
+  getStateLoadingIngredients
+} from '../../services/slices/ingredientsSlice/ingredientsSelector.ts';
 
 export const BurgerIngredients = memo(() => {
   const dispatch = useAppDispatch();

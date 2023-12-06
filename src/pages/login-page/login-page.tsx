@@ -3,7 +3,7 @@ import styles from './login-page.module.css';
 import { Link, Navigate } from 'react-router-dom';
 import { HEIGHT_WITHOUT_HEADER } from '../../constants/constants';
 import { FORGOT_PASSWORD, HOME, REGISTER } from '../../constants/path';
-import { getStateErrorLogin, getStateLoadingLogin, getStateLogin, postLogin } from '../../services/slices/loginSlice';
+import { postLogin } from '../../services/slices/loginSlice/loginSlice.ts';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useInput } from '../../hooks/useInput';
 import { FormEvent, useEffect } from 'react';
@@ -11,6 +11,11 @@ import { useModal } from '../../hooks/useModal';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { Status } from '../../components/status/status';
 import { ModalStatus } from '../../components/modal-status/modal-status';
+import {
+  getStateErrorLogin,
+  getStateLoadingLogin,
+  getStateLogin
+} from '../../services/slices/loginSlice/loginSelector.ts';
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
@@ -35,7 +40,7 @@ export const LoginPage = () => {
 
   return (
     <>
-      {(isLoginLoading) 
+      {(isLoginLoading)
         ?   <Status status='Проверка данных...'/>
         :   (!login.success) ?
           <div

@@ -2,17 +2,23 @@ import styles from './change-profile.module.css';
 import { HEIGHT_WITHOUT_HEADER } from '../../constants/constants.ts';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import {
-  getStateIsChangeData, getStateName,
-  getStateUserEmail,
-  getStateUserName,
-  getStateUserPassword,
   patchUser,
-  resetChanges, setUserEmail, setUserName, setUserPassword
-} from '../../services/slices/userSlice.ts';
+  resetChanges,
+  setUserEmail,
+  setUserName,
+  setUserPassword
+} from '../../services/slices/userSlice/userSlice.ts';
 import { useAppDispatch } from '../../hooks/useAppDispatch.tsx';
 import { useAppSelector } from '../../hooks/useAppSelector.tsx';
 import { ChangeEvent, useEffect } from 'react';
-import { setLoginName } from '../../services/slices/loginSlice.ts';
+import { setLoginName } from '../../services/slices/loginSlice/loginSlice.ts';
+import {
+  getStateIsChangeData,
+  getStateName,
+  getStateUserEmail,
+  getStateUserName,
+  getStateUserPassword
+} from '../../services/slices/userSlice/userSelector.ts';
 
 export const ChangeProfile = () => {
   const dispatch = useAppDispatch();

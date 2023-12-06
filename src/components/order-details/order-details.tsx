@@ -1,9 +1,14 @@
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { SvgOrder } from '../../images/svg-order';
-import { getStateErrorOrder, getStateLoadingOrder, getStateOrder, postOrder } from '../../services/slices/orderSlice';
+import { postOrder } from '../../services/slices/orderSlice/orderSlice.ts';
 import detailsStyle from './order-details.module.css';
 import { useEffect } from 'react';
+import {
+  getStateErrorOrder,
+  getStateLoadingOrder,
+  getStateOrder
+} from '../../services/slices/orderSlice/orderSelector.ts';
 
 interface Props {
     ids: string[];

@@ -4,8 +4,9 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useEffect } from 'react';
 import { findRoute } from '../../helpers/helpers';
 import { useLocation } from 'react-router';
-import { getStateUser, getUser } from '../../services/slices/userSlice';
+import { getUser } from '../../services/slices/userSlice/userSlice.ts';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { getStateUser } from '../../services/slices/userSlice/userSelector.ts';
 
 export const App = () => {
   const dispatch = useAppDispatch();

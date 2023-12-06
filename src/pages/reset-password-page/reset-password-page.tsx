@@ -5,17 +5,17 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { FORGOT_PASSWORD, LOGIN } from '../../constants/path';
 import { useInput } from '../../hooks/useInput';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import {
-  getStateResetPassword,
-  getStateResetPasswordError,
-  getStateResetPasswordLoading,
-  postResetPassword
-} from '../../services/slices/resetPasswordSlice';
+import { postResetPassword } from '../../services/slices/resetPasswordSlice/resetPasswordSlice.ts';
 import { FormEvent, useEffect } from 'react';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useModal } from '../../hooks/useModal';
 import { ModalStatus } from '../../components/modal-status/modal-status';
 import { Status } from '../../components/status/status';
+import {
+  getStateResetPassword,
+  getStateResetPasswordError,
+  getStateResetPasswordLoading
+} from '../../services/slices/resetPasswordSlice/resetPasswordSelector.ts';
 
 export const ResetPasswordPage = () => {
   const dispatch = useAppDispatch();

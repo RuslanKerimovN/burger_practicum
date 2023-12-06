@@ -8,11 +8,11 @@ import { useAppSelector } from '../../hooks/useAppSelector.tsx';
 import { useDrop } from 'react-dnd';
 import { Constructor } from '../../components/constructor/constructor.tsx';
 import { IBurgerIngredients } from '../../types/types.ts';
-import { getStateConstructor } from '../../services/slices/constructorSlice.ts';
 import { ACCESS_TOKEN, CONSTRUCTOR_HEIGHT, REFRESH_TOKEN } from '../../constants/constants.ts';
 import { getCookie } from '../../helpers/helpers.ts';
 import { useNavigate } from 'react-router';
 import { LOGIN } from '../../constants/path.ts';
+import { getStateConstructor } from '../../services/slices/constructorSlice/constructorSelector.ts';
 
 export const BurgerConstructor = () => {
   const { isModalOpen, openModal, closeModal } = useModal();
@@ -45,7 +45,7 @@ export const BurgerConstructor = () => {
   useEffect(() => {
     let price: number = 0;
     let ids: string[] = [];
-    const bunTmp = constructor.find((el: IBurgerIngredients) => el.type === 'bun'); 
+    const bunTmp = constructor.find((el: IBurgerIngredients) => el.type === 'bun');
     for (let i = 0; i < constructor.length; i++) {
       price += constructor[i].price;
       ids = [...ids, constructor[i]._id];
@@ -92,7 +92,7 @@ export const BurgerConstructor = () => {
         </Button>
 
         {
-          isModalOpen && 
+          isModalOpen &&
             <Modal closeModal={closeModal} >
               <OrderDetails ids={requestParams}/>
             </Modal>

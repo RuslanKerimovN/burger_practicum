@@ -1,7 +1,6 @@
-import { IBurgerIngredients } from '../../types/types';
-import { baseIngredient } from '../../types/baseObjects';
-import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../store/store';
+import { IBurgerIngredients } from '../../../types/types.ts';
+import { baseIngredient } from '../../../types/baseObjects.ts';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface IShowIngredient {
     watchIngredient: IBurgerIngredients,
@@ -28,10 +27,5 @@ export const {
   saveWatchIngredient,
   deleteWatchIngredient
 } = showIngredientSlice.actions;
+
 export default showIngredientSlice.reducer;
-
-const watchIngredient = (state: RootState) => state.showIngredientSlice.watchIngredient;
-
-export const getStateWatchIngredient = createSelector(
-  [watchIngredient], (watchIngredient) => watchIngredient
-);

@@ -1,8 +1,7 @@
-import { IOrders } from '../../types/types';
-import { createAsyncThunk, createSelector, createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { getOrderInfoService } from '../api/services.ts';
-import { RootState } from '../../store/store';
-import { baseOrderInfo } from '../../types/baseObjects.ts';
+import { IOrders } from '../../../types/types.ts';
+import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { getOrderInfoService } from '../../api/services.ts';
+import { baseOrderInfo } from '../../../types/baseObjects.ts';
 
 export interface IOrderInfo {
   orderInfo: IOrders;
@@ -52,19 +51,3 @@ const orderInfoSlice = createSlice({
 });
 
 export default orderInfoSlice.reducer;
-
-const orderInfo = (state: RootState) => state.orderInfoSlice.orderInfo;
-const isLoadingOrderInfo = (state: RootState) => state.orderInfoSlice.isLoadingOrderInfo;
-const isErrorOrderInfo = (state: RootState) => state.orderInfoSlice.isErrorOrderInfo;
-
-export const getStateOrderInfo = createSelector(
-  [orderInfo], (orderInfo) => orderInfo
-);
-
-export const getStateLoadingOrderInfo = createSelector(
-  [isLoadingOrderInfo], (isLoadingOrderInfo) => isLoadingOrderInfo
-);
-
-export const getStateErrorOrderInfo = createSelector(
-  [isErrorOrderInfo], (isErrorOrderInfo) => isErrorOrderInfo
-);

@@ -4,8 +4,8 @@ import { IOrders, TOrderImages } from '../../types/types.ts';
 import { baseOrderInfo } from '../../types/baseObjects.ts';
 import { getOrderImages } from '../../helpers/helpers.ts';
 import { useAppSelector } from '../../hooks/useAppSelector.tsx';
-import { getStateIngredients } from '../../services/slices/ingredientsSlice.ts';
 import { useMemo } from 'react';
+import { getStateIngredients } from '../../services/slices/ingredientsSlice/ingredientsSelector.ts';
 
 interface Props {
   order: IOrders;

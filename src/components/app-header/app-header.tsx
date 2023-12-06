@@ -5,7 +5,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { HOME, PROFILE, FEED } from '../../constants/path';
 import { getIconType } from '../../helpers/helpers';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { getStateName } from '../../services/slices/userSlice';
+import { getStateName } from '../../services/slices/userSlice/userSelector.ts';
 
 export const AppHeader = () => {
   const { pathname } = useLocation();

@@ -3,10 +3,11 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { IBurgerIngredients } from '../../types/types';
 import detailsStyle from './ingredient-details.module.css';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { getIngredients, getStateIngredients } from '../../services/slices/ingredientsSlice';
+import { getIngredients } from '../../services/slices/ingredientsSlice/ingredientsSlice.ts';
 import { useParams } from 'react-router';
 import { baseIngredient } from '../../types/baseObjects';
 import { IngredientInfo } from '../ingredient-info/ingredient-info.tsx';
+import { getStateIngredients } from '../../services/slices/ingredientsSlice/ingredientsSelector.ts';
 
 export const IngredientDetails = () => {
   const dispatch = useAppDispatch();

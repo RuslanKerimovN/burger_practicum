@@ -2,11 +2,12 @@ import { useCallback, useEffect, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { getStateConstructor, moveIngredientInConstructor } from '../../services/slices/constructorSlice';
+import { moveIngredientInConstructor } from '../../services/slices/constructorSlice/constructorSlice.ts';
 import { IBurgerIngredients } from '../../types/types';
 import update from 'immutability-helper';
 import { BurgerElement } from '../burger-element/burger-element';
 import { CONSTRUCTOR_INGREDIENTS_ARRAY } from '../../constants/constants';
+import { getStateConstructor } from '../../services/slices/constructorSlice/constructorSelector.ts';
 
 export const Constructor = () => {
   const dispatch = useAppDispatch();
