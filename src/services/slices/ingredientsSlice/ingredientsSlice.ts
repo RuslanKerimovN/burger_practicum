@@ -1,5 +1,5 @@
 import { IBurgerIngredients } from '../../../types/types.ts';
-import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getIngredientsServices } from '../../api/services.ts';
 
 export interface IIngredients {
@@ -40,11 +40,11 @@ const ingredientsSlice = createSlice({
         state.isLoadingIngredients = false;
         state.isErrorIngredients = false;
       })
-      .addMatcher(isAnyOf(getIngredients.pending), (state) => {
+      .addCase(getIngredients.pending, (state) => {
         state.isLoadingIngredients = true;
         state.isErrorIngredients = false;
       })
-      .addMatcher(isAnyOf(getIngredients.rejected), (state) => {
+      .addCase(getIngredients.rejected, (state) => {
         state.isLoadingIngredients = false;
         state.isErrorIngredients = true;
       });

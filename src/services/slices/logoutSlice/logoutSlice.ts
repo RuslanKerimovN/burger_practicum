@@ -3,7 +3,7 @@ import { baseLogout } from '../../../types/baseObjects.ts';
 import { ILogoutResponse } from '../../../types/types.ts';
 import { postLogoutService } from '../../api/services.ts';
 
-interface ILogout {
+export interface ILogout {
     logout: ILogoutResponse;
     isLogoutLoading: boolean;
     isLogoutError: boolean;

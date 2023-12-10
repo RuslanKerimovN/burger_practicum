@@ -5,7 +5,7 @@ import { getUserService, patchUserService, postUpdateTokenService } from '../../
 import { getCookie, setCookie } from '../../../helpers/helpers.ts';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../../constants/constants.ts';
 
-interface IUserInfo {
+export interface IUserInfo {
     user: IUserResponse;
     userEmail: string;
     userName: string;
@@ -188,11 +188,11 @@ const userSlice = createSlice({
       })
       .addCase(patchUser.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.userEmail = action.payload.user.email;
-        state.userName = action.payload.user.name;
         state.name = action.payload.user.name;
         state.email = action.payload.user.email;
         state.userPassword = '';
+        state.userEmail = action.payload.user.email;
+        state.userName = action.payload.user.name;
         state.isPatchLoadingUser = false;
         state.isPatchErrorUser = false;
       })

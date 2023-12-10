@@ -5,7 +5,7 @@ import { postRegisterService } from '../../api/services.ts';
 import { setCookie } from '../../../helpers/helpers.ts';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../../constants/constants.ts';
 
-interface IRegister {
+export interface IRegister {
     registerData: IRegisterResponse;
     isRegisterLoading: boolean;
     isRegisterError: boolean;

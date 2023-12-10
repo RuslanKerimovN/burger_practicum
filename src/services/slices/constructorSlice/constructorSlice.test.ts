@@ -7,17 +7,15 @@ import constructorSlice, {
 import { describe, expect, it } from 'vitest';
 import { baseIngredient } from '../../../types/baseObjects.ts';
 
-describe('Тестирование constructorSlice', () => {
-  it('constructorSlice начальное значение', () => {
-    const initialState: IConstructor = { constructor: [] };
+describe('Testing constructorSlice', () => {
+  const initialState: IConstructor = { constructor: [] };
 
+  it('constructorSlice initialState', () => {
     const result = constructorSlice(undefined, { type: '' });
     expect(result).toEqual(initialState);
   });
 
   it('addIngredientInConstructor', () => {
-    const initialState: IConstructor = { constructor: [] };
-
     const action = {
       type: addIngredientInConstructor.type,
       payload: { ingredient: baseIngredient, uniqId: '1' }

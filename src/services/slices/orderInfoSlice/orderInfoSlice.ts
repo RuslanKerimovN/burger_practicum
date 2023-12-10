@@ -1,5 +1,5 @@
 import { IOrders } from '../../../types/types.ts';
-import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getOrderInfoService } from '../../api/services.ts';
 import { baseOrderInfo } from '../../../types/baseObjects.ts';
 
@@ -39,11 +39,11 @@ const orderInfoSlice = createSlice({
         state.isLoadingOrderInfo = false;
         state.isErrorOrderInfo = false;
       })
-      .addMatcher(isAnyOf(getOrderInfo.pending), (state) => {
+      .addCase(getOrderInfo.pending, (state) => {
         state.isLoadingOrderInfo = true;
         state.isErrorOrderInfo = false;
       })
-      .addMatcher(isAnyOf(getOrderInfo.rejected), (state) => {
+      .addCase(getOrderInfo.rejected, (state) => {
         state.isLoadingOrderInfo = false;
         state.isErrorOrderInfo = true;
       });

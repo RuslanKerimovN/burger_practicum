@@ -16,7 +16,7 @@ const initialState: IResetPassword = {
 };
 
 export const postResetPassword = createAsyncThunk<IResetPasswordStatus, IResetPasswordRequest>(
-  'postResetEmail',
+  'postResetPassword',
   async (params, { rejectWithValue }) => {
     const response = await postPasswordResetServices(params);
 
