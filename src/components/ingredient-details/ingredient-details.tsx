@@ -31,7 +31,7 @@ export const IngredientDetails = () => {
     <div className={`${detailsStyle.card}`}>
       <img alt={name} src={image_large} className='mb-4'/>
       <div>
-        <p className={` ${detailsStyle.header} text text_type_main-medium mb-8`} >
+        <p data-testId='ingredient_info' className={` ${detailsStyle.header} text text_type_main-medium mb-8`} >
           {name}
         </p>
       </div>

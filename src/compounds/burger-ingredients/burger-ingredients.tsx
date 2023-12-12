@@ -7,6 +7,7 @@ import { getIngredients } from '../../services/slices/ingredientsSlice/ingredien
 import { IIngredientsArray } from '../../types/types.ts';
 import { getTabs } from '../../helpers/helpers.ts';
 import {
+  getStateErrorIngredients,
   getStateIngredients,
   getStateLoadingIngredients
 } from '../../services/slices/ingredientsSlice/ingredientsSelector.ts';
@@ -15,6 +16,7 @@ export const BurgerIngredients = memo(() => {
   const dispatch = useAppDispatch();
   const ingredients = useAppSelector(getStateIngredients);
   const isLoadingIngredients = useAppSelector(getStateLoadingIngredients);
+  const isErrorIngredients = useAppSelector(getStateErrorIngredients);
   const [ingredientsArray, setIngredientsArray] = useState<IIngredientsArray[]>([]);
 
   useEffect(() => {
@@ -28,22 +30,32 @@ export const BurgerIngredients = memo(() => {
     setIngredientsArray(tmp);
   }, [ingredients]);
 
+  if (!ingredients.length && isLoadingIngredients) {
+    return (
+      <section className={`${ingredientsStyle.panel} mt-10 mr-5 ml-5`}>
+        <h1 className={`${ingredientsStyle.attention}`}>Загрузка...</h1>
+      </section>
+    );
+  }
+
+  if (isErrorIngredients) {
+    return (
+      <section className={`${ingredientsStyle.panel} mt-10 mr-5 ml-5`}>
+        <h1 className={`${ingredientsStyle.attention}`}>
+          Ошибка загрузки ингредиентов, перезагрузите страницу!
+        </h1>
+      </section>
+    );
+  }
+
   return (
     <section className={`${ingredientsStyle.panel} mt-10 mr-5 ml-5`}>
-      {ingredients.length ?
-        <>
-          <p className="text text_type_main-large mb-5">
+      <>
+        <p className="text text_type_main-large mb-5">
             Соберите бургер
-          </p>
-          <Tabs ingredients={ingredientsArray}/>
-        </>
-        : (!ingredients.length && isLoadingIngredients)
-          ? <h1 className={`${ingredientsStyle.attention}`}>Загрузка...</h1>
-          :
-          <h1 className={`${ingredientsStyle.attention}`}>
-            Ошибка загрузки ингредиентов, перезагрузите страницу!
-          </h1>
-      }
+        </p>
+        <Tabs ingredients={ingredientsArray}/>
+      </>
     </section>
   );
 });

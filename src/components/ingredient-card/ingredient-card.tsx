@@ -48,7 +48,12 @@ export const IngredientCard = ({ ingredient }: Props) => {
 
   return (
     <>
-      <div ref={drag} className={`${ingredientCardStyle.card} pb-8`} onClick={onOpenClick}>
+      <div
+        data-testId={`drag_${ingredient._id}`}
+        ref={drag}
+        className={`${ingredientCardStyle.card} pb-8`}
+        onClick={onOpenClick}
+      >
         <Counter count={count} size="default"/>
 
         <img alt={ingredient.name} src={ingredient.image_large} className='pl-4 pr-4 mb-1' width={'220px'} />

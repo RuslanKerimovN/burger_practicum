@@ -38,40 +38,43 @@ export const LoginPage = () => {
     }
   }, [isLoginError]);
 
+  if (isLoginLoading) {
+    return <Status status='Проверка данных...'/>;
+  }
+
+  if (login.success) {
+    return <Navigate to={localStorage.getItem('noLogin') || HOME} />;
+  }
+
   return (
     <>
-      {(isLoginLoading)
-        ?   <Status status='Проверка данных...'/>
-        :   (!login.success) ?
-          <div
-            className={`${styles.login}`}
-            style={{ height: HEIGHT_WITHOUT_HEADER }}
-          >
-            <p className='text text_type_main-medium mb-6'>
-              Вход
-            </p>
-            <form onSubmit={onSubmitClick} className={`${styles.login}`}>
-              <div className='mb-6'>
-                <Input placeholder='E-mail' value={email} onChange={setEmail}/>
-              </div>
-              <div className='mb-6'>
-                <PasswordInput placeholder='Пароль' value={password} onChange={setPassword}/>
-              </div>
-              <div className='mb-20'>
-                <Button htmlType="submit" type="primary" size="medium">
-                  Войти
-                </Button>
-              </div>
-            </form>
-            <p className='text text_type_main-default text_color_inactive mb-4'>
-              Вы - новый пользователь? <Link to={REGISTER} className={`${styles.text}`}>Зарегистрироваться</Link>
-            </p>
-            <p className="text text_type_main-default text_color_inactive">
-              Забыли пароль? <Link to={FORGOT_PASSWORD} className={`${styles.text}`}>Восстановить пароль</Link>
-            </p>
+      <div
+        className={`${styles.login}`}
+        style={{ height: HEIGHT_WITHOUT_HEADER }}
+      >
+        <p className='text text_type_main-medium mb-6'>
+          Вход
+        </p>
+        <form onSubmit={onSubmitClick} className={`${styles.login}`}>
+          <div className='mb-6'>
+            <Input placeholder='E-mail' value={email} onChange={setEmail} data-testId='input_email'/>
           </div>
-          :   <Navigate to={localStorage.getItem('noLogin') || HOME} />
-      }
+          <div className='mb-6'>
+            <PasswordInput placeholder='Пароль' value={password} onChange={setPassword} data-testId='input_password'/>
+          </div>
+          <div className='mb-20'>
+            <Button htmlType="submit" type="primary" size="medium" data-testId='login_enter'>
+              Войти
+            </Button>
+          </div>
+        </form>
+        <p className='text text_type_main-default text_color_inactive mb-4'>
+          Вы - новый пользователь? <Link to={REGISTER} className={`${styles.text}`}>Зарегистрироваться</Link>
+        </p>
+        <p className="text text_type_main-default text_color_inactive">
+          Забыли пароль? <Link to={FORGOT_PASSWORD} className={`${styles.text}`}>Восстановить пароль</Link>
+        </p>
+      </div>
       {isModalOpen &&
         <ModalStatus
           header='Неверный логин или пароль'

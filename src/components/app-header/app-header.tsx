@@ -39,7 +39,7 @@ export const AppHeader = () => {
           to={PROFILE}
           className={({ isActive }) =>  isActive ? `${styles.active}` : `${styles.notActive}`}
         >
-          <div className={`${styles.items}`}>
+          <div data-testId='header_name' className={`${styles.items}`}>
             <HeaderItem text={name || 'Личный кабинет'}>
               <ProfileIcon type={getIconType(pathname, 'profile')}/>
             </HeaderItem>

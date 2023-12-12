@@ -32,7 +32,7 @@ export const Tabs = ({ ingredients }: Props) => {
   });
 
   const refs = [bunRef, mainRef, saucesRef];
-    
+
   useEffect(() => {
     if (bunIsView) {
       setCurrent('bun');
@@ -67,6 +67,7 @@ export const Tabs = ({ ingredients }: Props) => {
                 {
                   el.body.map((el, index) => (
                     <div
+                      data-testId={`${el._id}`}
                       key={el['_id']}
                       className={`${(index % 2 === 0) ? 'mr-6' : ''} ${tabsStyle.card}`}
                     >

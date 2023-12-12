@@ -57,7 +57,12 @@ export const BurgerConstructor = () => {
   }, [constructor]);
 
   return (
-    <div ref={drop} className='mt-25 pl-4 pr-4' style={{ maxHeight: `${CONSTRUCTOR_HEIGHT}px` }}>
+    <div
+      data-testId='drop_zone'
+      ref={drop}
+      className='mt-25 pl-4 pr-4'
+      style={{ maxHeight: `${CONSTRUCTOR_HEIGHT}px` }}
+    >
       <>
         <div className="pl-6 mb-1">
           <ConstructorElement
@@ -87,7 +92,13 @@ export const BurgerConstructor = () => {
           {renderPrice}<CurrencyIcon type="primary" />
         </p>
 
-        <Button htmlType="button" type="primary" size="medium"  onClick={onPressButton} disabled={!bun}>
+        <Button
+          data-testId='make_order'
+          htmlType="button"
+          type="primary"
+          size="medium"
+          onClick={onPressButton} disabled={!bun}
+        >
           Оформить заказ
         </Button>
 

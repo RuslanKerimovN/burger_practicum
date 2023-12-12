@@ -47,7 +47,7 @@ export const Modal = ({ closeModal = () => {}, children=<></> }: Props) => {
               {header ? 'Детали ингредиента' : ''}
             </p>
           </div>
-          <div className={`${modalStyle.exit}`}>
+          <div data-testId='icon_close' className={`${modalStyle.exit}`}>
             <CloseIcon type="primary" onClick={() => {onDismiss();}}/>
           </div>
         </div>
