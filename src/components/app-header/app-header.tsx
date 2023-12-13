@@ -5,7 +5,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { HOME, PROFILE, FEED } from '../../constants/path';
 import { getIconType } from '../../helpers/helpers';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { getStateName } from '../../services/slices/userSlice';
+import { getStateName } from '../../services/slices/userSlice/userSelector.ts';
 
 export const AppHeader = () => {
   const { pathname } = useLocation();
@@ -39,7 +39,7 @@ export const AppHeader = () => {
           to={PROFILE}
           className={({ isActive }) =>  isActive ? `${styles.active}` : `${styles.notActive}`}
         >
-          <div className={`${styles.items}`}>
+          <div data-testId='header_name' className={`${styles.items}`}>
             <HeaderItem text={name || 'Личный кабинет'}>
               <ProfileIcon type={getIconType(pathname, 'profile')}/>
             </HeaderItem>

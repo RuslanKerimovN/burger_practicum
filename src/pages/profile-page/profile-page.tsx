@@ -4,15 +4,12 @@ import {  useState, useEffect } from 'react';
 import { NavLink, useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { LOGIN, PROFILE, PROFILE_ORDERS } from '../../constants/path';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { postLogout } from '../../services/slices/logoutSlice';
+import { postLogout } from '../../services/slices/logoutSlice/logoutSlice.ts';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import {
-  deleteUser,
-  getStateName,
-  getUser
-} from '../../services/slices/userSlice';
+import { deleteUser, getUser } from '../../services/slices/userSlice/userSlice.ts';
 import { deleteCookie } from '../../helpers/helpers';
-import { clearLogin } from '../../services/slices/loginSlice';
+import { clearLogin } from '../../services/slices/loginSlice/loginSlice.ts';
+import { getStateName } from '../../services/slices/userSlice/userSelector.ts';
 
 export const ProfilePage = () => {
   const dispatch = useAppDispatch();

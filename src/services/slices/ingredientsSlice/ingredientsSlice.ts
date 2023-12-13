@@ -1,7 +1,6 @@
-import { IBurgerIngredients } from '../../types/types';
-import { createAsyncThunk, createSelector, createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { getIngredientsServices } from '../api/services.ts';
-import { RootState } from '../../store/store';
+import { IBurgerIngredients } from '../../../types/types.ts';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getIngredientsServices } from '../../api/services.ts';
 
 export interface IIngredients {
     ingredients: IBurgerIngredients[];
@@ -41,33 +40,15 @@ const ingredientsSlice = createSlice({
         state.isLoadingIngredients = false;
         state.isErrorIngredients = false;
       })
-      .addMatcher(isAnyOf(getIngredients.pending), (state) => {
+      .addCase(getIngredients.pending, (state) => {
         state.isLoadingIngredients = true;
         state.isErrorIngredients = false;
       })
-      .addMatcher(isAnyOf(getIngredients.rejected), (state) => {
+      .addCase(getIngredients.rejected, (state) => {
         state.isLoadingIngredients = false;
         state.isErrorIngredients = true;
       });
   }
 });
 
-// export const {
-// } = ingredientsSlice.actions;
 export default ingredientsSlice.reducer;
-
-const ingredients = (state: RootState) => state.ingredientsSlice.ingredients;
-const isLoadingIngredients = (state: RootState) => state.ingredientsSlice.isLoadingIngredients;
-const isErrorIngredients = (state: RootState) => state.ingredientsSlice.isErrorIngredients;
-
-export const getStateIngredients = createSelector(
-  [ingredients], (ingredients) => ingredients
-);
-
-export const getStateLoadingIngredients = createSelector(
-  [isLoadingIngredients], (isLoadingIngredients) => isLoadingIngredients
-);
-
-export const getStateErrorIngredients = createSelector(
-  [isErrorIngredients], (isErrorIngredients) => isErrorIngredients
-);

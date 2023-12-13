@@ -3,10 +3,11 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { IBurgerIngredients } from '../../types/types';
 import detailsStyle from './ingredient-details.module.css';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { getIngredients, getStateIngredients } from '../../services/slices/ingredientsSlice';
+import { getIngredients } from '../../services/slices/ingredientsSlice/ingredientsSlice.ts';
 import { useParams } from 'react-router';
 import { baseIngredient } from '../../types/baseObjects';
 import { IngredientInfo } from '../ingredient-info/ingredient-info.tsx';
+import { getStateIngredients } from '../../services/slices/ingredientsSlice/ingredientsSelector.ts';
 
 export const IngredientDetails = () => {
   const dispatch = useAppDispatch();
@@ -30,7 +31,7 @@ export const IngredientDetails = () => {
     <div className={`${detailsStyle.card}`}>
       <img alt={name} src={image_large} className='mb-4'/>
       <div>
-        <p className={` ${detailsStyle.header} text text_type_main-medium mb-8`} >
+        <p data-testId='ingredient_info' className={` ${detailsStyle.header} text text_type_main-medium mb-8`} >
           {name}
         </p>
       </div>

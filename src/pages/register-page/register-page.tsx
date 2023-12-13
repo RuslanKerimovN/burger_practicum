@@ -6,16 +6,16 @@ import { Link, Navigate } from 'react-router-dom';
 import { HOME, LOGIN } from '../../constants/path';
 import { useInput } from '../../hooks/useInput';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import {
-  getStateErrorRegisterData,
-  getStateLoadingRegisterData,
-  getStateRegisterData,
-  postRegister
-} from '../../services/slices/registerSlice';
+import { postRegister } from '../../services/slices/registerSlice/registerSlice.ts';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { Status } from '../../components/status/status';
 import { useModal } from '../../hooks/useModal';
 import { ModalStatus } from '../../components/modal-status/modal-status';
+import {
+  getStateErrorRegisterData,
+  getStateLoadingRegisterData,
+  getStateRegisterData
+} from '../../services/slices/registerSlice/registerSelector.ts';
 
 export const RegisterPage = () => {
   const dispatch = useAppDispatch();
@@ -26,7 +26,7 @@ export const RegisterPage = () => {
   const isRegisterLoading = useAppSelector(getStateLoadingRegisterData);
   const isRegisterError = useAppSelector(getStateErrorRegisterData);
   const { isModalOpen, closeModal, openModal } = useModal();
-    
+
   const onSubmitClick = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     dispatch(postRegister({ email, password, name }));

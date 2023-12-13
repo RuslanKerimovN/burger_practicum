@@ -2,7 +2,7 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import elementStyle from './burger-element.module.css';
 import { IBurgerIngredients } from '../../types/types';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { deleteIngredientFromConstructor } from '../../services/slices/constructorSlice';
+import { deleteIngredientFromConstructor } from '../../services/slices/constructorSlice/constructorSlice.ts';
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef } from 'react';
 import type { Identifier, XYCoord } from 'dnd-core';
@@ -48,7 +48,7 @@ export const BurgerElement = ({ isLocked, ingredient, id, moveIngredient, index,
       const hoverMiddleY =(hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
       const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
-      
+
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
       }
@@ -73,7 +73,7 @@ export const BurgerElement = ({ isLocked, ingredient, id, moveIngredient, index,
   });
 
   drag(drop(ref));
-  
+
   return (
     <div ref={ref} className={`${elementStyle.element}`}>
       <DragIcon type="primary" />

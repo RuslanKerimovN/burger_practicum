@@ -1,13 +1,13 @@
-import { ITapeOrders, WebSocketStatus } from '../../types/types.ts';
+import { ITapeOrders, WebSocketStatus } from '../../../types/types.ts';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface ITapeOrderSlice {
+export interface IHistoryTapeOrderSlice {
   historyOrders: ITapeOrders | undefined;
   status: WebSocketStatus;
   error: string;
 }
 
-const initialState: ITapeOrderSlice = {
+const initialState: IHistoryTapeOrderSlice = {
   historyOrders: undefined,
   status: WebSocketStatus.OFFLINE,
   error: ''

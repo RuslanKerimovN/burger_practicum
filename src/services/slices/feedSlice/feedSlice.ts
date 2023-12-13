@@ -1,7 +1,7 @@
-import { IOrders, ITapeOrders, WebSocketStatus } from '../../types/types.ts';
+import { IOrders, ITapeOrders, WebSocketStatus } from '../../../types/types.ts';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface ITapeOrderSlice {
+export interface ITapeOrderSlice {
   feedOrders: ITapeOrders | undefined;
   feedDone: IOrders[];
   feedPending: IOrders[];

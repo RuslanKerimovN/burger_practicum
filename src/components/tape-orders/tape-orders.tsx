@@ -4,10 +4,11 @@ import { ORDERS_HEIGHT } from '../../constants/constants.ts';
 import { Link, useLocation } from 'react-router-dom';
 import { ITapeOrders } from '../../types/types.ts';
 import { useAppSelector } from '../../hooks/useAppSelector.tsx';
-import { getIngredients, getStateIngredients } from '../../services/slices/ingredientsSlice.ts';
+import { getIngredients } from '../../services/slices/ingredientsSlice/ingredientsSlice.ts';
 import { getPriceOneOrder } from '../../helpers/helpers.ts';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../hooks/useAppDispatch.tsx';
+import { getStateIngredients } from '../../services/slices/ingredientsSlice/ingredientsSelector.ts';
 
 interface Props {
     label: string;

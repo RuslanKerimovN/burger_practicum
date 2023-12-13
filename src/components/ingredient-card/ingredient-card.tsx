@@ -3,12 +3,13 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import ingredientCardStyle from './ingredient-card.module.css';
 import { useModal } from '../../hooks/useModal';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { addIngredientInConstructor, getStateConstructor } from '../../services/slices/constructorSlice';
+import { addIngredientInConstructor } from '../../services/slices/constructorSlice/constructorSlice.ts';
 import { useDrag } from 'react-dnd';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { findCount } from '../../helpers/helpers';
 import { useEffect, useState } from 'react';
-import { saveWatchIngredient } from '../../services/slices/showIngredientSlice';
+import { saveWatchIngredient } from '../../services/slices/showIngredientSlice/showIngredientSlice.ts';
+import { getStateConstructor } from '../../services/slices/constructorSlice/constructorSelector.ts';
 
 interface Props {
     ingredient: IBurgerIngredients;
@@ -44,20 +45,25 @@ export const IngredientCard = ({ ingredient }: Props) => {
       handlerId: monitor.getHandlerId()
     })
   }));
-    
+
   return (
     <>
-      <div ref={drag} className={`${ingredientCardStyle.card} pb-8`} onClick={onOpenClick}>
+      <div
+        data-testId={`drag_${ingredient._id}`}
+        ref={drag}
+        className={`${ingredientCardStyle.card} pb-8`}
+        onClick={onOpenClick}
+      >
         <Counter count={count} size="default"/>
 
         <img alt={ingredient.name} src={ingredient.image_large} className='pl-4 pr-4 mb-1' width={'220px'} />
-                
+
         <p className="text text_type_digits-default mb-1">
           <span className={`${ingredientCardStyle.price}`}>
             {ingredient.price}<CurrencyIcon type="primary" />
           </span>
         </p>
-                
+
         <p className={`text text_type_main-default ${ingredientCardStyle.name}`}>
           {ingredient.name}
         </p>

@@ -1,12 +1,11 @@
-import { createAsyncThunk, createSelector, createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { baseRegisterResponse } from '../../types/baseObjects';
-import { IRegisterRequest, IRegisterResponse } from '../../types/types';
-import { postRegisterService } from '../api/services';
-import { RootState } from '../../store/store';
-import { setCookie } from '../../helpers/helpers';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../constants/constants';
+import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { baseRegisterResponse } from '../../../types/baseObjects.ts';
+import { IRegisterRequest, IRegisterResponse } from '../../../types/types.ts';
+import { postRegisterService } from '../../api/services.ts';
+import { setCookie } from '../../../helpers/helpers.ts';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../../constants/constants.ts';
 
-interface IRegister {
+export interface IRegister {
     registerData: IRegisterResponse;
     isRegisterLoading: boolean;
     isRegisterError: boolean;
@@ -55,22 +54,4 @@ const registerSlice = createSlice({
   }
 });
 
-// export const {
-// } = orderSlice.actions;
 export default registerSlice.reducer;
-
-const registerData = (state: RootState) => state.registerSlice.registerData;
-const isRegisterLoading = (state: RootState) => state.registerSlice.isRegisterLoading;
-const isRegisterError = (state: RootState) => state.registerSlice.isRegisterError;
-
-export const getStateRegisterData = createSelector(
-  [registerData], (registerData) => registerData
-);
-
-export const getStateLoadingRegisterData = createSelector(
-  [isRegisterLoading], (isRegisterLoading) => isRegisterLoading
-);
-
-export const getStateErrorRegisterData = createSelector(
-  [isRegisterError], (isRegisterError) => isRegisterError
-);

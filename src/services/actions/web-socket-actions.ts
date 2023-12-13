@@ -5,7 +5,7 @@ import {
   onMessageFeed,
   onOpenFeed,
   wsConnectingFeed
-} from '../slices/feedSlice.ts';
+} from '../slices/feedSlice/feedSlice.ts';
 import { IwsActionTypes } from '../../types/types.ts';
 import {
   onCloseHistoryOrders,
@@ -13,7 +13,7 @@ import {
   onMessageHistoryOrders,
   onOpenHistoryOrders,
   wsConnectingHistoryOrders
-} from '../slices/historyOrdersSlice.ts';
+} from '../slices/historyOrdersSlice/historyOrdersSlice.ts';
 
 export const connect = createAction<string, 'LIVE_TABLE_CONNECT'>('LIVE_TABLE_CONNECT');
 export const disconnect = createAction('LIVE_TABLE_DISCONNECT');

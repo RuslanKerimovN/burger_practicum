@@ -1,12 +1,11 @@
-import { PayloadAction, createAsyncThunk, createSelector, createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { baseAuthToken } from '../../types/baseObjects';
-import { IAuthTokenRequest, IAuthTokenResponse } from '../../types/types';
-import { postLoginService } from '../api/services';
-import { RootState } from '../../store/store';
-import { setCookie } from '../../helpers/helpers';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../constants/constants';
+import { PayloadAction, createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { baseAuthToken } from '../../../types/baseObjects.ts';
+import { IAuthTokenRequest, IAuthTokenResponse } from '../../../types/types.ts';
+import { postLoginService } from '../../api/services.ts';
+import { setCookie } from '../../../helpers/helpers.ts';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../../constants/constants.ts';
 
-interface ILogin {
+export interface ILogin {
     login: IAuthTokenResponse;
     loginName: string;
     isLoginLoading: boolean;
@@ -66,27 +65,7 @@ const loginSlice = createSlice({
 });
 
 export const {
-  clearLogin, setLoginName
+  clearLogin,
+  setLoginName
 } = loginSlice.actions;
 export default loginSlice.reducer;
-
-const login = (state: RootState) => state.loginSlice.login;
-const loginName = (state: RootState) => state.loginSlice.loginName;
-const isLoginLoading = (state: RootState) => state.loginSlice.isLoginLoading;
-const isLoginError = (state: RootState) => state.loginSlice.isLoginError;
-
-export const getStateLogin = createSelector(
-  [login], (login) => login
-);
-
-export const getStateLoginName = createSelector(
-  [loginName], (loginName) => loginName
-);
-
-export const getStateLoadingLogin = createSelector(
-  [isLoginLoading], (isLoginLoading) => isLoginLoading
-);
-
-export const getStateErrorLogin = createSelector(
-  [isLoginError], (isLoginError) => isLoginError
-);

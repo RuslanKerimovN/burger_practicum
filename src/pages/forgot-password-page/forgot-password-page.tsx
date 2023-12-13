@@ -4,18 +4,18 @@ import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-component
 import { Link, Navigate } from 'react-router-dom';
 import { LOGIN, RESET_PASSWORD } from '../../constants/path';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import {
-  getStateConfirmationEmail,
-  getStateConfirmationEmailError,
-  getStateConfirmationEmailLoading,
-  postConfirmationEmail
-} from '../../services/slices/confirmationEmailSlice';
+import { postConfirmationEmail } from '../../services/slices/confirmationEmailSlice/confirmationEmailSlice.ts';
 import { useInput } from '../../hooks/useInput';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { ModalStatus } from '../../components/modal-status/modal-status';
 import { useModal } from '../../hooks/useModal';
 import { FormEvent, useEffect } from 'react';
 import { Status } from '../../components/status/status';
+import {
+  getStateConfirmationEmail,
+  getStateConfirmationEmailError,
+  getStateConfirmationEmailLoading
+} from '../../services/slices/confirmationEmailSlice/confirmationEmailSelector.ts';
 
 export const ForgotPasswordPage = () => {
   const dispatch = useAppDispatch();

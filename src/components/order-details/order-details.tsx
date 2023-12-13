@@ -1,9 +1,14 @@
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { SvgOrder } from '../../images/svg-order';
-import { getStateErrorOrder, getStateLoadingOrder, getStateOrder, postOrder } from '../../services/slices/orderSlice';
+import { postOrder } from '../../services/slices/orderSlice/orderSlice.ts';
 import detailsStyle from './order-details.module.css';
 import { useEffect } from 'react';
+import {
+  getStateErrorOrder,
+  getStateLoadingOrder,
+  getStateOrder
+} from '../../services/slices/orderSlice/orderSelector.ts';
 
 interface Props {
     ids: string[];
@@ -32,7 +37,10 @@ export const OrderDetails = ({ ids }: Props) => {
     <>
       <div className={`${detailsStyle.card}`}>
         <div>
-          <p className={`${detailsStyle.text} ${detailsStyle.shadow} text text_type_digits-large mb-8`}>
+          <p
+            data-testId='order_number'
+            className={`${detailsStyle.text} ${detailsStyle.shadow} text text_type_digits-large mb-8`}
+          >
             {order.order.number}
           </p>
         </div>
