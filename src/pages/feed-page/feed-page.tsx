@@ -6,6 +6,7 @@ import { useAppSelector } from '../../hooks/useAppSelector.tsx';
 import { connect, disconnect } from '../../services/actions/web-socket-actions.ts';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../hooks/useAppDispatch.tsx';
+import { HEIGHT_WITHOUT_HEADER } from '../../constants/constants.ts';
 
 export const FeedPage = () => {
   const dispatch = useAppDispatch();
@@ -23,7 +24,13 @@ export const FeedPage = () => {
   }, []);
 
   if (!feedOrders) {
-    return null;
+    return (
+      <div className={`${styles.loading}`} style={{ height: HEIGHT_WITHOUT_HEADER }}>
+        <p className='text text_type_main-large mb-3'>
+        Загрузка данных, подождите!
+        </p>
+      </div>
+    );
   }
 
   return (

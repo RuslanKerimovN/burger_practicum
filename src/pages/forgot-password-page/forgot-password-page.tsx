@@ -37,31 +37,34 @@ export const ForgotPasswordPage = () => {
     }
   }, [isErrorConfirmationEmail]);
 
+  if (isLoadingConfirmationEmail) {
+    return <Status status='Проверка данных...'/>;
+  }
+
+  if (confirmationEmail.success) {
+    return <Navigate to={RESET_PASSWORD}/>;
+  }
+
   return (
     <>
-      {(isLoadingConfirmationEmail)
-        ?   <Status status='Проверка данных...'/>
-        :   (!confirmationEmail.success) ?
-          <div className={`${styles.center}`} style={{ height: HEIGHT_WITHOUT_HEADER }}>
-            <p className='text text_type_main-medium mb-6'>
-              Восстановление пароля
-            </p>
-            <form onSubmit={onSubmitClick} className={`${styles.center}`}>
-              <div className='mb-6'>
-                <Input placeholder='E-mail' value={`${email}`} onChange={setEmail}/>
-              </div>
-              <div className='mb-20'>
-                <Button htmlType="submit" type="primary" size="medium">
-                  Восстановить
-                </Button>
-              </div>
-            </form>
-            <p className='text text_type_main-default text_color_inactive'>
-              Вспомнили пароль? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
-            </p>
+      <div className={`${styles.center}`} style={{ height: HEIGHT_WITHOUT_HEADER }}>
+        <p className='text text_type_main-medium mb-6'>
+          Восстановление пароля
+        </p>
+        <form onSubmit={onSubmitClick} className={`${styles.center}`}>
+          <div className='mb-6'>
+            <Input placeholder='E-mail' value={`${email}`} onChange={setEmail}/>
           </div>
-          :   <Navigate to={RESET_PASSWORD}/>
-      }
+          <div className='mb-20'>
+            <Button htmlType="submit" type="primary" size="medium">
+              Восстановить
+            </Button>
+          </div>
+        </form>
+        <p className='text text_type_main-default text_color_inactive'>
+          Вспомнили пароль? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
+        </p>
+      </div>
       {isModalOpen &&
         <ModalStatus
           header='Данный пользователь не зарегистрирован, попробуйте ввести правильный e-mail'

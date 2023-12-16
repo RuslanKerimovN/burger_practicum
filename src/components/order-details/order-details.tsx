@@ -26,7 +26,11 @@ export const OrderDetails = ({ ids }: Props) => {
   }, [dispatch, ids]);
 
   if (isLoadingOrder) {
-    return <h1>Загрузка....</h1>;
+    return (
+      <p className='text text_type_main-large mb-3'>
+        Загрузка данных, подождите!
+      </p>
+    );
   }
 
   if (isErrorOrder) {

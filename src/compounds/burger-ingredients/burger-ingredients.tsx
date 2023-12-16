@@ -33,7 +33,9 @@ export const BurgerIngredients = memo(() => {
   if (!ingredients.length && isLoadingIngredients) {
     return (
       <section className={`${ingredientsStyle.panel} mt-10 mr-5 ml-5`}>
-        <h1 className={`${ingredientsStyle.attention}`}>Загрузка...</h1>
+        <p className={`${ingredientsStyle.attention} text text_type_main-large mb-3`}>
+          Загрузка данных, подождите!
+        </p>
       </section>
     );
   }
@@ -41,9 +43,9 @@ export const BurgerIngredients = memo(() => {
   if (isErrorIngredients) {
     return (
       <section className={`${ingredientsStyle.panel} mt-10 mr-5 ml-5`}>
-        <h1 className={`${ingredientsStyle.attention}`}>
+        <p className={`${ingredientsStyle.attention} text text_type_main-large mb-3`}>
           Ошибка загрузки ингредиентов, перезагрузите страницу!
-        </h1>
+        </p>
       </section>
     );
   }
@@ -52,7 +54,7 @@ export const BurgerIngredients = memo(() => {
     <section className={`${ingredientsStyle.panel} mt-10 mr-5 ml-5`}>
       <>
         <p className="text text_type_main-large mb-5">
-            Соберите бургер
+          Соберите бургер
         </p>
         <Tabs ingredients={ingredientsArray}/>
       </>

@@ -38,43 +38,46 @@ export const RegisterPage = () => {
     }
   }, [isRegisterError]);
 
+  if (isRegisterLoading) {
+    return <Status status='Проверка данных...' />;
+  }
+
+  if (registerData.success) {
+    return <Navigate to={localStorage.getItem('noLogin') || HOME} />;
+  }
+
   return (
     <>
-      {(isRegisterLoading)
-        ?   <Status status='Проверка данных...' />
-        :   (!registerData.success) ?
-          <div
-            className={`${styles.center}`}
-            style={{ height: HEIGHT_WITHOUT_HEADER }}
-          >
-            <p className='text text_type_main-medium mb-6'>
-              Регистрация
-            </p>
-            <form onSubmit={onSubmitClick} className={`${styles.center}`}>
-              <div className='mb-6'>
-                <Input placeholder='Имя' value={name} onChange={setName}/>
-              </div>
-              <div className='mb-6'>
-                <Input placeholder='E-mail' value={email} onChange={setEmail}/>
-              </div>
-              <div className='mb-6'>
-                <PasswordInput placeholder='Пароль' value={password} onChange={setPassword}/>
-              </div>
-              <div className='mb-20'>
-                <Button htmlType="submit" type="primary" size="medium">
-                  Зарегистрироваться
-                </Button>
-              </div>
-            </form>
-            <p className='text text_type_main-default text_color_inactive'>
-              Уже зарегистрированы? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
-            </p>
+      <div
+        className={`${styles.center}`}
+        style={{ height: HEIGHT_WITHOUT_HEADER }}
+      >
+        <p className='text text_type_main-medium mb-6'>
+          Регистрация
+        </p>
+        <form onSubmit={onSubmitClick} className={`${styles.center}`}>
+          <div className='mb-6'>
+            <Input placeholder='Имя' value={name} onChange={setName}/>
           </div>
-          :   <Navigate to={localStorage.getItem('noLogin') || HOME} />
-      }
+          <div className='mb-6'>
+            <Input placeholder='E-mail' value={email} onChange={setEmail}/>
+          </div>
+          <div className='mb-6'>
+            <PasswordInput placeholder='Пароль' value={password} onChange={setPassword}/>
+          </div>
+          <div className='mb-20'>
+            <Button htmlType="submit" type="primary" size="medium">
+              Зарегистрироваться
+            </Button>
+          </div>
+        </form>
+        <p className='text text_type_main-default text_color_inactive'>
+          Уже зарегистрированы? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
+        </p>
+      </div>
       {isModalOpen &&
         <ModalStatus
-          header='Заполните все поля ввода данными'
+          header='Заполните все поля ввода данными или пользователь с таким email уже существует'
           closeModal={closeModal}
         />
       }

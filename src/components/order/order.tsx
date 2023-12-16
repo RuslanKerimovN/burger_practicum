@@ -56,7 +56,7 @@ export const Order = () => {
     return (
       <div className={`${styles.container}`}>
         <p className='text text_type_main-large mb-3'>
-        Загрузка данных, подождите!
+          Загрузка данных, подождите!
         </p>
       </div>
     );

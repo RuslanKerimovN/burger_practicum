@@ -44,37 +44,40 @@ export const ResetPasswordPage = () => {
     }
   }, [isErrorResetPassword]);
 
+  if (isLoadingResetPassword) {
+    return <Status status='Проверка данных...'/>;
+  }
+
+  if (resetPassword.success) {
+    return <Navigate to={LOGIN} />;
+  }
+
   return (
     <>
-      {(isLoadingResetPassword)
-        ?   <Status status='Проверка данных...'/>
-        :   (!resetPassword.success) ?
-          <div
-            className={`${styles.center}`}
-            style={{ height: HEIGHT_WITHOUT_HEADER }}
-          >
-            <p className='text text_type_main-medium mb-6'>
-              Восстановление пароля
-            </p>
-            <form onSubmit={onSubmitClick} className={`${styles.center}`}>
-              <div className='mb-6'>
-                <PasswordInput placeholder='Введите новый пароль' value={password} onChange={setPassword}/>
-              </div>
-              <div className='mb-6'>
-                <Input placeholder='Введите код из письма' value={token} onChange={setToken}/>
-              </div>
-              <div className='mb-20'>
-                <Button htmlType="submit" type="primary" size="medium">
-                  Сохранить
-                </Button>
-              </div>
-            </form>
-            <p className='text text_type_main-default text_color_inactive'>
-              Вспомнили пароль? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
-            </p>
+      <div
+        className={`${styles.center}`}
+        style={{ height: HEIGHT_WITHOUT_HEADER }}
+      >
+        <p className='text text_type_main-medium mb-6'>
+          Восстановление пароля
+        </p>
+        <form onSubmit={onSubmitClick} className={`${styles.center}`}>
+          <div className='mb-6'>
+            <PasswordInput placeholder='Введите новый пароль' value={password} onChange={setPassword}/>
           </div>
-          :   <Navigate to={LOGIN} />
-      }
+          <div className='mb-6'>
+            <Input placeholder='Введите код из письма' value={token} onChange={setToken}/>
+          </div>
+          <div className='mb-20'>
+            <Button htmlType="submit" type="primary" size="medium">
+              Сохранить
+            </Button>
+          </div>
+        </form>
+        <p className='text text_type_main-default text_color_inactive'>
+          Вспомнили пароль? <Link to={LOGIN} className={`${styles.text}`}>Войти</Link>
+        </p>
+      </div>
       {isModalOpen &&
         <ModalStatus
           header='Введены неверные данные'
